@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include eticket_management *.css
+recursive-include eticket_management *.csv
+recursive-include eticket_management *.html
+recursive-include eticket_management *.ico
+recursive-include eticket_management *.js
+recursive-include eticket_management *.json
+recursive-include eticket_management *.md
+recursive-include eticket_management *.png
+recursive-include eticket_management *.py
+recursive-include eticket_management *.svg
+recursive-include eticket_management *.txt
+recursive-exclude eticket_management *.pyc
