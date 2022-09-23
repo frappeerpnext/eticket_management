@@ -1,0 +1,139 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2022-09-22 11:05:12.021803",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "id",
+  "pos_invoice_id",
+  "pos_invoice",
+  "ticket_number",
+  "item_code",
+  "item_name",
+  "price",
+  "is_synced",
+  "is_can_sync",
+  "is_master_ticket_number",
+  "pos_profile",
+  "pos_opening_entry_id",
+  "station_name",
+  "pos_username",
+  "checkin_time"
+ ],
+ "fields": [
+  {
+   "fieldname": "id",
+   "fieldtype": "Data",
+   "label": "POS Ticket ID"
+  },
+  {
+   "fieldname": "pos_invoice_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "POS Invoice ID"
+  },
+  {
+   "fieldname": "pos_invoice",
+   "fieldtype": "Data",
+   "label": "POS Invoice"
+  },
+  {
+   "fieldname": "ticket_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Ticket Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Code"
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Item Name"
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Price"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_synced",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "is_synced"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_can_sync",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "is_can_sync"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_master_ticket_number",
+   "fieldtype": "Check",
+   "label": "Is Master Ticket Number"
+  },
+  {
+   "fieldname": "pos_profile",
+   "fieldtype": "Data",
+   "label": "POS Profile"
+  },
+  {
+   "fieldname": "pos_opening_entry_id",
+   "fieldtype": "Data",
+   "label": "POS Opening Entry ID"
+  },
+  {
+   "fieldname": "station_name",
+   "fieldtype": "Data",
+   "label": "Station Name"
+  },
+  {
+   "fieldname": "pos_username",
+   "fieldtype": "Data",
+   "label": "POS Username"
+  },
+  {
+   "fieldname": "checkin_time",
+   "fieldtype": "Datetime",
+   "label": "Checkin Time"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-09-22 14:27:02.282214",
+ "modified_by": "Administrator",
+ "module": "E Ticket Management",
+ "name": "POS Ticket",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -1,0 +1,94 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2022-09-20 09:52:12.573797",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "card_number",
+  "door_name",
+  "card_holder_name",
+  "direction",
+  "ip_address",
+  "access_date",
+  "status",
+  "is_sync"
+ ],
+ "fields": [
+  {
+   "fieldname": "card_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Card Number"
+  },
+  {
+   "fieldname": "door_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Door Name"
+  },
+  {
+   "fieldname": "direction",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Direction"
+  },
+  {
+   "fieldname": "ip_address",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "IP Address"
+  },
+  {
+   "fieldname": "access_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Access Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Success\nFail"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_sync",
+   "fieldtype": "Check",
+   "label": "Is Sync"
+  },
+  {
+   "fieldname": "card_holder_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Card Holder Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-09-22 09:34:52.016090",
+ "modified_by": "Administrator",
+ "module": "E Ticket Management",
+ "name": "Door Access Logs",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
