@@ -1,0 +1,71 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:ticket_number",
+ "creation": "2022-09-23 15:21:11.054344",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "ticket_number",
+  "ticket_type",
+  "total_checked_in",
+  "last_checked_in_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "ticket_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Ticket Number",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "default": "QR Code",
+   "fieldname": "ticket_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Ticket Type",
+   "options": "QR Code\nRFID"
+  },
+  {
+   "fieldname": "total_checked_in",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Total Checked In"
+  },
+  {
+   "fieldname": "last_checked_in_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Last Checked In Date"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-09-23 15:22:44.026105",
+ "modified_by": "Administrator",
+ "module": "E Ticket Management",
+ "name": "Ticket Code",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

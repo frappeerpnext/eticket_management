@@ -12,9 +12,12 @@
   "card_holder_name",
   "direction",
   "ip_address",
-  "access_date",
+  "transaction_date",
   "status",
-  "is_sync"
+  "is_sync",
+  "id",
+  "access_token",
+  "count_door_open"
  ],
  "fields": [
   {
@@ -42,12 +45,6 @@
    "label": "IP Address"
   },
   {
-   "fieldname": "access_date",
-   "fieldtype": "Datetime",
-   "in_list_view": 1,
-   "label": "Access Date"
-  },
-  {
    "fieldname": "status",
    "fieldtype": "Select",
    "label": "Status",
@@ -64,11 +61,34 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Card Holder Name"
+  },
+  {
+   "fieldname": "id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "ID"
+  },
+  {
+   "fieldname": "access_token",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Access Token"
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Transaction Date"
+  },
+  {
+   "fieldname": "count_door_open",
+   "fieldtype": "Int",
+   "label": "Total Door Opened"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-09-22 09:34:52.016090",
+ "modified": "2022-09-23 15:17:49.977346",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Door Access Logs",

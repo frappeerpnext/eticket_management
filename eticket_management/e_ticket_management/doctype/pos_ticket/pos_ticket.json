@@ -21,7 +21,8 @@
   "pos_opening_entry_id",
   "station_name",
   "pos_username",
-  "checkin_time"
+  "checked_in_time",
+  "is_checked_in"
  ],
  "fields": [
   {
@@ -106,14 +107,20 @@
    "label": "POS Username"
   },
   {
-   "fieldname": "checkin_time",
+   "fieldname": "checked_in_time",
    "fieldtype": "Datetime",
    "label": "Checkin Time"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_checked_in",
+   "fieldtype": "Check",
+   "label": "Is Checked In"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-09-22 14:27:02.282214",
+ "modified": "2022-09-23 14:49:40.117765",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "POS Ticket",
