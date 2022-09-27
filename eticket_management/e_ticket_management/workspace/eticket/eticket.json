@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">eTicket</span>\",\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Hello world</b></span>\",\"col\":12}}]",
+ "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">eTicket</span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Today Ticket Sold\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Hello world</b></span>\",\"col\":12}}]",
  "creation": "2022-09-22 17:03:51.790559",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -10,7 +10,7 @@
  "idx": 0,
  "label": "eTicket",
  "links": [],
- "modified": "2022-09-23 14:29:22.725082",
+ "modified": "2022-09-27 11:20:14.599457",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "eTicket",
@@ -20,6 +20,22 @@
  "quick_lists": [],
  "roles": [],
  "sequence_id": 2.0,
- "shortcuts": [],
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Dashboard",
+   "link_to": "eTicket Dashboard",
+   "type": "Dashboard"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Today Ticket Sold",
+   "link_to": "POS Ticket",
+   "stats_filter": "{\"transaction_date\":[\"Timespan\",\"today\"]}",
+   "type": "DocType"
+  }
+ ],
  "title": "eTicket"
 }

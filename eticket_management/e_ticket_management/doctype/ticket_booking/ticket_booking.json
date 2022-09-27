@@ -24,7 +24,11 @@
   "payment_method",
   "payment_amount",
   "section_break_17",
-  "note"
+  "note",
+  "check_in_status_section",
+  "is_checked_in",
+  "column_break_21",
+  "checked_in_date"
  ],
  "fields": [
   {
@@ -123,12 +127,32 @@
    "fieldname": "note",
    "fieldtype": "Text Editor",
    "label": "Note"
+  },
+  {
+   "fieldname": "check_in_status_section",
+   "fieldtype": "Section Break",
+   "label": "Check In Status"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_checked_in",
+   "fieldtype": "Check",
+   "label": "Is Checked In"
+  },
+  {
+   "fieldname": "column_break_21",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "checked_in_date",
+   "fieldtype": "Date",
+   "label": "Checked In Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-09-23 12:10:56.353697",
+ "modified": "2022-09-27 18:06:03.950560",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",

@@ -17,6 +17,38 @@ class TicketBooking(Document):
 		self.total_quantity =total_quantity
 		self.total_amount=total_amount
 
+	def on_submit(self):
+		frappe.msgprint("hello")
+		for t in self.ticket_items:
+			for n in range(t.quantity):
+				doc = frappe.get_doc(
+					{
+						"booking_number":self.name,
+						"transaction_date":self.booking_date,
+						"item_code": t.ticket_type,
+						"item_name": t.ticket_name,
+						"price": t.price,
+						"ticket_number": "N/A",
+						"is_synced": 0,
+						"is_can_sync": 1,
+						"is_master_ticket_number": 0,
+						"is_checked_in": 0,
+						"doctype": "POS Ticket",
+					}
+				)
+				doc.insert()
+
+	def before_cancel(self):
+		data = frappe.db.get_list('POS Ticket',
+				filters={
+					'booking_number': self.name,
+					'is_checked_in':1
+				}
+			)
+		if data:
+			frappe.throw("You cannot cancel this booking because it is already checked in.")
+
+
 
 
 

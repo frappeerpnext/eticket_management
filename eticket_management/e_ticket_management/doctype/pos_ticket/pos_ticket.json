@@ -7,27 +7,33 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "transaction_date",
   "id",
   "pos_invoice_id",
   "pos_invoice",
-  "ticket_number",
+  "booking_number",
+  "pos_profile",
+  "pos_username",
+  "station_name",
+  "column_break_7",
   "item_code",
   "item_name",
   "price",
+  "ticket_number",
   "is_synced",
   "is_can_sync",
   "is_master_ticket_number",
-  "pos_profile",
   "pos_opening_entry_id",
-  "station_name",
-  "pos_username",
-  "checked_in_time",
-  "is_checked_in"
+  "check_in_status_section",
+  "is_checked_in",
+  "column_break_18",
+  "checked_in_time"
  ],
  "fields": [
   {
    "fieldname": "id",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "POS Ticket ID"
   },
   {
@@ -94,6 +100,7 @@
   {
    "fieldname": "pos_opening_entry_id",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "POS Opening Entry ID"
   },
   {
@@ -116,11 +123,35 @@
    "fieldname": "is_checked_in",
    "fieldtype": "Check",
    "label": "Is Checked In"
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "label": "Transaction Date"
+  },
+  {
+   "fieldname": "check_in_status_section",
+   "fieldtype": "Section Break",
+   "label": "Check In Status"
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "booking_number",
+   "fieldtype": "Link",
+   "label": "Booking Number",
+   "options": "Ticket Booking"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-09-23 14:49:40.117765",
+ "modified": "2022-09-27 13:05:05.097227",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "POS Ticket",

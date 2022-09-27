@@ -3,6 +3,6 @@
 
 frappe.ui.form.on('Ticket Booking', {
 	 refresh: function(frm) {
-		frm.set_intro('Please set the value of description', 'blue');
+		
 	 }
 });

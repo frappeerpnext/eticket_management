@@ -1,0 +1,25 @@
+{
+ "cards": [
+  {
+   "card": "Today Ticket Sold"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Daily POS Invoice Summary",
+   "width": "Full"
+  }
+ ],
+ "creation": "2022-09-27 11:19:41.041120",
+ "dashboard_name": "eTicket Dashboard",
+ "docstatus": 0,
+ "doctype": "Dashboard",
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "modified": "2022-09-27 11:22:07.309308",
+ "modified_by": "Administrator",
+ "module": "E Ticket Management",
+ "name": "eTicket Dashboard",
+ "owner": "Administrator"
+}
