@@ -1,0 +1,164 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2022-09-30 18:55:28.845975",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "id",
+  "customer",
+  "voucher_number",
+  "transaction_date",
+  "pos_invoice_id",
+  "booking_number",
+  "voucher_amount",
+  "use_amount",
+  "refund_amount",
+  "balance",
+  "note",
+  "pos_username",
+  "pos_station_name",
+  "pos_profile",
+  "status",
+  "is_refunded",
+  "refund_by",
+  "refund_date",
+  "refund_pos_station_name"
+ ],
+ "fields": [
+  {
+   "fieldname": "id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "id"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer"
+  },
+  {
+   "fieldname": "voucher_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Voucher Number"
+  },
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Transaction Date"
+  },
+  {
+   "fieldname": "pos_invoice_id",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "pos_invoice_id"
+  },
+  {
+   "fieldname": "booking_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "booking_number"
+  },
+  {
+   "fieldname": "voucher_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Voucher Amount"
+  },
+  {
+   "fieldname": "use_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Use Amount"
+  },
+  {
+   "fieldname": "refund_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Refund Amount"
+  },
+  {
+   "fieldname": "balance",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Balance"
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Data",
+   "label": "Note"
+  },
+  {
+   "fieldname": "pos_username",
+   "fieldtype": "Data",
+   "label": "POS Username"
+  },
+  {
+   "fieldname": "pos_station_name",
+   "fieldtype": "Data",
+   "label": "POS Station Name"
+  },
+  {
+   "fieldname": "pos_profile",
+   "fieldtype": "Data",
+   "label": "POS Profile"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nCancel"
+  },
+  {
+   "default": "0",
+   "fieldname": "is_refunded",
+   "fieldtype": "Check",
+   "label": "is_refunded"
+  },
+  {
+   "fieldname": "refund_by",
+   "fieldtype": "Data",
+   "label": "Refund By"
+  },
+  {
+   "fieldname": "refund_date",
+   "fieldtype": "Datetime",
+   "label": "Refund Date"
+  },
+  {
+   "fieldname": "refund_pos_station_name",
+   "fieldtype": "Data",
+   "label": "Refund POS Station Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-10-04 10:17:43.870075",
+ "modified_by": "Administrator",
+ "module": "E Ticket Management",
+ "name": "POS Voucher",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

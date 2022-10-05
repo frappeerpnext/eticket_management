@@ -27,7 +27,8 @@
   "check_in_status_section",
   "is_checked_in",
   "column_break_18",
-  "checked_in_time"
+  "checked_in_time",
+  "status"
  ],
  "fields": [
   {
@@ -147,11 +148,18 @@
   {
    "fieldname": "column_break_7",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "Active",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Active\nCancel"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-09-27 13:05:05.097227",
+ "modified": "2022-10-01 15:26:57.535129",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "POS Ticket",
