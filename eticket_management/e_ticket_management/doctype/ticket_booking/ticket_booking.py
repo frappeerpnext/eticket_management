@@ -18,7 +18,7 @@ class TicketBooking(Document):
 		self.total_amount=total_amount
 
 	def on_submit(self):
-		frappe.msgprint("hello")
+		
 		for t in self.ticket_items:
 			for n in range(t.quantity):
 				doc = frappe.get_doc(

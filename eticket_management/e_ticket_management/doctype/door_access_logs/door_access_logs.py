@@ -13,15 +13,15 @@ class DoorAccessLogs(Document):
 		#update ticket total check in history
 	 
 		if self.status == "Success":
-			 
-			doc = frappe.get_doc("Ticket Code",self.card_number)
-			if doc:
-				
-				 
-				doc.total_checked_in = (doc.total_checked_in or 0) + 1
-				doc.last_checked_in_date = self.transaction_date
-				doc.save()
-				frappe.db.commit()
+			if frappe.db.exists("Ticket Code",self.card_number, cache=True):
+				doc = frappe.get_doc("Ticket Code",self.card_number)
+				if doc:
+					
+					
+					doc.total_checked_in = (doc.total_checked_in or 0) + 1
+					doc.last_checked_in_date = self.transaction_date
+					doc.save()
+					frappe.db.commit()
 
 
 
