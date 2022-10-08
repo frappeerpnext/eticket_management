@@ -14,6 +14,7 @@ frappe.ui.form.on('Booking Ticket Items', {
 	    frm.refresh_field('ticket_items');
 		updateSumTotal(frm);
 	},
+	
     price(frm,cdt, cdn) {
 		let doc=   locals[cdt][cdn];
 		doc.amount=doc.quantity*doc.price;
@@ -27,16 +28,21 @@ frappe.ui.form.on('Booking Ticket Items', {
 function updateSumTotal(frm) {
     let sum_total = 0;
 	let total_qty = 0;
+	let total_ticket = 0;
     $.each(frm.doc.ticket_items, function(i, d) {
         sum_total += flt(d.amount);
 		total_qty +=flt(d.quantity);
+		if (d.is_ticket)
+			total_ticket += flt(d.quantity);
     });
  
     frm.set_value('total_amount', sum_total);
     frm.set_value('total_quantity', total_qty);
+    frm.set_value('total_ticket', total_ticket);
 	 
 	frm.refresh_field("total_amount");
 	frm.refresh_field("total_quantity");
+	frm.refresh_field("total_ticket");
 }
 
  

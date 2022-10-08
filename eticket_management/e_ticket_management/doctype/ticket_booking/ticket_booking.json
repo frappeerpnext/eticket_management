@@ -19,6 +19,7 @@
   "ticket_items",
   "section_break_11",
   "total_quantity",
+  "total_ticket",
   "column_break_12",
   "total_amount",
   "payment_method",
@@ -150,12 +151,18 @@
    "fieldname": "checked_in_date",
    "fieldtype": "Date",
    "label": "Checked In Date"
+  },
+  {
+   "default": "0",
+   "fieldname": "total_ticket",
+   "fieldtype": "Int",
+   "label": "Total Ticket"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-09-28 17:40:14.507530",
+ "modified": "2022-10-08 10:37:55.347096",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",
