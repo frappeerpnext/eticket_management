@@ -49,7 +49,5 @@ class TicketBooking(Document):
 			frappe.throw("You cannot cancel this booking because it is already checked in.")
 
 
-
-
-
-		
+	def before_save(self):
+		self.keyword = str(self.customer) + " " + str(self.phone_number) + " " + str(self.email_address or "")

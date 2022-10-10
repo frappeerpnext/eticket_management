@@ -29,7 +29,8 @@
   "check_in_status_section",
   "is_checked_in",
   "column_break_21",
-  "checked_in_date"
+  "checked_in_date",
+  "keyword"
  ],
  "fields": [
   {
@@ -157,12 +158,18 @@
    "fieldname": "total_ticket",
    "fieldtype": "Int",
    "label": "Total Ticket"
+  },
+  {
+   "fieldname": "keyword",
+   "fieldtype": "Text",
+   "hidden": 1,
+   "label": "Keyword"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-08 10:37:55.347096",
+ "modified": "2022-10-10 08:50:12.344515",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",
