@@ -1,0 +1,21 @@
+{
+ "creation": "2022-10-10 20:16:25.497350",
+ "docstatus": 0,
+ "doctype": "Number Card",
+ "filters_json": "null",
+ "function": "Count",
+ "idx": 0,
+ "is_public": 1,
+ "is_standard": 1,
+ "label": "Ticket Booking Forcast",
+ "method": "eticket_management.e_ticket_management.e_ticket_management_dashboard.get_ticket_booking_forcast",
+ "modified": "2022-10-10 20:16:25.497350",
+ "modified_by": "Administrator",
+ "module": "E Ticket Management",
+ "name": "Ticket Booking Forcast",
+ "owner": "Administrator",
+ "report_function": "Sum",
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Daily",
+ "type": "Custom"
+}

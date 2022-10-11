@@ -2,11 +2,18 @@
  "cards": [
   {
    "card": "Today Ticket Sold"
+  },
+  {
+   "card": "MTD Ticket Sold"
   }
  ],
  "charts": [
   {
    "chart": "Daily POS Invoice Summary",
+   "width": "Full"
+  },
+  {
+   "chart": "Daily Ticket Sold By Date",
    "width": "Full"
   }
  ],
@@ -17,7 +24,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2022-09-27 11:22:07.309308",
+ "modified": "2022-10-10 19:16:51.431950",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "eTicket Dashboard",

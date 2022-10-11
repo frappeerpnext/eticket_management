@@ -1,6 +1,11 @@
 {
- "charts": [],
- "content": "[{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">eTicket</span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Today Ticket Sold\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Hello world</b></span>\",\"col\":12}}]",
+ "charts": [
+  {
+   "chart_name": "Daily Ticket Sold",
+   "label": "Daily Ticket Sold"
+  }
+ ],
+ "content": "[{\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Ticket Sold\",\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Your Shortcuts</span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Today Ticket Sold\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active Ticket\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"MTD Ticket Booking\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Booking Calendar\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Door Access\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Configuration\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Recent Activities</b></span>\",\"col\":12}},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Ticket Booking\",\"col\":12}}]",
  "creation": "2022-09-22 17:03:51.790559",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -9,18 +14,87 @@
  "icon": "tag",
  "idx": 0,
  "label": "eTicket",
- "links": [],
- "modified": "2022-09-27 11:20:14.599457",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Configuration",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Access Control Device",
+   "link_count": 0,
+   "link_to": "Ticket Booking",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Card Holder",
+   "link_count": 0,
+   "link_to": "Ticket Booking",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Ticket Sold Summary Report",
+   "link_count": 0,
+   "link_to": "About Us Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ticket Booking Summary Report",
+   "link_count": 0,
+   "link_to": "Access Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2022-10-11 10:31:58.602698",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "eTicket",
  "owner": "Administrator",
  "parent_page": "",
  "public": 1,
- "quick_lists": [],
+ "quick_lists": [
+  {
+   "document_type": "Ticket Booking",
+   "label": "Recent Ticket Booking"
+  }
+ ],
  "roles": [],
  "sequence_id": 2.0,
  "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Booking Calendar",
+   "link_to": "Ticket Booking",
+   "type": "DocType"
+  },
   {
    "color": "Grey",
    "doc_view": "List",
@@ -34,6 +108,30 @@
    "label": "Today Ticket Sold",
    "link_to": "POS Ticket",
    "stats_filter": "{\"transaction_date\":[\"Timespan\",\"today\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Active Ticket",
+   "link_to": "Ticket Code",
+   "stats_filter": "{\"total_checked_in\":[\"=\",0]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "Door Access",
+   "link_to": "Door Access Logs",
+   "stats_filter": "{\"transaction_date\":[\"Timespan\",\"today\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "label": "MTD Ticket Booking",
+   "link_to": "Ticket Booking",
+   "stats_filter": "{\"booking_date\":[\"Timespan\",\"this month\"]}",
    "type": "DocType"
   }
  ],

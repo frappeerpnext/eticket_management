@@ -90,7 +90,8 @@
    "fieldname": "ticket_items",
    "fieldtype": "Table",
    "label": "Ticket",
-   "options": "Booking Ticket Items"
+   "options": "Booking Ticket Items",
+   "reqd": 1
   },
   {
    "fieldname": "section_break_11",
@@ -169,7 +170,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-10 08:50:12.344515",
+ "modified": "2022-10-10 11:39:04.121928",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",

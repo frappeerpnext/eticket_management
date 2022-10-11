@@ -28,7 +28,8 @@
   "is_checked_in",
   "column_break_18",
   "checked_in_time",
-  "status"
+  "status",
+  "test_amount"
  ],
  "fields": [
   {
@@ -69,7 +70,7 @@
   },
   {
    "fieldname": "price",
-   "fieldtype": "Data",
+   "fieldtype": "Currency",
    "in_list_view": 1,
    "label": "Price"
   },
@@ -155,11 +156,16 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "Active\nCancel"
+  },
+  {
+   "fieldname": "test_amount",
+   "fieldtype": "Currency",
+   "label": "test amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-01 15:26:57.535129",
+ "modified": "2022-10-10 19:24:57.522401",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "POS Ticket",
