@@ -9,17 +9,16 @@ def execute(filters=None):
 
 def get_columns(filters):
 	columns=[]
-	columns.append({'fieldname':"name",'label':"Document",'fieldtype':'Data','align':'center','width':125})
+	columns.append({'fieldname':"name",'label':"Document",'fieldtype':'Data','align':'center','width':130})
 	columns.append({'fieldname':"booking_date",'label':"Booking Date",'fieldtype':'Date','align':'center','width':110})
 	columns.append({'fieldname':"arrival_date",'label':"Arrival Date",'fieldtype':'Date','align':'center','width':110})
 	columns.append({'fieldname':"customer",'label':"Customer",'fieldtype':'Data','align':'left','width':200})
-	columns.append({'fieldname':"total_ticket",'label':"Total Ticket",'fieldtype':'Currency','align':'right','width':100})
-	columns.append({'fieldname':"total_ticket_amount",'label':"Total Amount",'fieldtype':'Data','align':'right','width':110})
-	# columns.append({'fieldname':"business_source",'label':"Business Source",'fieldtype':'Data','align':'right','width':160})
-	# columns.append({'fieldname':"business_source_type",'label':"Business Source Type",'fieldtype':'Data','align':'right','width':200})
-	# columns.append({'fieldname':"market_segment",'label':"Market Segment",'fieldtype':'Data','align':'right','width':160})
-	# columns.append({'fieldname':"marketing_segment_type",'label':"Marketing Segment Type",'fieldtype':'Data','align':'right','width':200})
-	
+	columns.append({'fieldname':"total_ticket",'label':"Total Ticket",'fieldtype':'Data','align':'right','width':100})
+	columns.append({'fieldname':"total_ticket_amount",'label':"Total Amount",'fieldtype':'Currency','align':'right','width':110})
+	columns.append({'fieldname':"market_segment",'label':"Market Segment",'fieldtype':'Data','align':'right','width':130})
+	columns.append({'fieldname':"marketing_segment_type",'label':"Marketing Segment Type",'fieldtype':'Data','align':'right','width':180})
+	columns.append({'fieldname':"business_source",'label':"Business Source",'fieldtype':'Data','align':'right','width':140})
+	columns.append({'fieldname':"business_source_type",'label':"Business Source Type",'fieldtype':'Data','align':'right','width':170})
 	return columns
 def get_filters(filters):
 	fil=""
@@ -28,15 +27,16 @@ def get_filters(filters):
 		fil = fil + " and market_segment in (" + get_list(filters,"market_segment") + ")"
 	if(filters.business_source):
 		fil = fil + " and business_source in (" + get_list(filters,"business_source") + ")"
+	if(filters.business_source_type):
+		fil = fil + " and business_source_type in (" + get_list(filters,"business_source_type") + ")"
+	if(filters.marketing_segment_type):
+		fil = fil + " and marketing_segment_type in (" + get_list(filters,"marketing_segment_type	") + ")"
 	return fil
 
 def get_data(filters):
-	parent_data = []
-	data= []
-	parent = """
+	data = []
+	sql = """
 			SELECT 
-				0 as indent,
-				1 as is_group,
 				booking_date,
 				concat(customer,' / ',phone_number) customer,
 				arrival_date,
@@ -52,25 +52,7 @@ def get_data(filters):
 				name
 			FROM `tabTicket Booking` {0}
 	""".format(get_filters(filters))
-	frappe.msgprint(parent)
-	parent_data = frappe.db.sql(parent,as_dict=1)
-	for dic_p in parent_data:
-		data.append(dic_p)
-		child_data = ("""
-						SELECT 
-							1 as indent,
-							0 as is_group,
-							ticket_type,
-							quantity,
-							price,
-							amount,
-							ticket_name
-						FROM `tabBooking Ticket Items`
-						WHERE parent = '{}'
-					""".format(dic_p["name"]))
-		child = frappe.db.sql(child_data,as_dict=1)
-		for dic_c in child:
-			data.append(dic_c)
+	data = frappe.db.sql(sql,as_dict=1)
 	return data
 
 def get_list(filters,name):

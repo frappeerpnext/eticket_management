@@ -25,11 +25,27 @@ frappe.query_reports["Ticket Booking Report"] = {
 			}
 		},
 		{
+			fieldname: "marketing_segment_type",
+			label: "Market Segment Type",
+			"fieldtype": "MultiSelectList",
+			get_data: function(txt) {
+				return frappe.db.get_link_options('Marketing Segment Type', txt);
+			}
+		},
+		{
 			fieldname: "business_source",
 			label: "Business Source",
 			"fieldtype": "MultiSelectList",
 			get_data: function(txt) {
 				return frappe.db.get_link_options('Lead Source', txt);
+			}
+		},
+		{
+			fieldname: "business_source_type",
+			label: "Business Source Type",
+			"fieldtype": "MultiSelectList",
+			get_data: function(txt) {
+				return frappe.db.get_link_options('Lead Source Type', txt);
 			}
 		},
 	]
