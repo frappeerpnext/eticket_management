@@ -199,5 +199,5 @@ fixtures = [
     "Custom Field",
     "Report",
     {"dt": "Dashboard Chart", "filters": [["module", "=", "E Ticket Managementx"]]},
-    {"dt": "Dashboard", "filters": [["module", "=", "E Ticket Management"]]},
+    {"dt": "Dashboard", "filters": [["module", "=", "E Ticket Managementx"]]},
     ]
