@@ -30,12 +30,28 @@
  ],
  "charts": [
   {
-   "chart": "Daily Ticket Sold By Date-1",
+   "chart": "Ticket Sold By Date",
    "width": "Full"
   },
   {
-   "chart": "Ticket Sale by Ticket Type",
-   "width": "Full"
+   "chart": "Ticket Sold by Ticket Type",
+   "width": "Half"
+  },
+  {
+   "chart": "Ticket Sold by Business Source Type",
+   "width": "Half"
+  },
+  {
+   "chart": "Ticket Sold by Business Source",
+   "width": "Half"
+  },
+  {
+   "chart": "Ticket Sold by Segment",
+   "width": "Half"
+  },
+  {
+   "chart": "Ticket Sold by Segment Type",
+   "width": "Half"
   }
  ],
  "creation": "2022-09-27 11:19:41.041120",
@@ -45,7 +61,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2022-10-12 11:34:52.219696",
+ "modified": "2022-10-12 15:28:07.230692",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "eTicket Dashboard",

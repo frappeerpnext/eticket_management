@@ -4,6 +4,8 @@
 import frappe
 from urllib.request import ftpwrapper
 from frappe.model.document import Document
+from frappe import _
+from frappe.utils import fmt_money
 
 class TicketBooking(Document):
 	def validate(self):
@@ -17,6 +19,8 @@ class TicketBooking(Document):
 
 		self.total_quantity =total_quantity
 		self.total_amount=total_amount
+		self.keyword = str(self.customer) + " " + str(self.phone_number) + " " + str(self.email_address or "")
+		self.calendar_title = _("New Booking") + " " + str(self.name) + " " + str(self.customer) + _("Total Ticket") + str(self.total_ticket) + _("Total Amount") + fmt_money(self.total_ticket_amount,2,None,"###,###.##")
 
 	def on_submit(self):
 		
@@ -49,6 +53,3 @@ class TicketBooking(Document):
 		if data:
 			frappe.throw("You cannot cancel this booking because it is already checked in.")
 
-
-	def before_save(self):
-		self.keyword = str(self.customer) + " " + str(self.phone_number) + " " + str(self.email_address or "")
