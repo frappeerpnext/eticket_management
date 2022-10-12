@@ -7,6 +7,7 @@ from frappe.model.document import Document
 
 class TicketBooking(Document):
 	def validate(self):
+		 
 		total_quantity = 0
 		total_amount = 0
 		for d in self.ticket_items:

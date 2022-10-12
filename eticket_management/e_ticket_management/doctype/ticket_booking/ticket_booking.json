@@ -20,6 +20,7 @@
   "section_break_11",
   "total_quantity",
   "total_ticket",
+  "total_ticket_amount",
   "column_break_12",
   "total_amount",
   "payment_method",
@@ -109,7 +110,8 @@
   {
    "fieldname": "total_amount",
    "fieldtype": "Currency",
-   "label": "Total Amount"
+   "label": "Total Amount",
+   "options": "Company:company:default_currency"
   },
   {
    "fieldname": "payment_method",
@@ -165,12 +167,18 @@
    "fieldtype": "Text",
    "hidden": 1,
    "label": "Keyword"
+  },
+  {
+   "fieldname": "total_ticket_amount",
+   "fieldtype": "Currency",
+   "label": "Total Ticket Amount",
+   "options": "Company:company:default_currency"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-10 11:39:04.121928",
+ "modified": "2022-10-12 09:04:02.525513",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",

@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "hash",
- "creation": "2022-09-22 11:05:12.021803",
+ "creation": "2022-10-11 18:03:25.753119",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -28,10 +28,14 @@
   "is_checked_in",
   "column_break_18",
   "checked_in_time",
-  "status",
-  "test_amount"
+  "status"
  ],
  "fields": [
+  {
+   "fieldname": "transaction_date",
+   "fieldtype": "Date",
+   "label": "Transaction Date"
+  },
   {
    "fieldname": "id",
    "fieldtype": "Data",
@@ -50,11 +54,29 @@
    "label": "POS Invoice"
   },
   {
-   "fieldname": "ticket_number",
+   "fieldname": "booking_number",
+   "fieldtype": "Link",
+   "label": "Booking Number",
+   "options": "Ticket Booking"
+  },
+  {
+   "fieldname": "pos_profile",
    "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Ticket Number",
-   "reqd": 1
+   "label": "POS Profile"
+  },
+  {
+   "fieldname": "pos_username",
+   "fieldtype": "Data",
+   "label": "POS Username"
+  },
+  {
+   "fieldname": "station_name",
+   "fieldtype": "Data",
+   "label": "Station Name"
+  },
+  {
+   "fieldname": "column_break_7",
+   "fieldtype": "Column Break"
   },
   {
    "fieldname": "item_code",
@@ -72,7 +94,15 @@
    "fieldname": "price",
    "fieldtype": "Currency",
    "in_list_view": 1,
-   "label": "Price"
+   "label": "Price",
+   "options": "Company:company:default_currency"
+  },
+  {
+   "fieldname": "ticket_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Ticket Number",
+   "reqd": 1
   },
   {
    "default": "0",
@@ -95,30 +125,15 @@
    "label": "Is Master Ticket Number"
   },
   {
-   "fieldname": "pos_profile",
-   "fieldtype": "Data",
-   "label": "POS Profile"
-  },
-  {
    "fieldname": "pos_opening_entry_id",
    "fieldtype": "Data",
    "hidden": 1,
    "label": "POS Opening Entry ID"
   },
   {
-   "fieldname": "station_name",
-   "fieldtype": "Data",
-   "label": "Station Name"
-  },
-  {
-   "fieldname": "pos_username",
-   "fieldtype": "Data",
-   "label": "POS Username"
-  },
-  {
-   "fieldname": "checked_in_time",
-   "fieldtype": "Datetime",
-   "label": "Checkin Time"
+   "fieldname": "check_in_status_section",
+   "fieldtype": "Section Break",
+   "label": "Check In Status"
   },
   {
    "default": "0",
@@ -127,28 +142,13 @@
    "label": "Is Checked In"
   },
   {
-   "fieldname": "transaction_date",
-   "fieldtype": "Date",
-   "label": "Transaction Date"
-  },
-  {
-   "fieldname": "check_in_status_section",
-   "fieldtype": "Section Break",
-   "label": "Check In Status"
-  },
-  {
    "fieldname": "column_break_18",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "booking_number",
-   "fieldtype": "Link",
-   "label": "Booking Number",
-   "options": "Ticket Booking"
-  },
-  {
-   "fieldname": "column_break_7",
-   "fieldtype": "Column Break"
+   "fieldname": "checked_in_time",
+   "fieldtype": "Datetime",
+   "label": "Checkin Time"
   },
   {
    "default": "Active",
@@ -156,16 +156,11 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "Active\nCancel"
-  },
-  {
-   "fieldname": "test_amount",
-   "fieldtype": "Currency",
-   "label": "test amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-10 19:24:57.522401",
+ "modified": "2022-10-11 18:12:51.672102",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "POS Ticket",
