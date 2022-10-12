@@ -52,6 +52,7 @@ def get_data(filters):
 				name
 			FROM `tabTicket Booking` {0}
 	""".format(get_filters(filters))
+	frappe.msgprint(parent)
 	parent_data = frappe.db.sql(parent,as_dict=1)
 	for dic_p in parent_data:
 		data.append(dic_p)
@@ -68,8 +69,8 @@ def get_data(filters):
 						WHERE parent = '{}'
 					""".format(dic_p["name"]))
 		child = frappe.db.sql(child_data,as_dict=1)
-		for dic_p in parent_data:
-			data.append(dic_p)
+		for dic_c in child:
+			data.append(dic_c)
 	return data
 
 def get_list(filters,name):

@@ -5253,16 +5253,6 @@
     "width": 200
    },
    {
-    "fieldname": "nation_quantity",
-    "fieldtype": "Int",
-    "label": "Nation Qty",
-    "options": null,
-    "parent": "Ticket Booking Forcast",
-    "parentfield": "columns",
-    "parenttype": "Report",
-    "width": 0
-   },
-   {
     "fieldname": "nation_child_quantity",
     "fieldtype": "Int",
     "label": "Nation Child Qty",
@@ -5270,7 +5260,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 75
+    "width": 100
    },
    {
     "fieldname": "nation_child_amount",
@@ -5280,7 +5270,107 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 0
+    "width": 75
+   },
+   {
+    "fieldname": "nation_adult_quantity",
+    "fieldtype": "Int",
+    "label": "Nation Adult Qty",
+    "options": null,
+    "parent": "Ticket Booking Forcast",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 75
+   },
+   {
+    "fieldname": "nation_adult_amount",
+    "fieldtype": "Currency",
+    "label": "Nation Adult Amount",
+    "options": null,
+    "parent": "Ticket Booking Forcast",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 75
+   },
+   {
+    "fieldname": "nation_quantity",
+    "fieldtype": "Int",
+    "label": "Nation Qty",
+    "options": null,
+    "parent": "Ticket Booking Forcast",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 75
+   },
+   {
+    "fieldname": "nation_amount",
+    "fieldtype": "Currency",
+    "label": "Nation Amount",
+    "options": null,
+    "parent": "Ticket Booking Forcast",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 75
+   },
+   {
+    "fieldname": "international_child_quantity",
+    "fieldtype": "Int",
+    "label": "International Child Qty",
+    "options": null,
+    "parent": "Ticket Booking Forcast",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 75
+   },
+   {
+    "fieldname": "international_child_amount",
+    "fieldtype": "Currency",
+    "label": "International Child Amount",
+    "options": null,
+    "parent": "Ticket Booking Forcast",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 75
+   },
+   {
+    "fieldname": "international_adult_quantity",
+    "fieldtype": "Int",
+    "label": "International Adult Qty",
+    "options": null,
+    "parent": "Ticket Booking Forcast",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 75
+   },
+   {
+    "fieldname": "international_adult_amount",
+    "fieldtype": "Currency",
+    "label": "International Adult Amount",
+    "options": null,
+    "parent": "Ticket Booking Forcast",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 75
+   },
+   {
+    "fieldname": "international_quantity",
+    "fieldtype": "Int",
+    "label": "International Qty",
+    "options": null,
+    "parent": "Ticket Booking Forcast",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 75
+   },
+   {
+    "fieldname": "international_amount",
+    "fieldtype": "Currency",
+    "label": "International Amount",
+    "options": null,
+    "parent": "Ticket Booking Forcast",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 75
    },
    {
     "fieldname": "total_quantity",
@@ -5335,11 +5425,11 @@
   "javascript": null,
   "json": null,
   "letter_head": "Default Letter Head",
-  "modified": "2022-10-12 16:44:17.115924",
+  "modified": "2022-10-12 17:18:26.601810",
   "module": "E Ticket Management",
   "name": "Ticket Booking Forcast",
   "prepared_report": 0,
-  "query": "SELECT \r\n\tb.booking_date, \r\n\tSUM(a.quantity) AS total_quantity, \r\n\tSUM(if(a.ticket_type IN ('T001','T002'),a.quantity,0))  AS nation_quantity, \r\n\tSUM(if(a.ticket_type='T002',a.quantity,0))  AS nation_child_quantity, \r\n\tSUM(if(a.ticket_type='T002',a.amount,0))  AS nation_child_amount, \r\n\t\r\n\tSUM(if(a.ticket_type='T001',a.quantity,0))  AS nation_adult_quantity, \r\n\tSUM(if(a.ticket_type='T001',a.amount,0))  AS nation_adult_amount,\r\n\t\r\n\tSUM(if(a.ticket_type IN ('T003','T004'),a.quantity,0))  AS international_quantity, \r\n\tSUM(if(a.ticket_type='T004',a.quantity,0))  AS international_child_quantity, \r\n\tSUM(if(a.ticket_type='T004',a.amount,0))  AS international_child_amount, \r\n\t\r\n\tSUM(if(a.ticket_type='T003',a.quantity,0))  AS international_adult_quantity, \r\n\tSUM(if(a.ticket_type='T003',a.amount,0))  AS international_adult_amount, \r\n\tSUM(a.amount) AS total_amount \r\nFROM `tabBooking Ticket Items` a \r\nINNER JOIN `tabTicket Booking` b ON b.name = a.parent\r\nWHERE\r\n\t\ta.is_ticket = 1 and\r\n\t\tb.booking_date between  %(start_date)s and  %(end_date)s\r\nGROUP BY b.booking_date ",
+  "query": "SELECT \r\n\t b.booking_date  as booking_date, \r\n\r\n\tSUM(if(a.ticket_type='T002',coalesce(a.quantity,0),0))  AS nation_child_quantity, \r\n\tSUM(if(a.ticket_type='T002',coalesce(a.amount,0),0))  AS nation_child_amount, \r\n\tSUM(if(a.ticket_type='T001',coalesce(a.quantity,0),0))  AS nation_adult_quantity, \r\n\tSUM(if(a.ticket_type='T001',coalesce(a.amount,0),0))  AS nation_adult_amount,\r\n\t\r\n\tSUM(if(a.ticket_type IN ('T001','T002'),coalesce(a.quantity,0),0))  AS nation_quantity, \r\n\tSUM(if(a.ticket_type IN ('T001','T002'),coalesce(a.amount,0),0))  AS nation_amount, \r\n\t\r\n\t\r\n\tSUM(if(a.ticket_type='T004',coalesce(a.quantity,0),0))  AS international_child_quantity, \r\n\tSUM(if(a.ticket_type='T004',coalesce(a.amount,0),0))  AS international_child_amount, \r\n\tSUM(if(a.ticket_type='T003',coalesce(a.quantity,0),0))  AS international_adult_quantity, \r\n\tSUM(if(a.ticket_type='T003',coalesce(a.amount,0),0))  AS international_adult_amount, \r\n\t\r\n\tSUM(if(a.ticket_type IN ('T003','T004'),coalesce(a.quantity,0),0))  AS international_quantity, \r\n\tSUM(if(a.ticket_type IN ('T003','T004'),coalesce(a.amount,0),0))  AS international_amount, \r\n\t\r\n\tSUM(coalesce(a.quantity,0)) AS total_quantity, \r\n\tSUM(coalesce(a.amount,0)) AS total_amount \r\nFROM `tabBooking Ticket Items` a \r\nINNER JOIN `tabTicket Booking` b ON b.name = a.parent\r\nWHERE\r\n\t\ta.is_ticket = 1 \r\n\t\tand b.booking_date between  %(start_date)s and  %(end_date)s\r\nGROUP BY b.booking_date ",
   "ref_doctype": "Ticket Booking",
   "reference_report": null,
   "report_name": "Ticket Booking Forcast",
