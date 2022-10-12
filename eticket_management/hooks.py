@@ -195,4 +195,8 @@ app_license = "MIT"
 # translated_search_doctypes = []
 
 
-fixtures = ["Custom Field","Report","Dashboard Chart"]
+fixtures = [
+    "Custom Field",
+    "Report",
+    {"dt": "Dashboard Chart", "filters": [["module", "=", "E Ticket Management"]]},
+    ]

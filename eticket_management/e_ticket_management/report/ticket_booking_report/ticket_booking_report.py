@@ -35,8 +35,8 @@ def get_data(filters):
 	data= []
 	parent = """
 			SELECT 
-				0 indent,
-				1 is_group,
+				0 as indent,
+				1 as is_group,
 				booking_date,
 				concat(customer,' / ',phone_number) customer,
 				arrival_date,
@@ -54,54 +54,22 @@ def get_data(filters):
 	""".format(get_filters(filters))
 	parent_data = frappe.db.sql(parent,as_dict=1)
 	for dic_p in parent_data:
+		data.append(dic_p)
 		child_data = ("""
-						with sale as(SELECT
-							a.item_group, 
-							coalesce(a.supplier_name,'Not Set') supplier_name,
-							a.item_code,
-							a.item_name,
-							a.stock_uom,
-							concat('<img src=','''',a.image,'''',' Style="Height:100px" />') image,
-							coalesce(SUM(a.qty * a.conversion_factor),0) sale_qty
-						FROM `tabSales Invoice Item` a
-							INNER JOIN `tabSales Invoice` b ON b.name = a.parent									
-						WHERE {0} and a.item_group = '{4}'
-						GROUP BY
-							a.item_group, 
-							a.supplier_name,
-							a.item_code,
-							a.item_name,
-							a.stock_uom,
-							a.image)
-
 						SELECT 
-							a.*,
-							coalesce((SELECT 
-									sum(qty_after_transaction) qty_after_transaction
-									FROM  `tabStock Ledger Entry` c
-									WHERE  concat(posting_date,' ',time_format(creation,'%H:%i:%s.%f')) =
-									( SELECT  max(concat(posting_date,' ',time_format(creation,'%H:%i:%s.%f')))
-											FROM  `tabStock Ledger Entry` d
-											WHERE posting_date BETWEEN '{1}' AND '{2}' and d.item_code = c.item_code AND d.warehouse = if('{3}'='None',d.warehouse,'{3}')
-									)
-								and posting_date BETWEEN '{1}' AND '{2}' AND warehouse = if('{3}'='None',warehouse,'{3}') AND c.item_code = a.item_code),0) boh,
-							coalesce((SELECT 
-									sum(qty_after_transaction) qty_after_transaction
-									FROM  `tabStock Ledger Entry` e
-									WHERE  concat(posting_date,' ',time_format(creation,'%H:%i:%s.%f')) =
-									( SELECT  max(concat(posting_date,' ',time_format(creation,'%H:%i:%s.%f')))
-											FROM  `tabStock Ledger Entry` f
-											WHERE posting_date BETWEEN '{1}' AND '{2}' and f.item_code = e.item_code AND f.warehouse = if('{3}'='None',f.warehouse,'{3}')
-									)
-								and posting_date BETWEEN '{1}' AND '{2}' AND warehouse = if('{3}'='None',warehouse,'{3}') AND e.item_code = a.item_code),0) - a.sale_qty total_qty
-						FROM sale a
-					""".format(get_filters(filters),filters.start_date,filters.end_date,filters.warehouse,dic_p["item_code"]))
+							1 as indent,
+							0 as is_group,
+							ticket_type,
+							quantity,
+							price,
+							amount,
+							ticket_name
+						FROM `tabBooking Ticket Items`
+						WHERE parent = '{}'
+					""".format(dic_p["name"]))
 		child = frappe.db.sql(child_data,as_dict=1)
-		for dic_c in child:
-			dic_c["indent"] = 1
-			dic_c["is_group"] = 0
-			data.append(dic_c)
-
+		for dic_p in parent_data:
+			data.append(dic_p)
 	return data
 
 def get_list(filters,name):
