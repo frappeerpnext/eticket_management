@@ -1,10 +1,11 @@
-frappe.views.calendar['Event'] = {
+frappe.views.calendar['Ticket Booking'] = {
     field_map: {
         start: 'booking_date',
         end: 'booking_date',
         id: 'name',
         allDay: 'all_day',
-        title: 'name'
+        title: 'name',
+        color:"color"
     },
     style_map: {
         Public: 'success',

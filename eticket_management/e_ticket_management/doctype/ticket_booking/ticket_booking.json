@@ -32,9 +32,7 @@
   "column_break_21",
   "checked_in_date",
   "keyword",
-  "start",
-  "end",
-  "subject"
+  "color"
  ],
  "fields": [
   {
@@ -178,28 +176,16 @@
    "options": "Company:company:default_currency"
   },
   {
-   "fieldname": "start",
-   "fieldtype": "Datetime",
-   "hidden": 1,
-   "label": "Start"
-  },
-  {
-   "fieldname": "end",
-   "fieldtype": "Datetime",
-   "hidden": 1,
-   "label": "End"
-  },
-  {
-   "fieldname": "subject",
-   "fieldtype": "Data",
-   "hidden": 1,
-   "label": "Subject"
+   "allow_on_submit": 1,
+   "fieldname": "color",
+   "fieldtype": "Color",
+   "label": "Color"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-12 10:21:01.180528",
+ "modified": "2022-10-12 11:06:05.389124",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",
