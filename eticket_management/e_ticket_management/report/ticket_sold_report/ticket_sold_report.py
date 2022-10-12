@@ -13,9 +13,10 @@ def execute(filters=None):
 	validate(filters)
 	return get_columns(filters), data
 
-def get_filters(filters):
+def get_filters(filters,group="",value="",indent=1):
 	data = " transaction_date between '{}' AND '{}'".format(filters.start_date,filters.end_date)
-	data = data + "{}={}".format()
+	if indent == 1:
+		data = data + " and {} = '{}' ".format(group,value)
 	return data
 
 def get_columns(filters):
@@ -36,11 +37,11 @@ def get_report_group_data(filters):
 	for p in parent:
 		p["is_group"] = 1
 		data.append(p)
-		children = get_data(filters, 1,get_row_group(filters.parent_row_group),parent["group_field"])
+		children = get_data(filters, 1,get_row_group(filters.parent_row_group),p["group_field"])
 		for c in children:data.append(c)
 	return data
 
-def get_data(filters,indent=0,parent_row_group=""):
+def get_data(filters,indent=0,parent_row_group="",value=""):
 	row_group = ""
 	if parent_row_group != "":
 		row_group = parent_row_group
@@ -61,8 +62,7 @@ def get_data(filters,indent=0,parent_row_group=""):
 				FROM `tabPOS Ticket` a
 					WHERE {0}
 				group by {1}
-			""".format(get_filters(filters),row_group)
-	frappe.msgprint(sql)
+			""".format(get_filters(filters,parent_row_group,value,indent),row_group)
 	data = frappe.db.sql(sql,as_dict=1)
 	return data
 

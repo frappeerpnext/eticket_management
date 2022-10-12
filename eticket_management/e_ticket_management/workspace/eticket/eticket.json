@@ -72,7 +72,7 @@
    "type": "Link"
   }
  ],
- "modified": "2022-10-11 18:08:00.710930",
+ "modified": "2022-10-12 10:11:47.827016",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "eTicket",
@@ -91,16 +91,16 @@
   {
    "color": "Grey",
    "doc_view": "List",
-   "label": "Booking Calendar",
-   "link_to": "Ticket Booking",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
    "label": "Dashboard",
    "link_to": "eTicket Dashboard",
    "type": "Dashboard"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "Calendar",
+   "label": "Booking Calendar",
+   "link_to": "Ticket Booking",
+   "type": "DocType"
   },
   {
    "color": "Grey",

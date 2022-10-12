@@ -1,34 +1,98 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:card_number",
  "creation": "2022-10-11 11:18:03.976281",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "ticket_type",
-  "ticket_number"
+  "name1",
+  "card_number",
+  "gender",
+  "birthday",
+  "nation",
+  "department",
+  "job",
+  "phone",
+  "address",
+  "email",
+  "image"
  ],
  "fields": [
   {
-   "fieldname": "ticket_number",
+   "fieldname": "name1",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Ticket Number"
+   "label": "Name"
   },
   {
-   "fieldname": "ticket_type",
+   "fieldname": "gender",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Gender",
+   "options": "Male\nFemale"
+  },
+  {
+   "fieldname": "nation",
+   "fieldtype": "Data",
+   "label": "Nation"
+  },
+  {
+   "fieldname": "department",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Ticket Type"
+   "label": "Department"
+  },
+  {
+   "fieldname": "job",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Job"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Phone"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Data",
+   "label": "Address"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Email"
+  },
+  {
+   "fieldname": "card_number",
+   "fieldtype": "Data",
+   "label": "Card Number",
+   "unique": 1
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "hidden": 1,
+   "label": "Image"
+  },
+  {
+   "fieldname": "birthday",
+   "fieldtype": "Date",
+   "label": "Birthday"
   }
  ],
+ "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-11 11:26:07.289209",
+ "modified": "2022-10-12 10:12:54.883118",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Card Holder",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
