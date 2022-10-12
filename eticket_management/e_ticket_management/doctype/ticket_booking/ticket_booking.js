@@ -36,7 +36,7 @@ function updateSumTotal(frm) {
 		total_qty +=flt(d.quantity);
 		if (d.is_ticket)
 			total_ticket += flt(d.quantity);
-			total_ticket_amount += flt(d.total_ticket_amount)
+			total_ticket_amount += flt(d.amount)
     });
 	
  

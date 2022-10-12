@@ -195,4 +195,4 @@ app_license = "MIT"
 # translated_search_doctypes = []
 
 
-fixtures = ["Custom Field","Report"]
+fixtures = ["Custom Field","Report","Dashboard Chart"]

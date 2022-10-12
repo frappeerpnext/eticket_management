@@ -111,7 +111,8 @@
   {
    "fieldname": "total_quantity",
    "fieldtype": "Int",
-   "label": "Total Quantity"
+   "label": "Total Quantity",
+   "read_only": 1
   },
   {
    "fieldname": "total_amount",
@@ -166,7 +167,8 @@
    "default": "0",
    "fieldname": "total_ticket",
    "fieldtype": "Int",
-   "label": "Total Ticket"
+   "label": "Total Ticket",
+   "read_only": 1
   },
   {
    "fieldname": "keyword",
@@ -178,7 +180,8 @@
    "fieldname": "total_ticket_amount",
    "fieldtype": "Currency",
    "label": "Total Ticket Amount",
-   "options": "Company:company:default_currency"
+   "options": "Company:company:default_currency",
+   "read_only": 1
   },
   {
    "allow_on_submit": 1,
@@ -224,7 +227,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-12 15:59:44.679674",
+ "modified": "2022-10-12 16:29:28.019720",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",

@@ -5273,6 +5273,16 @@
     "width": 75
    },
    {
+    "fieldname": "nation_child_amount",
+    "fieldtype": "Currency",
+    "label": "Nation Child Amount",
+    "options": null,
+    "parent": "Ticket Booking Forcast",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
     "fieldname": "total_quantity",
     "fieldtype": "Int",
     "label": "Total Ticket",
@@ -5325,11 +5335,11 @@
   "javascript": null,
   "json": null,
   "letter_head": "Default Letter Head",
-  "modified": "2022-10-12 16:15:47.009253",
+  "modified": "2022-10-12 16:44:17.115924",
   "module": "E Ticket Management",
   "name": "Ticket Booking Forcast",
   "prepared_report": 0,
-  "query": "SELECT \r\n\tb.booking_date, \r\n\tSUM(a.quantity) AS total_quantity, \r\n\tSUM(if(a.ticket_type IN ('T001','T002'),a.quantity,0))  AS nation_quantity, \r\n\tSUM(if(a.ticket_type='T001',a.quantity,0))  AS nation_child_quantity, \r\n\tSUM(if(a.ticket_type='T001',a.amount,0))  AS nation_child_amount, \r\n\tSUM(amount) AS total_amount \r\n\tFROM `tabBooking Ticket Items` a \r\nINNER JOIN `tabTicket Booking` b ON b.name = a.parent\r\nWHERE\r\n\ta.is_ticket = 1 and\r\n\tb.booking_date between  %(start_date)s and  %(end_date)s\r\n\tGROUP BY b.booking_date \r\n ",
+  "query": "SELECT \r\n\tb.booking_date, \r\n\tSUM(a.quantity) AS total_quantity, \r\n\tSUM(if(a.ticket_type IN ('T001','T002'),a.quantity,0))  AS nation_quantity, \r\n\tSUM(if(a.ticket_type='T002',a.quantity,0))  AS nation_child_quantity, \r\n\tSUM(if(a.ticket_type='T002',a.amount,0))  AS nation_child_amount, \r\n\t\r\n\tSUM(if(a.ticket_type='T001',a.quantity,0))  AS nation_adult_quantity, \r\n\tSUM(if(a.ticket_type='T001',a.amount,0))  AS nation_adult_amount,\r\n\t\r\n\tSUM(if(a.ticket_type IN ('T003','T004'),a.quantity,0))  AS international_quantity, \r\n\tSUM(if(a.ticket_type='T004',a.quantity,0))  AS international_child_quantity, \r\n\tSUM(if(a.ticket_type='T004',a.amount,0))  AS international_child_amount, \r\n\t\r\n\tSUM(if(a.ticket_type='T003',a.quantity,0))  AS international_adult_quantity, \r\n\tSUM(if(a.ticket_type='T003',a.amount,0))  AS international_adult_amount, \r\n\tSUM(a.amount) AS total_amount \r\nFROM `tabBooking Ticket Items` a \r\nINNER JOIN `tabTicket Booking` b ON b.name = a.parent\r\nWHERE\r\n\t\ta.is_ticket = 1 and\r\n\t\tb.booking_date between  %(start_date)s and  %(end_date)s\r\nGROUP BY b.booking_date ",
   "ref_doctype": "Ticket Booking",
   "reference_report": null,
   "report_name": "Ticket Booking Forcast",
