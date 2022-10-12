@@ -5260,7 +5260,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 100
+    "width": 120
    },
    {
     "fieldname": "nation_child_amount",
@@ -5270,7 +5270,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 75
+    "width": 120
    },
    {
     "fieldname": "nation_adult_quantity",
@@ -5280,7 +5280,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 75
+    "width": 120
    },
    {
     "fieldname": "nation_adult_amount",
@@ -5290,7 +5290,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 75
+    "width": 120
    },
    {
     "fieldname": "nation_quantity",
@@ -5300,7 +5300,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 75
+    "width": 120
    },
    {
     "fieldname": "nation_amount",
@@ -5310,7 +5310,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 75
+    "width": 120
    },
    {
     "fieldname": "international_child_quantity",
@@ -5320,7 +5320,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 75
+    "width": 120
    },
    {
     "fieldname": "international_child_amount",
@@ -5340,7 +5340,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 75
+    "width": 120
    },
    {
     "fieldname": "international_adult_amount",
@@ -5350,7 +5350,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 75
+    "width": 120
    },
    {
     "fieldname": "international_quantity",
@@ -5360,7 +5360,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 75
+    "width": 120
    },
    {
     "fieldname": "international_amount",
@@ -5370,7 +5370,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 75
+    "width": 120
    },
    {
     "fieldname": "total_quantity",
@@ -5380,7 +5380,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 100
+    "width": 120
    },
    {
     "fieldname": "total_amount",
@@ -5390,7 +5390,7 @@
     "parent": "Ticket Booking Forcast",
     "parentfield": "columns",
     "parenttype": "Report",
-    "width": 75
+    "width": 120
    }
   ],
   "disable_prepared_report": 0,
@@ -5425,7 +5425,7 @@
   "javascript": null,
   "json": null,
   "letter_head": "Default Letter Head",
-  "modified": "2022-10-12 17:18:26.601810",
+  "modified": "2022-10-12 17:20:02.782236",
   "module": "E Ticket Management",
   "name": "Ticket Booking Forcast",
   "prepared_report": 0,
