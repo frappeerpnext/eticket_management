@@ -21,8 +21,8 @@ class TicketBooking(Document):
 		self.total_amount=total_amount
 		self.keyword = str(self.customer) + " " + str(self.phone_number) + " " + str(self.email_address or "")
 		
-		self.calendar_title = "Ticket Booking %s $s Total Ticket %s Total Amount %s will arrive on %s" %(str(self.name),str(self.customer),str(self.total_ticket),str(fmt_money(self.total_ticket_amount,2,"USD","###,###.##")),str(format_date(self.arrival_date)))
-		# _("Ticket Booking") + " " + _("by") + " " + str(self.name) + " " + str(self.customer) + " " + _("Total Ticket")+":"+ (self.total_ticket) + _("Total Amount") + " " + str(fmt_money(self.total_ticket_amount,2,"USD")) + " "+ _("will arrive on") + " " + str(format_date(self.arrival_date)) 
+		self.calendar_title = "Ticket Booking %s by: %s Total Ticket:%s Total Amount:%s will arrive on %s" %(str(self.name),str(self.customer),str(self.total_ticket),str(fmt_money(self.total_ticket_amount,2,"USD","###,###.##")),str(format_date(self.arrival_date)))
+		
 	def on_submit(self):
 		
 		for t in self.ticket_items:

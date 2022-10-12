@@ -9,7 +9,18 @@ def execute(filters=None):
 
 def get_columns(filters):
 	columns=[]
+	columns.append({'fieldname':"name",'label':"Document",'fieldtype':'Data','align':'right','width':110})
 	columns.append({'fieldname':"booking_date",'label':"Booking Date",'fieldtype':'Date','align':'right','width':110})
+	columns.append({'fieldname':"customer",'label':"Customer",'fieldtype':'Data','align':'right','width':110})
+	columns.append({'fieldname':"phone_number",'label':"Phone",'fieldtype':'Data','align':'right','width':110})
+	columns.append({'fieldname':"arrival_date",'label':"Arrival Date",'fieldtype':'Date','align':'right','width':110})
+	columns.append({'fieldname':"total_ticket",'label':"Total Ticket",'fieldtype':'Data','align':'right','width':110})
+	columns.append({'fieldname':"total_ticket_amount",'label':"Total Amount",'fieldtype':'Data','align':'right','width':110})
+	columns.append({'fieldname':"business_source",'label':"Business Source",'fieldtype':'Data','align':'right','width':110})
+	columns.append({'fieldname':"business_source_type",'label':"Booking Date",'fieldtype':'Data','align':'right','width':110})
+	columns.append({'fieldname':"market_segment",'label':"Booking Date",'fieldtype':'Data','align':'right','width':110})
+	columns.append({'fieldname':"marketing_segment_type",'label':"Booking Date",'fieldtype':'Data','align':'right','width':110})
+	
 	return columns
 def get_filters(filters):
 	fil=""
