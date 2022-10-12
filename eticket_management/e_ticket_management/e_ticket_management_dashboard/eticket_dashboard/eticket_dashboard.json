@@ -1,6 +1,9 @@
 {
  "cards": [
   {
+   "card": "Total Ticket Sold"
+  },
+  {
    "card": "Today Ticket Sold"
   },
   {
@@ -27,12 +30,12 @@
  ],
  "charts": [
   {
-   "chart": "Daily Ticket Sold By Date",
+   "chart": "Daily Ticket Sold By Date-1",
    "width": "Full"
   },
   {
    "chart": "Ticket Sale by Ticket Type",
-   "width": "Half"
+   "width": "Full"
   }
  ],
  "creation": "2022-09-27 11:19:41.041120",
@@ -42,7 +45,7 @@
  "idx": 0,
  "is_default": 0,
  "is_standard": 1,
- "modified": "2022-10-12 10:50:35.713861",
+ "modified": "2022-10-12 11:34:52.219696",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "eTicket Dashboard",
