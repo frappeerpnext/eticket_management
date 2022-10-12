@@ -18,8 +18,36 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Reports",
+   "label": "Configuration",
    "link_count": 2,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Access Control Device",
+   "link_count": 0,
+   "link_to": "Access Control Device",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Card Holder",
+   "link_count": 0,
+   "link_to": "Card Holder",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_count": 3,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -45,34 +73,16 @@
   },
   {
    "hidden": 0,
-   "is_query_report": 0,
-   "label": "Configuration",
-   "link_count": 2,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Access Control Device",
+   "is_query_report": 1,
+   "label": "Ticket Booking Report",
    "link_count": 0,
-   "link_to": "Access Control Device",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Card Holder",
-   "link_count": 0,
-   "link_to": "Card Holder",
-   "link_type": "DocType",
+   "link_to": "Ticket Booking Report",
+   "link_type": "Report",
    "onboard": 0,
    "type": "Link"
   }
  ],
- "modified": "2022-10-12 13:24:39.203306",
+ "modified": "2022-10-12 17:57:38.287408",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "eTicket",
