@@ -8,13 +8,14 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
-  "current_customer",
   "customer",
   "phone_number",
   "email_address",
-  "column_break_4",
   "booking_date",
+  "column_break_4",
   "arrival_date",
+  "market_segment",
+  "business_source",
   "amended_from",
   "booking_ticket_section",
   "ticket_items",
@@ -35,16 +36,14 @@
   "keyword",
   "color",
   "calendar_title",
-  "business_source",
-  "market_segment",
   "business_source_type",
-  "marketing_source_type"
+  "marketing_segment_type"
  ],
  "fields": [
   {
    "fieldname": "customer",
    "fieldtype": "Data",
-   "hidden": 1,
+   "in_list_view": 1,
    "label": "Customer"
   },
   {
@@ -197,6 +196,7 @@
    "fetch_from": "current_customer.business_source",
    "fieldname": "business_source",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Business Source",
    "options": "Lead Source"
   },
@@ -204,6 +204,7 @@
    "fetch_from": "current_customer.market_segment",
    "fieldname": "market_segment",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Market Segment",
    "options": "Market Segment"
   },
@@ -215,22 +216,15 @@
   },
   {
    "fetch_from": "market_segment.marketing_segment_type",
-   "fieldname": "marketing_source_type",
+   "fieldname": "marketing_segment_type",
    "fieldtype": "Data",
-   "label": "Marketing Source Type"
-  },
-  {
-   "fieldname": "current_customer",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Current Customer",
-   "options": "Customer"
+   "label": "Marketing Segment Type"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-12 15:35:11.381512",
+ "modified": "2022-10-12 15:59:44.679674",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",
