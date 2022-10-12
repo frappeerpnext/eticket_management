@@ -198,6 +198,6 @@ app_license = "MIT"
 fixtures = [
     "Custom Field",
     "Report",
-    {"dt": "Dashboard Chart", "filters": [["module", "=", "E Ticket Managementx"]]},
-    {"dt": "Dashboard", "filters": [["module", "=", "E Ticket Managementx"]]},
+    {"dt": "Dashboard Chart", "filters":[["is_standard", "=", 0]]},
+    {"dt": "Dashboard", "filters": [["is_standard", "=", 0]]},
     ]
