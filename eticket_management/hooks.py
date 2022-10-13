@@ -197,7 +197,7 @@ app_license = "MIT"
 
 fixtures = [
     "Custom Field",
-    "Report",o
+    "Report",
     {"dt": "Dashboard Chart", "filters":[["is_standard", "=", 0]]},
     {"dt": "Dashboard", "filters": [["is_standard", "=", 0]]},
     ]
