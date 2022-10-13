@@ -11,6 +11,18 @@ frappe.query_reports["Sale Report"] = {
 			default:frappe.defaults.get_user_default("Company"),
 		},
 		{
+			fieldname: "department",
+			label: "Department",
+		 
+			
+			"fieldtype": "MultiSelectList",
+			get_data: function(txt) {
+				return frappe.db.get_link_options('Department', txt, {"name": ['!=', 'All Departments']});
+				
+			},
+			 
+		},
+		{
 			"fieldname":"filter_based_on",
 			"label": __("Filter Based On"),
 			"fieldtype": "Select",

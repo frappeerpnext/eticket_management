@@ -10,6 +10,8 @@ from frappe.utils.data import strip
 
 def execute(filters=None):
 	
+
+	
 	if filters.filter_based_on =="Fiscal Year":
 		filters.start_date = '{}-01-01'.format(filters.from_fiscal_year)
 		filters.end_date = '{}-12-31'.format(filters.from_fiscal_year)
@@ -21,7 +23,8 @@ def execute(filters=None):
 	update_parent_item_group()
 	update_sale()
 	
-	
+ 
+
 	report_data = []
 	skip_total_row=False
 	message=None
@@ -42,6 +45,8 @@ def execute(filters=None):
 
 
 def validate(filters):
+	if not filters.department:
+		filters.department = frappe.db.get_list("Department",pluck='name')
 
 	if filters.start_date and filters.end_date:
 		if filters.start_date > filters.end_date:
@@ -275,6 +280,8 @@ def get_conditions(filters,group_filter=None):
 
 	if filters.get("business_source"):
 		conditions += " AND b.business_source in %(business_source)s"
+
+	conditions += " AND b.department in %(department)s"
 	
 	if filters.get("supplier_group"):
 		conditions += " AND (SELECT supplier_group FROM `tabSupplier` b WHERE b.name = a.supplier) in %(supplier_group)s"
@@ -284,6 +291,7 @@ def get_conditions(filters,group_filter=None):
 
 	if filters.get("is_ticket"):
 		conditions += " AND a.is_ticket = 1"
+	
 	return conditions
 
 def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
