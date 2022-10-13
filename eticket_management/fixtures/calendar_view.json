@@ -1,0 +1,24 @@
+[
+ {
+  "all_day": 0,
+  "docstatus": 0,
+  "doctype": "Calendar View",
+  "end_date_field": "booking_date",
+  "modified": "2022-10-12 16:30:42.186969",
+  "name": "Ticket Booking Calendar (Booking Date)",
+  "reference_doctype": "Ticket Booking",
+  "start_date_field": "booking_date",
+  "subject_field": "calendar_title"
+ },
+ {
+  "all_day": 0,
+  "docstatus": 0,
+  "doctype": "Calendar View",
+  "end_date_field": "arrival_date",
+  "modified": "2022-10-12 17:25:20.067455",
+  "name": "Ticket Booking Calendar (Arrival Date)",
+  "reference_doctype": "Ticket Booking",
+  "start_date_field": "arrival_date",
+  "subject_field": "calendar_title"
+ }
+]
