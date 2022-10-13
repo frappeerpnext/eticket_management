@@ -30,7 +30,7 @@ def execute(filters=None):
 	report_chart = None
 	if filters.chart_type !="None" and len(report_data)<=100:
 		report_chart = get_report_chart(filters,report_data)
-
+		 
 	return get_columns(filters), report_data, message, report_chart, get_report_summary(report_data,filters),skip_total_row
 
 
@@ -53,9 +53,6 @@ def validate(filters):
 		if(filters.row_group == filters.parent_row_group):
 			frappe.throw("Parent row group and row group can not be the same")
 
-
-
-	 
 
 def get_columns(filters):
 	
@@ -86,7 +83,6 @@ def get_columns(filters):
 	if (filters.row_group == "Sale Invoice" or filters.parent_row_group == "Sale Invoice") and filters.get("include_cancelled") == True:
 		columns.append({"label":"Status","fieldname":"docstatus","fieldtype":"Data","align":"center",'width':100})
 	return columns
-
 
 
 def get_dynamic_columns(filters):
@@ -226,15 +222,16 @@ def get_conditions(filters,group_filter=None):
 		conditions += " AND b.business_source in %(business_source)s"
 	
 
-	conditions += " AND a.is_ticket = 1"
+	conditions += " AND a.is_ticket = 1" 
 	return conditions
 
 def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 	hide_columns = filters.get("hide_columns")
 	row_group = [d["fieldname"] for d in get_row_groups() if d["label"]==filters.row_group][0]
 	 
-	if(parent_row_group!=None):
+	if(parent_row_group!=None): 
 		row_group = [d["fieldname"] for d in get_row_groups() if d["label"]==parent_row_group][0]
+	 
 		
 
 	report_fields = get_report_field(filters)
@@ -295,7 +292,7 @@ def get_report_group_data(filters):
 
 def get_report_summary(data,filters):
 	hide_columns = filters.get("hide_columns")
-	report_summary=[]
+	report_summary=[] 
 	if filters.parent_row_group==None:
 		if not filters.is_ticket:
 			report_summary =[{"label":"Total " + filters.row_group ,"value":len(data)}]
@@ -331,7 +328,7 @@ def get_report_chart(filters,data):
 				#loop sum dynamic column data data set value
 				dataset_values = []
 				for f in fields:
-					dataset_values.append(sum(d["{}_{}".format(f["fieldname"],rf["fieldname"])] for d in data))
+					dataset_values.append(sum(d["{}_{}".format(f["fieldname"],rf["fieldname"])] for d  in data))
 					
 				dataset.append({'name':rf["label"],'values':dataset_values})
 				colors.append(rf["chart_color"])
@@ -347,9 +344,9 @@ def get_report_chart(filters,data):
 			if not hide_columns or  rf["label"] not in hide_columns:
 				fieldname = 'total_'+rf["fieldname"]
 				if(fieldname=="total_qty"):
-					dataset.append({'name':rf["label"],'values':(d["total_qty"] for d in data)})
+					dataset.append({'name':rf["label"],'values':(d["total_qty"] for d in data if d["indent"]==0)})
 				elif(fieldname=="total_amount"):
-					dataset.append({'name':rf["label"],'values':(d["total_amount"] for d in data)})
+					dataset.append({'name':rf["label"],'values':(d["total_amount"] for d in data if d["indent"]==0)})
 	
 
 		 
@@ -371,7 +368,7 @@ def get_report_chart(filters,data):
 def get_report_field(filters):
 	 
 	return [
-		{"label":"Quantity","short_label":"Qty", "fieldname":"qty","fieldtype":"Float","indicator":"Grey","precision":2, "align":"center","chart_color":"#FF8A65","sql_expression":"a.quantity"},
+		{"label":"Quantity","short_label":"Qty", "fieldname":"quantity","fieldtype":"Float","indicator":"Grey","precision":2, "align":"center","chart_color":"#FF8A65","sql_expression":"a.quantity"},
 		
 		{"label":"Amount", "short_label":"Amt", "fieldname":"amount","fieldtype":"Currency","indicator":"Red","precision":None, "align":"right","chart_color":"#2E7D32","sql_expression":"a.amount"},
 		

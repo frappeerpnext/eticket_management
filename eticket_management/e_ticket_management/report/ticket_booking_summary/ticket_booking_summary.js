@@ -68,7 +68,7 @@ frappe.query_reports["Ticket Booking Summary"] = {
 			"fieldname": "parent_row_group",
 			"label": __("Parent Group By"),
 			"fieldtype": "Select",
-			"options": "\nCategory\nProduct Group\nCompany\nTerritory\nDate\n\Month\nYear\nMarket Segment\nMarketing Segment Type\nBusiness Source\nBusiness Source Type",
+			"options": "\nCategory\nCompany\nTerritory\nDate\n\Month\nYear\nMarket Segment\nMarketing Segment Type\nBusiness Source\nBusiness Source Type",
 			
 		},
 		{
