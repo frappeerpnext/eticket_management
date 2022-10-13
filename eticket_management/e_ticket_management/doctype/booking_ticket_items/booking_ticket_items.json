@@ -13,7 +13,8 @@
   "amount",
   "photo",
   "is_ticket",
-  "is_voucher"
+  "is_voucher",
+  "item_group"
  ],
  "fields": [
   {
@@ -71,12 +72,18 @@
    "fieldname": "is_voucher",
    "fieldtype": "Check",
    "label": "Is Voucher"
+  },
+  {
+   "fetch_from": "ticket_type.item_group",
+   "fieldname": "item_group",
+   "fieldtype": "Data",
+   "label": "Item Group"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-10-06 11:00:11.590506",
+ "modified": "2022-10-13 12:28:03.559677",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Booking Ticket Items",

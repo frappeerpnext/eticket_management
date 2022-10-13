@@ -11,11 +11,12 @@
   "customer",
   "phone_number",
   "email_address",
-  "booking_date",
-  "column_break_4",
-  "arrival_date",
+  "territory",
   "market_segment",
   "business_source",
+  "column_break_4",
+  "booking_date",
+  "arrival_date",
   "amended_from",
   "booking_ticket_section",
   "ticket_items",
@@ -187,6 +188,7 @@
    "allow_on_submit": 1,
    "fieldname": "color",
    "fieldtype": "Color",
+   "hidden": 1,
    "label": "Color"
   },
   {
@@ -215,19 +217,27 @@
    "fetch_from": "business_source.lead_source_type",
    "fieldname": "business_source_type",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Business Source Type"
   },
   {
    "fetch_from": "market_segment.marketing_segment_type",
    "fieldname": "marketing_segment_type",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Marketing Segment Type"
+  },
+  {
+   "fieldname": "territory",
+   "fieldtype": "Link",
+   "label": "Territory",
+   "options": "Territory"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-12 16:29:28.019720",
+ "modified": "2022-10-13 12:33:20.657946",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",

@@ -16,11 +16,7 @@ def execute(filters=None):
 	
 
 	validate(filters)
-	#run this to update parent_item_group in table sales invoice item
-	update_parent_item_group()
-	update_sale()
-	
-	
+ 
 	report_data = []
 	skip_total_row=False
 	message=None
@@ -58,56 +54,15 @@ def validate(filters):
 			frappe.throw("Parent row group and row group can not be the same")
 
 
-def update_parent_item_group():
-	frappe.db.sql(
-		"""
-			UPDATE `tabSales Invoice Item` a 
-			SET parent_item_group = (
-					SELECT parent_item_group FROM `tabItem Group` WHERE NAME=a.item_group) 
-			WHERE ifnull(parent_item_group,'') = ''
-		"""
-	)
 
-def update_sale():
-	frappe.db.sql(
-		"""
-			UPDATE `tabSales Invoice Item` a 
-			SET parent_item_group = (
-					SELECT parent_item_group FROM `tabItem Group` WHERE NAME=a.item_group) 
-			WHERE ifnull(parent_item_group,'') = ''
-		"""
-	)
-
-	#update transaction to tbl sale invoice item
-	sale_invoices = frappe.db.sql("select distinct parent from `tabSales Invoice Item` where total_transaction=0", as_dict=1)
-	
-	if sale_invoices:
-		for s in sale_invoices:
-			 
-			item_count = frappe.db.sql("select count(name) as total from `tabSales Invoice Item` where parent='{}'".format(s["parent"]), as_dict=1)
-			
-			if item_count:
-				total_item = item_count[0]["total"]
-				#get total transaction from pos invoice
-				pos_invoice_count = frappe.db.sql("select count(name) as total from `tabPOS Invoice` where consolidated_invoice='{}'".format(s["parent"]), as_dict=1)
-				total_pos_invoice = 1
-				if pos_invoice_count and pos_invoice_count[0]["total"]>1:
-						total_pos_invoice = pos_invoice_count[0]["total"]
-
-				sql = "update `tabSales Invoice Item` set total_transaction = {} where parent='{}'".format(total_pos_invoice/total_item, s["parent"])
-				 
-				frappe.db.sql(sql)
-	
-	frappe.db.commit()
-	#end update total transaction to sale invoice item
-	# 				
+	 
 
 def get_columns(filters):
 	
 	columns = []
 	columns.append({'fieldname':'row_group','label':filters.row_group,'fieldtype':'Data','align':'left','width':250})
 	if filters.row_group == "Product":
-			columns.append({"label":"Item Code","fieldname":"item_code","fieldtype":"Data","align":"left",'width':130})
+			columns.append({"label":"Ticket Code","fieldname":"ticket_type","fieldtype":"Data","align":"left",'width':130})
 	hide_columns = filters.get("hide_columns")
 	 
 	if filters.column_group !="Column Group By" and filters.row_group not in ["Date","Month","Year"]:
@@ -243,16 +198,16 @@ def get_fields(filters):
 	
 
 def get_conditions(filters,group_filter=None):
-	conditions = ""
+	conditions = " 1=1 "
 
 	start_date = filters.start_date
 	end_date = filters.end_date
 
-	conditions += " b.company =if('{0}'='None',b.company,'{0}')".format(filters.company)
+ 
 	if(group_filter!=None):
 		conditions += " and {} ='{}'".format(group_filter["field"],group_filter["value"].replace("'","''").replace("%","%%"))
 
-	conditions += " AND b.posting_date between '{}' AND '{}'".format(start_date,end_date)
+	conditions += " AND b.booking_date between '{}' AND '{}'".format(start_date,end_date)
 
 
 
@@ -277,8 +232,10 @@ def get_conditions(filters,group_filter=None):
 def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 	hide_columns = filters.get("hide_columns")
 	row_group = [d["fieldname"] for d in get_row_groups() if d["label"]==filters.row_group][0]
+	 
 	if(parent_row_group!=None):
 		row_group = [d["fieldname"] for d in get_row_groups() if d["label"]==parent_row_group][0]
+		
 
 	report_fields = get_report_field(filters)
 	
@@ -292,14 +249,14 @@ def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 			
 			for rf in report_fields:
 				if not hide_columns or  rf["label"] not in hide_columns:
-					sql = sql +	"SUM(if(b.posting_date between '{}' AND '{}',{},0)) as '{}_{}',".format(f["start_date"],f["end_date"],rf["sql_expression"],f["fieldname"],rf["fieldname"])
+					sql = sql +	"SUM(if(b.booking_date between '{}' AND '{}',{},0)) as '{}_{}',".format(f["start_date"],f["end_date"],rf["sql_expression"],f["fieldname"],rf["fieldname"])
 			#end for
 	# total last column
 	item_code = ""
 	groupdocstatus = ""
 	normal_filter = "b.docstatus in (1) AND"
-	if filters.row_group == "Product" or filters.parent_row_group == "Product":
-		item_code = ",a.item_code"
+	if (indent > 0) and ( filters.row_group == "Product" or filters.parent_row_group == "Product"):
+		item_code = ",a.ticket_type"
 	for rf in report_fields:
 		#check sql variable if last character is , then remove it
 		sql = strip(sql)
@@ -308,14 +265,15 @@ def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 		if not hide_columns or  rf["label"] not in hide_columns:
 			sql = sql + " ,SUM({}) AS 'total_{}' ".format(rf["sql_expression"],rf["fieldname"])
 	sql = sql + """ {2}
-		FROM `tabSales Invoice Item` AS a
-			INNER JOIN `tabSales Invoice` b on b.name = a.parent
+		FROM `tabBooking Ticket Items` AS a
+			INNER JOIN `tabTicket Booking` b on b.name = a.parent
 		WHERE
 			{4}
 			{0}
 		GROUP BY 
 		{1} {2} {3}
-	""".format(get_conditions(filters,group_filter), row_group,item_code,groupdocstatus,normal_filter)	
+	""".format(get_conditions(filters,group_filter), row_group,item_code,groupdocstatus,normal_filter)
+	 
 	data = frappe.db.sql(sql,filters, as_dict=1)
 	return data
  
@@ -366,6 +324,7 @@ def get_report_chart(filters,data):
 	if filters.column_group != "Column Group By":
 		fields = get_fields(filters)
 		for f in fields:
+		 
 			columns.append(f["label"])
 		for rf in report_fields:
 			if not hide_columns or  rf["label"] not in hide_columns:
@@ -379,19 +338,16 @@ def get_report_chart(filters,data):
 
 	else: # if column group is none
 		for d in data:
-			columns.append(d["row_group"])
+			if(d["indent"]==0):
+				columns.append(d["row_group"])
+			
 
 		myds = []
 		for rf in report_fields:
 			if not hide_columns or  rf["label"] not in hide_columns:
 				fieldname = 'total_'+rf["fieldname"]
-				if(fieldname=="total_transaction"):
-					dataset.append({'name':rf["label"],'values':(d["total_transaction"] for d in data)})
-				elif(fieldname=="total_qty"):
+				if(fieldname=="total_qty"):
 					dataset.append({'name':rf["label"],'values':(d["total_qty"] for d in data)})
-				elif(fieldname=="total_sub_total"):
-					dataset.append({'name':rf["label"],'values':(d["total_sub_total"] for d in data)})
-
 				elif(fieldname=="total_amount"):
 					dataset.append({'name':rf["label"],'values':(d["total_amount"] for d in data)})
 	
@@ -415,11 +371,9 @@ def get_report_chart(filters,data):
 def get_report_field(filters):
 	 
 	return [
-		{"label":"Quantity","short_label":"Qty", "fieldname":"qty","fieldtype":"Float","indicator":"Grey","precision":2, "align":"center","chart_color":"#FF8A65","sql_expression":"a.qty"},
-		{"label":"Sub Total", "short_label":"Sub To.", "fieldname":"sub_total","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"a.base_rate*a.qty"},
-		{"label":"Discount", "short_label":"Disc.", "fieldname":"discount_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"a.base_rate*a.qty-a.net_amount"},
+		{"label":"Quantity","short_label":"Qty", "fieldname":"qty","fieldtype":"Float","indicator":"Grey","precision":2, "align":"center","chart_color":"#FF8A65","sql_expression":"a.quantity"},
 		
-		{"label":"Amount", "short_label":"Amt", "fieldname":"amount","fieldtype":"Currency","indicator":"Red","precision":None, "align":"right","chart_color":"#2E7D32","sql_expression":"a.net_amount"},
+		{"label":"Amount", "short_label":"Amt", "fieldname":"amount","fieldtype":"Currency","indicator":"Red","precision":None, "align":"right","chart_color":"#2E7D32","sql_expression":"a.amount"},
 		
 	]
 	
@@ -459,58 +413,22 @@ def get_row_groups():
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"a.parent_item_group",
-			"label":"Product Group",
-			"parent_row_group_filter_field":"row_group"
-		},
-		{
-			"fieldname":"b.company",
-			"label":"Company",
-			"parent_row_group_filter_field":"row_group"
-		},
-		{
-			"fieldname":"ifnull(b.branch,'Not Set')",
-			"label":"Branch",
-			"parent_row_group_filter_field":"row_group"
-		},
-		{
-			"fieldname":"ifnull(b.pos_profile,'Not Set')",
-			"label":"POS Profile",
-			"parent_row_group_filter_field":"row_group"
-		},
-		{
-			"fieldname":"concat(ifnull(b.customer,'Not Set'),'-',b.customer_name)",
-			"label":"Customer",
-			"parent_row_group_filter_field":"row_group"
-		},
-		{
-			"fieldname":"b.customer_group",
-			"label":"Customer Group",
-			"parent_row_group_filter_field":"row_group"
-		},
-		{
 			"fieldname":"ifnull(b.Territory,'Not Set')",
 			"label":"Territory",
 			"parent_row_group_filter_field":"row_group"
 		},
-		
 		{
-			"fieldname":"ifnull(b.set_warehouse,'Not Set')",
-			"label":"Warehouse",
-			"parent_row_group_filter_field":"row_group"
-		},
-		{
-			"fieldname":"date_format(b.posting_date,'%%d/%%m/%%Y')",
+			"fieldname":"date_format(b.booking_date,'%%d/%%m/%%Y')",
 			"label":"Date",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"date_format(b.posting_date,'%%m/%%Y')",
+			"fieldname":"date_format(b.booking_date,'%%m/%%Y')",
 			"label":"Month",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"date_format(b.posting_date,'%%Y')",
+			"fieldname":"date_format(b.booking_date,'%%Y')",
 			"label":"Year",
 			"parent_row_group_filter_field":"row_group"
 		},
@@ -525,7 +443,7 @@ def get_row_groups():
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"a.item_name",
+			"fieldname":"a.ticket_name",
 			"label":"Product"
 		},
 		{

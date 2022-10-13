@@ -1,14 +1,5 @@
-// Copyright (c) 2022, Frappe Technologies and contributors
-// For license information, please see license.txt
-/* eslint-disable */
-frappe.query_reports["Ticket Sold Report"] = {
+frappe.query_reports["Ticket Booking Summary"] = {
 	"filters": [
-		{
-			fieldname: "company",
-			label: "Company",
-			fieldtype: "Link",
-			options:"Company",
-		},
 		{
 			"fieldname":"filter_based_on",
 			"label": __("Filter Based On"),
@@ -57,24 +48,6 @@ frappe.query_reports["Ticket Sold Report"] = {
 				});
 			}
 		},
-
-		{
-			"fieldname": "price_list",
-			"label": __("Sale Type"),
-			"fieldtype": "MultiSelectList",
-			get_data: function(txt) {
-				return frappe.db.get_link_options('Price List', txt,{"selling":1});
-			}
-		},
-		{
-			"fieldname": "customer_group",
-			"label": __("Customer Group"),
-			"fieldtype": "MultiSelectList",
-			get_data: function(txt) {
-				
-				return frappe.db.get_link_options('Customer Group', txt,{"is_group":0});
-			}
-		},
 		{
 			fieldname: "market_segment",
 			label: "Market Segment",
@@ -95,14 +68,14 @@ frappe.query_reports["Ticket Sold Report"] = {
 			"fieldname": "parent_row_group",
 			"label": __("Parent Group By"),
 			"fieldtype": "Select",
-			"options": "\nCategory\nProduct Group\nCompany\nPrice List\nCustomer\nCustomer Group\nMembership\nTerritory\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarketing Segment Type\nBusiness Source\nBusiness Source Type",
+			"options": "\nCategory\nProduct Group\nCompany\nTerritory\nDate\n\Month\nYear\nMarket Segment\nMarketing Segment Type\nBusiness Source\nBusiness Source Type",
 			
 		},
 		{
 			"fieldname": "row_group",
 			"label": __("Row Group By"),
 			"fieldtype": "Select",
-			"options": "Product\nCategory\nProduct Group\nCompany\nPrice List\nCustomer\nCustomer Group\nMembership\nTerritory\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarketing Segment Type\nBusiness Source\nBusiness Source Type",
+			"options": "Product\nCategory\nTerritory\nDate\n\Month\nYear\nMarket Segment\nMarketing Segment Type\nBusiness Source\nBusiness Source Type",
 			"default":"Category"
 		},
 		{
@@ -119,10 +92,7 @@ frappe.query_reports["Ticket Sold Report"] = {
 			get_data: function(txt) {
 				return [
 					{"value":"Amount","description":"Amount"},
-					{"value":"Quantity","description":"Quantity"},
-					{"value":"Sub Total","description":"Sub Total"},
-					 
-					{"value":"Total Discount","description":"Total Discount"},
+					{"value":"Quantity","description":"Quantity"}
 				]
 			},
 			"default":"All"
@@ -135,6 +105,21 @@ frappe.query_reports["Ticket Sold Report"] = {
 			"default":"bar"
 		}
 	],
+	"formatter": function(value, row, column, data, default_formatter) {
+	
+		value = default_formatter(value, row, column, data);
+
+		if (data && data.is_group==1) {
+			value = $(`<span>${value}</span>`);
+
+			var $value = $(value).css("font-weight", "bold");
+			
+
+			value = $value.wrap("<p></p>").parent().html();
+		}
+		
+		return value;
+	},
 };
 
  

@@ -5,7 +5,7 @@
    "label": "Daily Ticket Sold"
   }
  ],
- "content": "[{\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Ticket Sold\",\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Your Shortcuts</span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Today Ticket Sold\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active Ticket\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"MTD Ticket Booking\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Booking Calendar\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Door Access\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Configuration\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Recent Activities</b></span>\",\"col\":12}},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Ticket Booking\",\"col\":6}},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Ticket Sold\",\"col\":6}}]",
+ "content": "[{\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Ticket Sold\",\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Your Shortcuts</span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Today Ticket Sold\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active Ticket\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"MTD Ticket Booking\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Today Arrival\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Booking Calendar\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Door Access\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Configuration\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Recent Activities</b></span>\",\"col\":12}},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Ticket Booking\",\"col\":6}},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Ticket Sold\",\"col\":6}}]",
  "creation": "2022-09-22 17:03:51.790559",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -47,7 +47,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Reports",
-   "link_count": 4,
+   "link_count": 3,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -66,23 +66,23 @@
    "is_query_report": 0,
    "label": "Ticket Booking Summary Report",
    "link_count": 0,
-   "link_to": "Access Log",
-   "link_type": "DocType",
+   "link_to": "Ticket Booking Summary",
+   "link_type": "Report",
    "onboard": 0,
    "type": "Link"
   },
   {
    "hidden": 0,
    "is_query_report": 1,
-   "label": "Ticket Booking Report",
+   "label": "Ticket Booking Forecast",
    "link_count": 0,
-   "link_to": "Ticket Booking Report",
+   "link_to": "Ticket Booking Forcast",
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
   }
  ],
- "modified": "2022-10-13 10:36:20.199490",
+ "modified": "2022-10-13 13:37:37.146044",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "eTicket",
@@ -115,6 +115,15 @@
    "doc_view": "Calendar",
    "label": "Booking Calendar",
    "link_to": "Ticket Booking",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "format": "{} Ticket(s)",
+   "label": "Today Arrival",
+   "link_to": "POS Ticket",
+   "stats_filter": "{\"transaction_date\":[\"Timespan\",\"today\"],\"booking_number\":[\"is\",\"set\"],\"status\":[\"=\",\"Active\"]}",
    "type": "DocType"
   },
   {

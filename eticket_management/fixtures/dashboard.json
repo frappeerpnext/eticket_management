@@ -8,6 +8,12 @@
     "parenttype": "Dashboard"
    },
    {
+    "card": "Total Ticket Sold (AMT)",
+    "parent": "eTicket Dashboard",
+    "parentfield": "cards",
+    "parenttype": "Dashboard"
+   },
+   {
     "card": "Today Ticket Sold",
     "parent": "eTicket Dashboard",
     "parentfield": "cards",
@@ -127,8 +133,29 @@
   "doctype": "Dashboard",
   "is_default": 0,
   "is_standard": 0,
-  "modified": "2022-10-12 20:04:34.785501",
+  "modified": "2022-10-13 11:42:15.234814",
   "module": "E Ticket Management",
   "name": "eTicket Dashboard"
+ },
+ {
+  "cards": [],
+  "chart_options": null,
+  "charts": [
+   {
+    "chart": "Monthly Ticket Booking",
+    "parent": "Sale and Marketing Dashboard",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Full"
+   }
+  ],
+  "dashboard_name": "Sale and Marketing Dashboard",
+  "docstatus": 0,
+  "doctype": "Dashboard",
+  "is_default": 0,
+  "is_standard": 0,
+  "modified": "2022-10-13 12:50:57.038451",
+  "module": null,
+  "name": "Sale and Marketing Dashboard"
  }
 ]

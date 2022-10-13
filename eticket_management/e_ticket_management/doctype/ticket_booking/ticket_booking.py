@@ -55,3 +55,7 @@ class TicketBooking(Document):
 		if data:
 			frappe.throw("You cannot cancel this booking because it is already checked in.")
 
+	def on_cancel(self):
+		 
+		frappe.db.sql("update `tabPOS Ticket` set status = 'Cancel' where booking_number='{}'".format(self.name))
+		frappe.db.commit()

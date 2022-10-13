@@ -34,9 +34,10 @@ function updateSumTotal(frm) {
     $.each(frm.doc.ticket_items, function(i, d) {
         sum_total += flt(d.amount);
 		total_qty +=flt(d.quantity);
-		if (d.is_ticket)
+		if (d.is_ticket){ 
 			total_ticket += flt(d.quantity);
-			total_ticket_amount += flt(d.amount)
+			total_ticket_amount += flt(d.amount);
+		}
     });
 	
  
