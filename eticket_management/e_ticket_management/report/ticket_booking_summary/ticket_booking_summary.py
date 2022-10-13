@@ -328,7 +328,7 @@ def get_report_chart(filters,data):
 				#loop sum dynamic column data data set value
 				dataset_values = []
 				for f in fields:
-					dataset_values.append(sum(d["{}_{}".format(f["fieldname"],rf["fieldname"])] for d  in data))
+					dataset_values.append(sum(d["{}_{}".format(f["fieldname"],rf["fieldname"])] for d  in data if d["indent"]==0))
 					
 				dataset.append({'name':rf["label"],'values':dataset_values})
 				colors.append(rf["chart_color"])

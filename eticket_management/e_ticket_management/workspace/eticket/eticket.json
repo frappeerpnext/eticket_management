@@ -63,7 +63,7 @@
   },
   {
    "hidden": 0,
-   "is_query_report": 0,
+   "is_query_report": 1,
    "label": "Ticket Booking Summary Report",
    "link_count": 0,
    "link_to": "Ticket Booking Summary",
@@ -82,7 +82,7 @@
    "type": "Link"
   }
  ],
- "modified": "2022-10-13 13:37:37.146044",
+ "modified": "2022-10-13 15:25:20.185052",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "eTicket",
