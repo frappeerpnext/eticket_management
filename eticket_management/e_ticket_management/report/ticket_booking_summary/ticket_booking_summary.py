@@ -201,7 +201,7 @@ def get_conditions(filters,group_filter=None):
 
  
 	if(group_filter!=None):
-		conditions += " and {} ='{}'".format(group_filter["field"],group_filter["value"].replace("'","''").replace("%","%%"))
+		conditions += " and {} ='{}'".format(group_filter["field"],str(group_filter["value"]).replace("'","''").replace("%","%%"))
 
 	conditions += " AND b.booking_date between '{}' AND '{}'".format(start_date,end_date)
 
