@@ -199,6 +199,7 @@ fixtures = [
     "Custom Field",
     "Report",
     "Calendar View",
+    "Number Card",
     {"dt": "Dashboard Chart", "filters":[["is_standard", "=", 0]]},
     {"dt": "Dashboard", "filters": [["is_standard", "=", 0]]},
     ]
