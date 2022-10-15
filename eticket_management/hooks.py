@@ -202,4 +202,5 @@ fixtures = [
     "Number Card",
     {"dt": "Dashboard Chart", "filters":[["is_standard", "=", 0]]},
     {"dt": "Dashboard", "filters": [["is_standard", "=", 0]]},
-    ]
+    {"dt": "Print Format", "filters": [["module", "=", "E Ticket Management"]]},
+]

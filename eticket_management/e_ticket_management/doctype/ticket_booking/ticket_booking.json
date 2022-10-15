@@ -9,6 +9,7 @@
  "field_order": [
   "naming_series",
   "customer",
+  "customer_address",
   "phone_number",
   "email_address",
   "territory",
@@ -17,6 +18,9 @@
   "column_break_4",
   "booking_date",
   "arrival_date",
+  "visit_date",
+  "length_of_visit",
+  "ticket_type",
   "amended_from",
   "booking_ticket_section",
   "ticket_items",
@@ -34,11 +38,16 @@
   "is_checked_in",
   "column_break_21",
   "checked_in_date",
+  "departure_time",
   "keyword",
   "color",
   "calendar_title",
   "business_source_type",
-  "marketing_segment_type"
+  "marketing_segment_type",
+  "section_break_38",
+  "meal_plan",
+  "column_break_40",
+  "promotions"
  ],
  "fields": [
   {
@@ -110,16 +119,19 @@
    "fieldtype": "Column Break"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "total_quantity",
    "fieldtype": "Int",
    "label": "Total Quantity",
    "read_only": 1
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "total_amount",
    "fieldtype": "Currency",
    "label": "Total Amount",
-   "options": "Company:company:default_currency"
+   "options": "Company:company:default_currency",
+   "read_only": 1
   },
   {
    "fieldname": "payment_method",
@@ -165,6 +177,7 @@
    "label": "Checked In Date"
   },
   {
+   "allow_on_submit": 1,
    "default": "0",
    "fieldname": "total_ticket",
    "fieldtype": "Int",
@@ -178,6 +191,7 @@
    "label": "Keyword"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "total_ticket_amount",
    "fieldtype": "Currency",
    "label": "Total Ticket Amount",
@@ -232,12 +246,60 @@
    "fieldtype": "Link",
    "label": "Territory",
    "options": "Territory"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "departure_time",
+   "fieldtype": "Datetime",
+   "label": "Departure Time"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "customer_address",
+   "fieldtype": "Data",
+   "label": "Customer Address"
+  },
+  {
+   "default": "GIT",
+   "fieldname": "ticket_type",
+   "fieldtype": "Select",
+   "label": "Ticket Type",
+   "options": "GIT\nFIT"
+  },
+  {
+   "fieldname": "visit_date",
+   "fieldtype": "Date",
+   "label": "Visit Date"
+  },
+  {
+   "fieldname": "length_of_visit",
+   "fieldtype": "Duration",
+   "label": "Length Of Visit"
+  },
+  {
+   "fieldname": "section_break_38",
+   "fieldtype": "Section Break",
+   "label": "Others"
+  },
+  {
+   "fieldname": "meal_plan",
+   "fieldtype": "Data",
+   "label": "Meal plan"
+  },
+  {
+   "fieldname": "promotions",
+   "fieldtype": "Data",
+   "label": "Promotions"
+  },
+  {
+   "fieldname": "column_break_40",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-13 12:33:20.657946",
+ "modified": "2022-10-15 16:44:42.487708",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",
