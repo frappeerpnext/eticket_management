@@ -59,3 +59,11 @@ class TicketBooking(Document):
 		 
 		frappe.db.sql("update `tabPOS Ticket` set status = 'Cancel' where booking_number='{}'".format(self.name))
 		frappe.db.commit()
+
+@frappe.whitelist()
+def get_item_price(price_list, item_code):
+	price = frappe.db.get_value("Item Price", [{'price_list':price_list},{'item_code':item_code}],"price_list_rate")
+	if price:
+		return price
+	else:
+		return 0

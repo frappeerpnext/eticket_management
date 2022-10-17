@@ -13,6 +13,7 @@
   "amount",
   "photo",
   "is_ticket",
+  "is_adult_ticket",
   "is_voucher",
   "item_group"
  ],
@@ -34,7 +35,6 @@
    "label": "Quantity"
   },
   {
-   "fetch_from": "ticket_type.standard_rate",
    "fieldname": "price",
    "fieldtype": "Currency",
    "in_list_view": 1,
@@ -80,12 +80,19 @@
    "fieldname": "item_group",
    "fieldtype": "Data",
    "label": "Item Group"
+  },
+  {
+   "default": "0",
+   "fetch_from": "ticket_type.is_adult_ticket",
+   "fieldname": "is_adult_ticket",
+   "fieldtype": "Check",
+   "label": "Is Adult Ticket"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-10-14 13:28:58.605507",
+ "modified": "2022-10-16 10:30:12.882731",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Booking Ticket Items",

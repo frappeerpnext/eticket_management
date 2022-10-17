@@ -7,20 +7,25 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "section_booking_information",
   "naming_series",
-  "customer",
-  "customer_address",
-  "phone_number",
-  "email_address",
-  "territory",
-  "market_segment",
-  "business_source",
-  "column_break_4",
   "booking_date",
-  "arrival_date",
-  "visit_date",
-  "length_of_visit",
   "ticket_type",
+  "column_break_4",
+  "arrival_date",
+  "length_of_visit",
+  "section_customer_information",
+  "customer",
+  "phone_number",
+  "customer_address",
+  "column_break_13",
+  "customer_name",
+  "email_address",
+  "column_break_15",
+  "territory",
+  "business_source",
+  "market_segment",
+  "price_list",
   "amended_from",
   "booking_ticket_section",
   "ticket_items",
@@ -32,8 +37,6 @@
   "total_amount",
   "payment_method",
   "payment_amount",
-  "section_break_17",
-  "note",
   "check_in_status_section",
   "is_checked_in",
   "column_break_21",
@@ -47,25 +50,27 @@
   "section_break_38",
   "meal_plan",
   "column_break_40",
-  "promotions"
+  "promotions",
+  "section_break_17",
+  "cancellation_policies",
+  "column_break_47",
+  "note"
  ],
  "fields": [
   {
-   "fieldname": "customer",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Customer"
-  },
-  {
+   "fetch_from": "customer.phone_number",
    "fieldname": "phone_number",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Phone Number"
+   "label": "Phone Number",
+   "read_only": 1
   },
   {
+   "fetch_from": "customer.email_address",
    "fieldname": "email_address",
    "fieldtype": "Data",
-   "label": "Email Address"
+   "label": "Email Address",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_4",
@@ -145,8 +150,10 @@
    "label": "Payment Amount"
   },
   {
+   "collapsible": 1,
    "fieldname": "section_break_17",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Cancellation Policies & Note"
   },
   {
    "fieldname": "note",
@@ -212,20 +219,21 @@
    "label": "Calendar Title"
   },
   {
-   "fetch_from": "current_customer.business_source",
    "fieldname": "business_source",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Business Source",
-   "options": "Lead Source"
+   "label": "Market Source",
+   "options": "Lead Source",
+   "read_only": 1
   },
   {
-   "fetch_from": "current_customer.market_segment",
+   "fetch_from": "customer.market_segment",
    "fieldname": "market_segment",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Market Segment",
-   "options": "Market Segment"
+   "options": "Market Segment",
+   "read_only": 1
   },
   {
    "fetch_from": "business_source.lead_source_type",
@@ -242,10 +250,12 @@
    "label": "Marketing Segment Type"
   },
   {
+   "fetch_from": "customer.territory",
    "fieldname": "territory",
    "fieldtype": "Link",
    "label": "Territory",
-   "options": "Territory"
+   "options": "Territory",
+   "read_only": 1
   },
   {
    "allow_on_submit": 1,
@@ -255,9 +265,11 @@
   },
   {
    "allow_on_submit": 1,
+   "fetch_from": "customer.customer_address",
    "fieldname": "customer_address",
    "fieldtype": "Data",
-   "label": "Customer Address"
+   "label": "Customer Address",
+   "read_only": 1
   },
   {
    "default": "GIT",
@@ -265,11 +277,6 @@
    "fieldtype": "Select",
    "label": "Ticket Type",
    "options": "GIT\nFIT"
-  },
-  {
-   "fieldname": "visit_date",
-   "fieldtype": "Date",
-   "label": "Visit Date"
   },
   {
    "fieldname": "length_of_visit",
@@ -294,12 +301,59 @@
   {
    "fieldname": "column_break_40",
    "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "section_booking_information",
+   "fieldtype": "Section Break",
+   "label": "Booking Information"
+  },
+  {
+   "fieldname": "section_customer_information",
+   "fieldtype": "Section Break",
+   "label": "Customer Information"
+  },
+  {
+   "fieldname": "column_break_13",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_15",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "price_list",
+   "fieldtype": "Link",
+   "label": "Price List",
+   "options": "Price List"
+  },
+  {
+   "fieldname": "cancellation_policies",
+   "fieldtype": "Small Text",
+   "label": "Cancellation Policies"
+  },
+  {
+   "fieldname": "column_break_47",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-15 16:44:42.487708",
+ "modified": "2022-10-16 10:49:26.551093",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",
