@@ -2,7 +2,7 @@
  {
   "absolute_value": 0,
   "align_labels_right": 1,
-  "css": ".text-end{\n    text-align:end;\n}\ntable{\n    font-size: 14px;\n}\n.col-text-value{\n    width:120px;\n}",
+  "css": ".text-end{\n    text-align:end;\n}\ntable{\n    font-size: 14px;\n}\n.col-text-value{\n    width:120px;\n}\n.print-format td, .print-format th{\n    padding: 5px !important;\n}\n",
   "custom_format": 0,
   "default_print_language": "en",
   "disabled": 0,
@@ -18,7 +18,7 @@
   "margin_left": 10.0,
   "margin_right": 10.0,
   "margin_top": 10.0,
-  "modified": "2022-10-17 10:36:46.280236",
+  "modified": "2022-10-17 10:40:29.559517",
   "module": "E Ticket Management",
   "name": "Reservation Confirmation",
   "page_number": "Hide",

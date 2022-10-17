@@ -15,3 +15,6 @@ class OnlineTicketBooking(Document):
 
 		self.total_quantity = total_quantity
 
+	def after_insert(self):
+		self.booking_number = 'BK2022-000001'
+		self.save()

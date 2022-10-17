@@ -156,6 +156,7 @@
    "label": "Cancellation Policies & Note"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "note",
    "fieldtype": "Text Editor",
    "label": "Note"
@@ -353,7 +354,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-16 10:49:26.551093",
+ "modified": "2022-10-17 10:55:12.444468",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",

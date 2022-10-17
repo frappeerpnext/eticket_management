@@ -128,9 +128,8 @@
   {
    "fetch_from": "customer.territory",
    "fieldname": "territory",
-   "fieldtype": "Link",
-   "label": "Territory",
-   "options": "Territory"
+   "fieldtype": "Data",
+   "label": "Territory"
   },
   {
    "fieldname": "business_source",
@@ -274,7 +273,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-17 10:09:03.973662",
+ "modified": "2022-10-17 10:51:48.271711",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Online Ticket Booking",
