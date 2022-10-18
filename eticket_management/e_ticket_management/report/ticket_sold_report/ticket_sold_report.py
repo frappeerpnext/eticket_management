@@ -298,7 +298,7 @@ def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 	item_code = ""
 	groupdocstatus = ""
 	normal_filter = "b.docstatus in (1) AND"
-	if filters.row_group == "Product" or filters.parent_row_group == "Product":
+	if indent > 0 and  (filters.row_group == "Product" or filters.parent_row_group == "Product"):
 		item_code = ",a.item_code"
 	for rf in report_fields:
 		#check sql variable if last character is , then remove it
@@ -317,6 +317,7 @@ def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 		{1} {2} {3}
 	""".format(get_conditions(filters,group_filter), row_group,item_code,groupdocstatus,normal_filter)	
 	data = frappe.db.sql(sql,filters, as_dict=1)
+	 
 	return data
  
 def get_report_group_data(filters):
@@ -364,6 +365,7 @@ def get_report_chart(filters,data):
 	report_fields = get_report_field(filters)
 
 	if filters.column_group != "Column Group By":
+		 
 		fields = get_fields(filters)
 		for f in fields:
 			columns.append(f["label"])
@@ -372,28 +374,30 @@ def get_report_chart(filters,data):
 				#loop sum dynamic column data data set value
 				dataset_values = []
 				for f in fields:
-					dataset_values.append(sum(d["{}_{}".format(f["fieldname"],rf["fieldname"])] for d in data))
+					dataset_values.append(sum(d["{}_{}".format(f["fieldname"],rf["fieldname"])] for d in data if d["indent"]==0))
 					
 				dataset.append({'name':rf["label"],'values':dataset_values})
 				colors.append(rf["chart_color"])
 
 	else: # if column group is none
-		for d in data:
-			columns.append(d["row_group"])
+	
+		for d in data :
+			if d.indent ==0:
+				columns.append(d["row_group"])
 
 		myds = []
 		for rf in report_fields:
 			if not hide_columns or  rf["label"] not in hide_columns:
 				fieldname = 'total_'+rf["fieldname"]
 				if(fieldname=="total_transaction"):
-					dataset.append({'name':rf["label"],'values':(d["total_transaction"] for d in data)})
+					dataset.append({'name':rf["label"],'values':(d["total_transaction"] for d in data if d["indent"]==0)})
 				elif(fieldname=="total_qty"):
-					dataset.append({'name':rf["label"],'values':(d["total_qty"] for d in data)})
+					dataset.append({'name':rf["label"],'values':(d["total_qty"] for d in data if d["indent"]==0)})
 				elif(fieldname=="total_sub_total"):
-					dataset.append({'name':rf["label"],'values':(d["total_sub_total"] for d in data)})
+					dataset.append({'name':rf["label"],'values':(d["total_sub_total"] for d in data if d["indent"]==0)})
 
 				elif(fieldname=="total_amount"):
-					dataset.append({'name':rf["label"],'values':(d["total_amount"] for d in data)})
+					dataset.append({'name':rf["label"],'values':(d["total_amount"] for d in data if d["indent"]==0)})
 	
 
 		 
