@@ -1,0 +1,81 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "hash",
+ "creation": "2022-10-20 14:41:02.871427",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "year",
+  "column_break_3",
+  "daily_target",
+  "daily_contribution_section",
+  "tickets_sale_target_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "year",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Year",
+   "reqd": 1
+  },
+  {
+   "description": "Ex. Tickets Sale Target 2022",
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "daily_contribution_section",
+   "fieldtype": "Section Break",
+   "label": "Daily Contribution"
+  },
+  {
+   "fieldname": "tickets_sale_target_date",
+   "fieldtype": "Table",
+   "label": "Date",
+   "options": "Tickets Sale Target Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "1000",
+   "fieldname": "daily_target",
+   "fieldtype": "Int",
+   "label": "Daily Target"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2022-10-20 16:20:38.004088",
+ "modified_by": "Administrator",
+ "module": "E Ticket Management",
+ "name": "Tickets Sale Target",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

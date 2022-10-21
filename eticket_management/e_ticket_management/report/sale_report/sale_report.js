@@ -71,22 +71,6 @@ frappe.query_reports["Sale Report"] = {
 			}
 		},
 		{
-			fieldname: "branch",
-			label: "Branch",
-			"fieldtype": "MultiSelectList",
-			get_data: function(txt) {
-				return frappe.db.get_link_options('Branch', txt);
-			}
-		},
-		{
-			"fieldname": "price_list",
-			"label": __("Sale Type"),
-			"fieldtype": "MultiSelectList",
-			get_data: function(txt) {
-				return frappe.db.get_link_options('Price List', txt,{"selling":1});
-			}
-		},
-		{
 			"fieldname": "item_group",
 			"label": __("Item Group"),
 			"fieldtype": "MultiSelectList",
@@ -124,31 +108,6 @@ frappe.query_reports["Sale Report"] = {
 			}
 		},
 		{
-			"fieldname": "supplier_group",
-			"label": __("Supplier Group"),
-			"fieldtype": "MultiSelectList",
-			get_data: function(txt) {
-				
-				return frappe.db.get_link_options('Supplier Group', txt,{"is_group":0});
-			}
-		},
-		{
-			"fieldname": "supplier",
-			"label": __("Supplier"),
-			"fieldtype": "MultiSelectList",
-			get_data: function(txt) {
-				group = frappe.query_report.get_filter_value("supplier_group");
-				if(group==""){
-					return frappe.db.get_link_options('Supplier', txt);
-				}
-				else {
-					return frappe.db.get_link_options('Supplier', txt,filters={
-						"supplier_group":["in",group]
-					});
-				}
-			}
-		},
-		{
 			fieldname: "market_segment",
 			label: "Market Segment",
 			"fieldtype": "MultiSelectList",
@@ -158,7 +117,7 @@ frappe.query_reports["Sale Report"] = {
 		},
 		{
 			fieldname: "business_source",
-			label: "Business Source",
+			label: "Market Source",
 			"fieldtype": "MultiSelectList",
 			get_data: function(txt) {
 				return frappe.db.get_link_options('Lead Source', txt);
@@ -168,14 +127,14 @@ frappe.query_reports["Sale Report"] = {
 			"fieldname": "parent_row_group",
 			"label": __("Parent Group By"),
 			"fieldtype": "Select",
-			"options": "\nCategory\nProduct Group\nBrand\nCompany\nBranch\nSale Type\nCustomer\nCustomer Group\nMembership\nTerritory\nSupplier\nSupplier Group\nWarehouse\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarketing Segment Type\nBusiness Source\nBusiness Source Type",
+			"options": "\nCategory\nProduct Group\nCustomer\nCustomer Group\nMembership\nTerritory\nSupplier\nSupplier Group\nWarehouse\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarket Segment Type\nMarket Source\nMarket Source Type",
 			
 		},
 		{
 			"fieldname": "row_group",
 			"label": __("Row Group By"),
 			"fieldtype": "Select",
-			"options": "Product\nCategory\nProduct Group\nBrand\nCompany\nBranch\nSale Type\nCustomer\nCustomer Group\nMembership\nTerritory\nSupplier\nSupplier Group\nWarehouse\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarketing Segment Type\nBusiness Source\nBusiness Source Type",
+			"options": "Product\nCategory\nProduct Group\nCustomer\nCustomer Group\nMembership\nTerritory\nSupplier\nSupplier Group\nWarehouse\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarket Segment Type\nMarket Source\nMarket Source Type",
 			"default":"Category"
 		},
 		{
@@ -195,8 +154,6 @@ frappe.query_reports["Sale Report"] = {
 					{"value":"Transaction","description":"Transaction"},
 					{"value":"Quantity","description":"Quantity"},
 					{"value":"Sub Total","description":"Sub Total"},
-					{"value":"Cost","description":"Cost"},
-					{"value":"Profit","description":"Profit"},
 					{"value":"Total Discount","description":"Total Discount"},
 				]
 			},
@@ -209,11 +166,7 @@ frappe.query_reports["Sale Report"] = {
 			"options": "None\nbar\nline\npie",
 			"default":"bar"
 		},
-		{
-			fieldname: "is_ticket",
-			label: "Ticket Only",
-			fieldtype: "Check"
-		},
+
 	],
 	"formatter": function(value, row, column, data, default_formatter) {
 	

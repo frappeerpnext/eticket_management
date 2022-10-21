@@ -1,29 +1,16 @@
-# Copyright (c) 2022, Frappe Technologies and contributors
-# For license information, please see license.txt
-
-
 import frappe
-from frappe.utils import date_diff
-
-
+from frappe.utils import date_diff 
 from frappe.utils.data import strip
 
-def execute(filters=None):
-	
-
-	
+def execute(filters=None): 
 	if filters.filter_based_on =="Fiscal Year":
 		filters.start_date = '{}-01-01'.format(filters.from_fiscal_year)
-		filters.end_date = '{}-12-31'.format(filters.from_fiscal_year)
-	
- 
+		filters.end_date = '{}-12-31'.format(filters.from_fiscal_year) 
 
 	validate(filters)
 	#run this to update parent_item_group in table sales invoice item
 	update_parent_item_group()
-	update_sale()
-	
- 
+	update_sale() 
 
 	report_data = []
 	skip_total_row=False
@@ -33,17 +20,12 @@ def execute(filters=None):
 		message="Enable <strong>Parent Row Group</strong> making report loading slower. Please try  to select some report filter to reduce record from database "
 		skip_total_row = True
 	else:
-		report_data = get_report_data(filters)
-
+		report_data = get_report_data(filters) 
 	report_chart = None
 	if filters.chart_type !="None" and len(report_data)<=100:
-		report_chart = get_report_chart(filters,report_data)
-
+		report_chart = get_report_chart(filters,report_data) 
 	return get_columns(filters), report_data, message, report_chart, get_report_summary(report_data,filters),skip_total_row
-
-
-
-
+ 
 def validate(filters):
 	if not filters.department:
 		filters.department = frappe.db.get_list("Department",pluck='name')
@@ -62,8 +44,7 @@ def validate(filters):
 	if filters.row_group and filters.parent_row_group:
 		if(filters.row_group == filters.parent_row_group):
 			frappe.throw("Parent row group and row group can not be the same")
-
-
+ 
 def update_parent_item_group():
 	frappe.db.sql(
 		"""
@@ -137,9 +118,7 @@ def get_columns(filters):
 	if (filters.row_group == "Sale Invoice" or filters.parent_row_group == "Sale Invoice") and filters.get("include_cancelled") == True:
 		columns.append({"label":"Status","fieldname":"docstatus","fieldtype":"Data","align":"center",'width':100})
 	return columns
-
-
-
+ 
 def get_dynamic_columns(filters):
 	hide_columns = filters.get("hide_columns")
 	#dynmic report file
@@ -246,8 +225,7 @@ def get_fields(filters):
 	fields = frappe.db.sql(sql,as_dict=1)
 	 
 	return fields
-	
-
+ 
 def get_conditions(filters,group_filter=None):
 	conditions = ""
 
@@ -288,15 +266,14 @@ def get_conditions(filters,group_filter=None):
 		
 	if filters.get("branch"):
 		conditions += " AND b.branch in %(branch)s"
-
-	if filters.get("is_ticket"):
-		conditions += " AND a.is_ticket = 1"
 	
 	return conditions
 
 def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
+	
 	hide_columns = filters.get("hide_columns")
 	row_group = [d["fieldname"] for d in get_row_groups() if d["label"]==filters.row_group][0]
+	
 	if(parent_row_group!=None):
 		row_group = [d["fieldname"] for d in get_row_groups() if d["label"]==parent_row_group][0]
 
@@ -306,11 +283,13 @@ def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 	if filters.column_group != "None":
 		fields = get_fields(filters)
 		for f in fields:
+			
 			sql = strip(sql)
 			if sql[-1]!=",":
 				sql = sql + ','
 			
 			for rf in report_fields:
+				
 				if not hide_columns or  rf["label"] not in hide_columns:
 					sql = sql +	"SUM(if(b.posting_date between '{}' AND '{}',{},0)) as '{}_{}',".format(f["start_date"],f["end_date"],rf["sql_expression"],f["fieldname"],rf["fieldname"])
 			#end for
@@ -336,14 +315,14 @@ def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 		GROUP BY 
 		{1} {2} {3}
 	""".format(get_conditions(filters,group_filter), row_group,item_code,groupdocstatus,normal_filter)	
+	
 	data = frappe.db.sql(sql,filters, as_dict=1)
+
 	return data
  
 def get_report_group_data(filters):
 	parent = get_report_data(filters, filters.parent_row_group, 0)
-	data=[]
- 
-
+	data=[] 
 	for p in parent:
 		p["is_group"] = 1
 		data.append(p)
@@ -353,8 +332,7 @@ def get_report_group_data(filters):
 		for c in children:
 			data.append(c)
 	return data
-
-
+ 
 def get_report_summary(data,filters):
 	hide_columns = filters.get("hide_columns")
 	report_summary=[]
@@ -412,12 +390,12 @@ def get_report_chart(filters,data):
 					dataset.append({'name':rf["label"],'values':(d["total_qty"] for d in data if d["indent"]==0)})
 				elif(fieldname=="total_sub_total"):
 					dataset.append({'name':rf["label"],'values':(d["total_sub_total"] for d in data if d["indent"]==0)})
-				elif(fieldname=="total_cost"):
-					dataset.append({'name':rf["label"],'values':(d["total_cost"] for d in data if d["indent"]==0)})
+				# elif(fieldname=="total_cost"):
+				# 	dataset.append({'name':rf["label"],'values':(d["total_cost"] for d in data if d["indent"]==0)})
 				elif(fieldname=="total_amount"):
 					dataset.append({'name':rf["label"],'values':(d["total_amount"] for d in data if d["indent"]==0)})
-				elif(fieldname=="total_profit"):
-					dataset.append({'name':rf["label"],'values':(d["total_profit"] for d in data if d["indent"]==0)})
+				# elif(fieldname=="total_profit"):
+				# 	dataset.append({'name':rf["label"],'values':(d["total_profit"] for d in data if d["indent"]==0)})
 
 		 
 
@@ -433,17 +411,14 @@ def get_report_chart(filters,data):
 		"axisOptions": {"xIsSeries": 1}
 	}
 	return chart
- 
-
+  
 def get_report_field(filters):
 	if filters.parent_row_group == "Sale Invoice" or filters.row_group == "Sale Invoice":
 		return [
 			{"label":"Quantity","short_label":"Qty", "fieldname":"qty","fieldtype":"Float","indicator":"Grey","precision":2, "align":"center","chart_color":"#FF8A65","sql_expression":"a.qty"},
 			{"label":"Sub Total", "short_label":"Sub To.", "fieldname":"sub_total","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"a.base_rate*a.qty"},
 			{"label":"Total Discount", "short_label":"Disc.", "fieldname":"discount_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"a.base_rate*a.qty-a.net_amount"},
-			{"label":"Cost","short_label":"Cost", "fieldname":"cost","fieldtype":"Currency","indicator":"Blue","precision":None, "align":"right","chart_color":"#1976D2","sql_expression":"a.qty*a.incoming_rate*a.conversion_factor"},
 			{"label":"Amount", "short_label":"Amt", "fieldname":"amount","fieldtype":"Currency","indicator":"Red","precision":None, "align":"right","chart_color":"#2E7D32","sql_expression":"a.net_amount"},
-			{"label":"Profit", "short_label":"Prof.", "fieldname":"profit","fieldtype":"Currency","indicator":"Green","precision":None, "align":"right","chart_color":"#FF3D00","sql_expression":"a.net_amount - (a.qty*a.incoming_rate*a.conversion_factor)"}
 		]
 	else:
 		return [
@@ -451,15 +426,8 @@ def get_report_field(filters):
 			{"label":"Quantity","short_label":"Qty", "fieldname":"qty","fieldtype":"Float","indicator":"Grey","precision":2, "align":"center","chart_color":"#FF8A65","sql_expression":"a.qty"},
 			{"label":"Sub Total", "short_label":"Sub To.", "fieldname":"sub_total","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"a.base_rate*a.qty"},
 			{"label":"Total Discount", "short_label":"Disc.", "fieldname":"discount_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"a.base_rate*a.qty-a.net_amount"},
-			{"label":"Cost","short_label":"Cost", "fieldname":"cost","fieldtype":"Currency","indicator":"Blue","precision":None, "align":"right","chart_color":"#1976D2","sql_expression":"a.qty*a.incoming_rate*a.conversion_factor"},
 			{"label":"Amount", "short_label":"Amt", "fieldname":"amount","fieldtype":"Currency","indicator":"Red","precision":None, "align":"right","chart_color":"#2E7D32","sql_expression":"a.net_amount"},
-			{"label":"Profit", "short_label":"Prof.", "fieldname":"profit","fieldtype":"Currency","indicator":"Green","precision":None, "align":"right","chart_color":"#FF3D00","sql_expression":"a.net_amount - (a.qty*a.incoming_rate*a.conversion_factor)"}
 		]
-	
-	
-
-	 
- 
 
 def get_row_groups():
 	return [
@@ -475,17 +443,17 @@ def get_row_groups():
 		},
 		{
 			"fieldname":"coalesce(b.business_source,'Not Set')",
-			"label":"Business Source",
+			"label":"Market Source",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
 			"fieldname":"coalesce(b.marketing_segment_type,'Not Set')",
-			"label":"Marketing Segment Type",
+			"label":"Market Segment Type",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
 			"fieldname":"coalesce(b.business_source_type,'Not Set')",
-			"label":"Business Source Type",
+			"label":"Market Source Type",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{

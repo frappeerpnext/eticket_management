@@ -346,6 +346,7 @@ def get_report_summary(data,filters):
 	fields = get_report_field(filters)
 
 	for f in fields:
+		
 		if not hide_columns or  f["label"] not in hide_columns:
 			value=sum(d["total_" + f["fieldname"]] for d in data if d["indent"]==0)
 			if f["fieldtype"] == "Currency":
@@ -395,7 +396,6 @@ def get_report_chart(filters,data):
 					dataset.append({'name':rf["label"],'values':(d["total_qty"] for d in data if d["indent"]==0)})
 				elif(fieldname=="total_sub_total"):
 					dataset.append({'name':rf["label"],'values':(d["total_sub_total"] for d in data if d["indent"]==0)})
-
 				elif(fieldname=="total_amount"):
 					dataset.append({'name':rf["label"],'values':(d["total_amount"] for d in data if d["indent"]==0)})
 	

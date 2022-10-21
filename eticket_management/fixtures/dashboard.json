@@ -100,14 +100,14 @@
     "width": "Half"
    },
    {
-    "chart": "Ticket Sold by Business Source",
+    "chart": "Ticket Sold by Market Source",
     "parent": "eTicket Dashboard",
     "parentfield": "charts",
     "parenttype": "Dashboard",
     "width": "Half"
    },
    {
-    "chart": "Ticket Sold By Business Source Type",
+    "chart": "Ticket Sold by Market Source Type",
     "parent": "eTicket Dashboard",
     "parentfield": "charts",
     "parenttype": "Dashboard",
@@ -133,7 +133,7 @@
   "doctype": "Dashboard",
   "is_default": 0,
   "is_standard": 0,
-  "modified": "2022-10-13 11:42:15.234814",
+  "modified": "2022-10-20 12:03:52.813360",
   "module": "E Ticket Management",
   "name": "eTicket Dashboard"
  },

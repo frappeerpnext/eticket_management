@@ -20,6 +20,7 @@
   "customer_address",
   "column_break_13",
   "customer_name",
+  "company_name",
   "email_address",
   "column_break_15",
   "territory",
@@ -84,7 +85,7 @@
   },
   {
    "fieldname": "arrival_date",
-   "fieldtype": "Date",
+   "fieldtype": "Datetime",
    "in_list_view": 1,
    "label": "Arrival Date"
   },
@@ -342,19 +343,28 @@
    "options": "Price List"
   },
   {
+   "allow_on_submit": 1,
+   "default": "Up to 3 days prior to arrival \u2013 free of charge\n2-0 days prior to arrival \u2013 100% charge \nNo-show \u2013 100% charge\n",
    "fieldname": "cancellation_policies",
-   "fieldtype": "Small Text",
+   "fieldtype": "Text Editor",
    "label": "Cancellation Policies"
   },
   {
    "fieldname": "column_break_47",
    "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "customer.company_name",
+   "fieldname": "company_name",
+   "fieldtype": "Data",
+   "label": "Company Name",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-17 10:55:12.444468",
+ "modified": "2022-10-20 12:03:25.107009",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",

@@ -95,14 +95,14 @@ frappe.query_reports["Ticket Sold Report"] = {
 			"fieldname": "parent_row_group",
 			"label": __("Parent Group By"),
 			"fieldtype": "Select",
-			"options": "\nCategory\nProduct Group\nCompany\nPrice List\nCustomer\nCustomer Group\nMembership\nTerritory\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarketing Segment Type\nBusiness Source\nBusiness Source Type",
+			"options": "\nCategory\nProduct Group\nCustomer\nCustomer Group\nMembership\nTerritory\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarketing Segment Type\nMarket Source\nMarket Type",
 			
 		},
 		{
 			"fieldname": "row_group",
 			"label": __("Row Group By"),
 			"fieldtype": "Select",
-			"options": "Product\nCategory\nProduct Group\nCompany\nPrice List\nCustomer\nCustomer Group\nMembership\nTerritory\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarketing Segment Type\nBusiness Source\nBusiness Source Type",
+			"options": "Product\nCategory\nProduct Group\nCustomer\nCustomer Group\nMembership\nTerritory\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarketing Segment Type\nMarket Source\nMarket Type",
 			"default":"Category"
 		},
 		{
@@ -122,7 +122,7 @@ frappe.query_reports["Ticket Sold Report"] = {
 					{"value":"Quantity","description":"Quantity"},
 					{"value":"Sub Total","description":"Sub Total"},
 					 
-					{"value":"Total Discount","description":"Total Discount"},
+					{"value":"Discount","description":"Total Discount"},
 				]
 			},
 			"default":"All"
