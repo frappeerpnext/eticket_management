@@ -127,14 +127,14 @@ frappe.query_reports["Sale Report"] = {
 			"fieldname": "parent_row_group",
 			"label": __("Parent Group By"),
 			"fieldtype": "Select",
-			"options": "\nCategory\nProduct Group\nCustomer\nCustomer Group\nMembership\nTerritory\nSupplier\nSupplier Group\nWarehouse\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarket Segment Type\nMarket Source\nMarket Source Type",
+			"options": "\nCategory\nProduct Group\nCustomer\nCustomer Group\nMembership\nTerritory\nWarehouse\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarket Segment Type\nMarket Source\nMarket Source Type",
 			
 		},
 		{
 			"fieldname": "row_group",
 			"label": __("Row Group By"),
 			"fieldtype": "Select",
-			"options": "Product\nCategory\nProduct Group\nCustomer\nCustomer Group\nMembership\nTerritory\nSupplier\nSupplier Group\nWarehouse\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarket Segment Type\nMarket Source\nMarket Source Type",
+			"options": "Product\nCategory\nProduct Group\nCustomer\nCustomer Group\nMembership\nTerritory\nWarehouse\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarket Segment Type\nMarket Source\nMarket Source Type",
 			"default":"Category"
 		},
 		{

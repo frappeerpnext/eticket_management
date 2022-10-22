@@ -437,7 +437,7 @@ def get_row_groups():
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"coalesce(b.market_segment,'Not Set')",
+			"fieldname":"if(coalesce(b.market_segment,'Not Set')='','Not Set',coalesce(b.market_segment,'Not Set'))",
 			"label":"Market Segment",
 			"parent_row_group_filter_field":"row_group"
 		},
@@ -447,12 +447,12 @@ def get_row_groups():
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"coalesce(b.marketing_segment_type,'Not Set')",
+			"fieldname":"if(coalesce(b.marketing_segment_type,'Not Set')='','Not Set',coalesce(b.marketing_segment_type,'Not Set'))",
 			"label":"Market Segment Type",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"coalesce(b.business_source_type,'Not Set')",
+			"fieldname":"if(coalesce(b.business_source_type,'Not Set')='','Not Set',coalesce(b.business_source_type,'Not Set'))",
 			"label":"Market Source Type",
 			"parent_row_group_filter_field":"row_group"
 		},
