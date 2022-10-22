@@ -18,36 +18,8 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Configuration",
-   "link_count": 2,
-   "onboard": 0,
-   "type": "Card Break"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Access Control Device",
-   "link_count": 0,
-   "link_to": "Access Control Device",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
-   "label": "Card Holder",
-   "link_count": 0,
-   "link_to": "Card Holder",
-   "link_type": "DocType",
-   "onboard": 0,
-   "type": "Link"
-  },
-  {
-   "hidden": 0,
-   "is_query_report": 0,
    "label": "Reports",
-   "link_count": 3,
+   "link_count": 4,
    "onboard": 0,
    "type": "Card Break"
   },
@@ -80,9 +52,57 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Ticket Sold Target Variance",
+   "link_count": 0,
+   "link_to": "Ticket Sold Target Variance",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Configuration",
+   "link_count": 3,
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Access Control Device",
+   "link_count": 0,
+   "link_to": "Access Control Device",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Card Holder",
+   "link_count": 0,
+   "link_to": "Card Holder",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Ticket Sale Target",
+   "link_count": 0,
+   "link_to": "Tickets Sale Target",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2022-10-13 15:25:20.185052",
+ "modified": "2022-10-22 14:21:44.687328",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "eTicket",

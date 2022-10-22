@@ -18,6 +18,8 @@
   "column_break_7",
   "item_code",
   "item_name",
+  "item_group",
+  "parent_item_group",
   "price",
   "ticket_number",
   "is_synced",
@@ -28,7 +30,17 @@
   "is_checked_in",
   "column_break_18",
   "checked_in_time",
-  "status"
+  "status",
+  "report_field_section",
+  "customer",
+  "customer_group",
+  "market_source",
+  "market_segment",
+  "territory",
+  "column_break_31",
+  "market_source_type",
+  "market_segment_type",
+  "customer_name"
  ],
  "fields": [
   {
@@ -80,11 +92,13 @@
   },
   {
    "fieldname": "item_code",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Item Code"
+   "label": "Item Code",
+   "options": "Item"
   },
   {
+   "fetch_from": "item_code.item_name",
    "fieldname": "item_name",
    "fieldtype": "Data",
    "in_list_view": 1,
@@ -156,11 +170,86 @@
    "fieldtype": "Select",
    "label": "Status",
    "options": "Active\nCancel"
+  },
+  {
+   "fetch_from": "item_code.item_group",
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Item Group",
+   "options": "Item Group"
+  },
+  {
+   "fetch_from": "item_group.parent_item_group",
+   "fieldname": "parent_item_group",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Parent Item Group"
+  },
+  {
+   "fieldname": "report_field_section",
+   "fieldtype": "Section Break",
+   "label": "Report Field"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Customer",
+   "options": "Customer"
+  },
+  {
+   "fetch_from": "customer.customer_group",
+   "fieldname": "customer_group",
+   "fieldtype": "Data",
+   "label": "Customer Group"
+  },
+  {
+   "fetch_from": "customer.business_source",
+   "fieldname": "market_source",
+   "fieldtype": "Link",
+   "label": "Market Source",
+   "options": "Lead Source"
+  },
+  {
+   "fetch_from": "customer.market_segment",
+   "fieldname": "market_segment",
+   "fieldtype": "Link",
+   "label": "Market Segment",
+   "options": "Market Segment"
+  },
+  {
+   "fetch_from": "customer.territory",
+   "fieldname": "territory",
+   "fieldtype": "Link",
+   "label": "Territory",
+   "options": "Territory"
+  },
+  {
+   "fieldname": "column_break_31",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "market_source.lead_source_type",
+   "fieldname": "market_source_type",
+   "fieldtype": "Data",
+   "label": "Market Source Type"
+  },
+  {
+   "fetch_from": "market_segment.marketing_segment_type",
+   "fieldname": "market_segment_type",
+   "fieldtype": "Data",
+   "label": "Market Segment Type"
+  },
+  {
+   "fetch_from": "customer.customer_name",
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "Customer Name"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-11 18:12:51.672102",
+ "modified": "2022-10-22 10:07:34.949486",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "POS Ticket",

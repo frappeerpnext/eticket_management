@@ -50,10 +50,12 @@
   "marketing_segment_type",
   "section_break_38",
   "meal_plan",
+  "extras",
   "column_break_40",
   "promotions",
   "section_break_17",
   "cancellation_policies",
+  "inclusions",
   "column_break_47",
   "note"
  ],
@@ -359,12 +361,23 @@
    "fieldtype": "Data",
    "label": "Company Name",
    "read_only": 1
+  },
+  {
+   "default": "Rate includes 10% government tax",
+   "fieldname": "inclusions",
+   "fieldtype": "Data",
+   "label": "Inclusions"
+  },
+  {
+   "fieldname": "extras",
+   "fieldtype": "Data",
+   "label": "Extras"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-20 12:03:25.107009",
+ "modified": "2022-10-21 13:50:45.026744",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",

@@ -31,6 +31,7 @@ class TicketBooking(Document):
 				doc = frappe.get_doc(
 					{
 						"booking_number":self.name,
+						"customer":self.customer,
 						"transaction_date":self.booking_date,
 						"item_code": t.ticket_type,
 						"item_name": t.ticket_name,
