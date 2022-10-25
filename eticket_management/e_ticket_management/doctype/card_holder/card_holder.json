@@ -7,7 +7,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "name1",
+  "card_holder_name",
   "card_number",
   "gender",
   "birthday",
@@ -20,12 +20,6 @@
   "image"
  ],
  "fields": [
-  {
-   "fieldname": "name1",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Name"
-  },
   {
    "fieldname": "gender",
    "fieldtype": "Select",
@@ -83,12 +77,18 @@
    "fieldname": "birthday",
    "fieldtype": "Date",
    "label": "Birthday"
+  },
+  {
+   "fieldname": "card_holder_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Name"
   }
  ],
  "image_field": "image",
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-12 10:12:54.883118",
+ "modified": "2022-10-22 16:12:18.429908",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Card Holder",
