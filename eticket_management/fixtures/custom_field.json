@@ -2238,7 +2238,7 @@
   "docstatus": 0,
   "doctype": "Custom Field",
   "dt": "POS Invoice",
-  "fetch_from": null,
+  "fetch_from": "pos_profile.department",
   "fetch_if_empty": 0,
   "fieldname": "department",
   "fieldtype": "Link",
