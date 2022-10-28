@@ -61,41 +61,41 @@ class TicketBooking(Document):
 		frappe.db.sql("update `tabPOS Ticket` set status = 'Cancel' where booking_number='{}'".format(self.name))
 		frappe.db.commit()
 		
-	def on_update_after_submit(self):
+	# def on_update_after_submit(self):
 
-		frappe.db.sql("delete from `tabPOS Ticket` where booking_number='{}'".format(self.name))
-		frappe.db.commit()
-		for t in self.ticket_items:
-			if t.is_ticket == 1:
-				for n in range(t.quantity):
-					doc = frappe.get_doc(
-						{
-							"booking_number":self.name,
-							"customer":self.customer,
-							"transaction_date":self.booking_date,
-							"item_code": t.ticket_type,
-							"item_name": t.ticket_name,
-							"price": t.price,
-							"ticket_number": "N/A",
-							"is_synced": 0,
-							"is_can_sync": 1,
-							"is_master_ticket_number": 0,
-							"is_checked_in": 0,
-							"doctype": "POS Ticket",
-						}
-					)
-					doc.insert()
+	# 	frappe.db.sql("delete from `tabPOS Ticket` where booking_number='{}'".format(self.name))
+	# 	frappe.db.commit()
+	# 	for t in self.ticket_items:
+	# 		if t.is_ticket == 1:
+	# 			for n in range(t.quantity):
+	# 				doc = frappe.get_doc(
+	# 					{
+	# 						"booking_number":self.name,
+	# 						"customer":self.customer,
+	# 						"transaction_date":self.booking_date,
+	# 						"item_code": t.ticket_type,
+	# 						"item_name": t.ticket_name,
+	# 						"price": t.price,
+	# 						"ticket_number": "N/A",
+	# 						"is_synced": 0,
+	# 						"is_can_sync": 1,
+	# 						"is_master_ticket_number": 0,
+	# 						"is_checked_in": 0,
+	# 						"doctype": "POS Ticket",
+	# 					}
+	# 				)
+	# 				doc.insert()
 			
 	
-	def before_update_after_submit(self):
-		data = frappe.db.get_list('POS Ticket',
-				filters={
-					'booking_number': self.name,
-					'is_checked_in':1
-				}
-			)
-		if data:
-			frappe.throw("You cannot update this booking because it is already checked in.")
+	# def before_update_after_submit(self):
+	# 	data = frappe.db.get_list('POS Ticket',
+	# 			filters={
+	# 				'booking_number': self.name,
+	# 				'is_checked_in':1
+	# 			}
+	# 		)
+	# 	if data:
+	# 		frappe.throw("You cannot update this booking because it is already checked in.")
 @frappe.whitelist()
 def get_item_price(price_list, item_code):
 	price = frappe.db.get_value("Item Price", [{'price_list':price_list},{'item_code':item_code}],"price_list_rate")
