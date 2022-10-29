@@ -314,8 +314,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Customer Name",
-   "read_only": 1,
-   "reqd": 1
+   "read_only": 1
   },
   {
    "fieldname": "customer",
@@ -346,8 +345,7 @@
    "fieldname": "price_list",
    "fieldtype": "Link",
    "label": "Price List",
-   "options": "Price List",
-   "reqd": 1
+   "options": "Price List"
   },
   {
    "allow_on_submit": 1,
@@ -382,7 +380,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-28 16:26:34.438832",
+ "modified": "2022-10-29 13:52:12.792874",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",
