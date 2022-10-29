@@ -83,13 +83,15 @@
    "fieldname": "booking_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Booking Date"
+   "label": "Booking Date",
+   "reqd": 1
   },
   {
    "fieldname": "arrival_date",
    "fieldtype": "Datetime",
    "in_list_view": 1,
-   "label": "Arrival Date"
+   "label": "Arrival Date",
+   "reqd": 1
   },
   {
    "fieldname": "amended_from",
@@ -312,13 +314,15 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Customer Name",
-   "read_only": 1
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "fieldname": "customer",
    "fieldtype": "Link",
    "label": "Customer",
-   "options": "Customer"
+   "options": "Customer",
+   "reqd": 1
   },
   {
    "fieldname": "section_booking_information",
@@ -342,7 +346,8 @@
    "fieldname": "price_list",
    "fieldtype": "Link",
    "label": "Price List",
-   "options": "Price List"
+   "options": "Price List",
+   "reqd": 1
   },
   {
    "allow_on_submit": 1,
@@ -377,7 +382,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2022-10-21 13:50:45.026744",
+ "modified": "2022-10-28 16:26:34.438832",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",
