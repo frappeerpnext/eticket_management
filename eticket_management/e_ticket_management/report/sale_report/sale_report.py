@@ -93,9 +93,8 @@ def get_columns(filters):
 	
 	columns = []
 	columns.append({'fieldname':'row_group','label':filters.row_group,'fieldtype':'Data','align':'left','width':250})
-	if filters.row_group == "Product":
-		
-		columns.append({"label":"Item Code","fieldname":"item_code","fieldtype":"Data","align":"left",'width':130})
+	# if filters.row_group == "Product":
+	# 	columns.append({"label":"Item Code","fieldname":"item_code","fieldtype":"Data","align":"left",'width':130})
 	
 	hide_columns = filters.get("hide_columns")
 	 
@@ -299,8 +298,8 @@ def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 	item_code = ""
 	groupdocstatus = ""
 	normal_filter = "b.docstatus in (1) AND"
-	if ((indent > 0) and ( filters.row_group == "Product" or filters.parent_row_group == "Product")) or filters.row_group == "Product":
-		item_code = ",a.item_code"
+	# if ((indent > 0) and ( filters.row_group == "Product" or filters.parent_row_group == "Product")):
+	# 	item_code = ",a.item_code"
 	
 	for rf in report_fields:
 		#check sql variable if last character is , then remove it
@@ -536,7 +535,7 @@ def get_row_groups():
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"a.item_name",
+			"fieldname":"concat(a.item_code,'-',a.item_name)",
 			"label":"Product"
 		},
 		{
