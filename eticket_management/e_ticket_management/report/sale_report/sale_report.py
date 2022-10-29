@@ -94,7 +94,9 @@ def get_columns(filters):
 	columns = []
 	columns.append({'fieldname':'row_group','label':filters.row_group,'fieldtype':'Data','align':'left','width':250})
 	if filters.row_group == "Product":
-			columns.append({"label":"Item Code","fieldname":"item_code","fieldtype":"Data","align":"left",'width':130})
+		
+		columns.append({"label":"Item Code","fieldname":"item_code","fieldtype":"Data","align":"left",'width':130})
+	
 	hide_columns = filters.get("hide_columns")
 	 
 	if filters.column_group !="None" and filters.row_group not in ["Date","Month","Year"]:
@@ -297,8 +299,9 @@ def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 	item_code = ""
 	groupdocstatus = ""
 	normal_filter = "b.docstatus in (1) AND"
-	if (indent > 0) and ( filters.row_group == "Product" or filters.parent_row_group == "Product"):
+	if ((indent > 0) and ( filters.row_group == "Product" or filters.parent_row_group == "Product")) or filters.row_group == "Product":
 		item_code = ",a.item_code"
+	
 	for rf in report_fields:
 		#check sql variable if last character is , then remove it
 		sql = strip(sql)
@@ -464,6 +467,11 @@ def get_row_groups():
 		{
 			"fieldname":"a.parent_item_group",
 			"label":"Product Group",
+			"parent_row_group_filter_field":"row_group"
+		},
+			{
+			"fieldname":"b.department",
+			"label":"Department",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
