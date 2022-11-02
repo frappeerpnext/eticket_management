@@ -6,7 +6,6 @@ def get_data():
 		"fieldname": "booking_number",
 	
 		"transactions": [
-			{"label": _("Groups"), "items": ["POS Ticket"]},
-		
+			{"label": _("Issue Invoice"), "items": ["Sales Invoice"]},
 		],
 	}

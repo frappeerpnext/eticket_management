@@ -13,6 +13,7 @@
   "ticket_type",
   "column_break_4",
   "arrival_date",
+  "check_in_time",
   "length_of_visit",
   "section_customer_information",
   "customer",
@@ -57,7 +58,15 @@
   "cancellation_policies",
   "inclusions",
   "column_break_47",
-  "note"
+  "note",
+  "activate_tickets_tab",
+  "master_ticket_number",
+  "section_break_54",
+  "scan_ticket_number",
+  "column_break_54",
+  "scan_remove_ticket_number",
+  "section_break_56",
+  "tickets_number"
  ],
  "fields": [
   {
@@ -65,6 +74,7 @@
    "fieldname": "phone_number",
    "fieldtype": "Data",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Phone Number",
    "read_only": 1
   },
@@ -83,12 +93,13 @@
    "fieldname": "booking_date",
    "fieldtype": "Date",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Booking Date",
    "reqd": 1
   },
   {
    "fieldname": "arrival_date",
-   "fieldtype": "Datetime",
+   "fieldtype": "Date",
    "in_list_view": 1,
    "label": "Arrival Date",
    "reqd": 1
@@ -319,6 +330,7 @@
   {
    "fieldname": "customer",
    "fieldtype": "Link",
+   "in_standard_filter": 1,
    "label": "Customer",
    "options": "Customer",
    "reqd": 1
@@ -375,12 +387,54 @@
    "fieldname": "extras",
    "fieldtype": "Data",
    "label": "Extras"
+  },
+  {
+   "fieldname": "activate_tickets_tab",
+   "fieldtype": "Tab Break",
+   "label": "Activate Tickets"
+  },
+  {
+   "fieldname": "scan_ticket_number",
+   "fieldtype": "Data",
+   "label": "Scan Ticket Number"
+  },
+  {
+   "fieldname": "column_break_54",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "scan_remove_ticket_number",
+   "fieldtype": "Data",
+   "label": "Scan Remove Ticket Number"
+  },
+  {
+   "fieldname": "section_break_56",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "tickets_number",
+   "fieldtype": "Table",
+   "label": "Tickets Number",
+   "options": "Booking Active Ticket"
+  },
+  {
+   "fieldname": "master_ticket_number",
+   "fieldtype": "Data",
+   "label": "Master Ticket Number"
+  },
+  {
+   "fieldname": "section_break_54",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "check_in_time",
+   "fieldtype": "Time",
+   "label": "Check In Time"
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [],
- "modified": "2022-10-29 13:52:12.792874",
+ "modified": "2022-11-02 15:53:22.063951",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",

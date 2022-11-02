@@ -1,0 +1,77 @@
+{
+ "actions": [],
+ "autoname": "hash",
+ "creation": "2022-11-01 10:35:16.862235",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "ticket_number",
+  "master_ticket_number",
+  "is_master_ticket",
+  "arrival_date",
+  "is_checked",
+  "checked_date",
+  "count_door_open"
+ ],
+ "fields": [
+  {
+   "fieldname": "ticket_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Ticket Number"
+  },
+  {
+   "fieldname": "master_ticket_number",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Master Ticket Number",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_master_ticket",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Master Ticket"
+  },
+  {
+   "fieldname": "arrival_date",
+   "fieldtype": "Date",
+   "label": "Arrival Date",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_checked",
+   "fieldtype": "Check",
+   "label": "Is Checked",
+   "read_only": 1
+  },
+  {
+   "fieldname": "checked_date",
+   "fieldtype": "Datetime",
+   "label": "Checked Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "count_door_open",
+   "fieldtype": "Data",
+   "label": "Count Door Open",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2022-11-02 17:17:44.419645",
+ "modified_by": "Administrator",
+ "module": "E Ticket Management",
+ "name": "Booking Active Ticket",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
