@@ -24,6 +24,9 @@ class TicketBooking(Document):
 		self.calendar_title = """%s by: %s 
 								Total Ticket:%s Amount:%s arrive on %s""" %(str(self.name),str(self.customer),str(self.total_ticket),str(fmt_money(self.total_ticket_amount,2,"USD","###,###.##")),str(format_date(self.arrival_date)))
 		
+		#update master ticket number 
+		
+
 	def on_submit(self):
 		
 		for t in self.ticket_items:
@@ -103,3 +106,5 @@ def get_item_price(price_list, item_code):
 		return price
 	else:
 		return 0
+
+
