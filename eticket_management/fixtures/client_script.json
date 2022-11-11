@@ -1,0 +1,13 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Sales Invoice",
+  "enabled": 1,
+  "modified": "2022-11-08 13:47:09.366986",
+  "module": "E Ticket Management",
+  "name": "Load Ticket Booking Item",
+  "script": "frappe.ui.form.on('Sales Invoice', {\n\tsetup(frm) {\n\t\tif (frm.doc.booking_number && frm.is_new()){\n\t\t    \n\t\t    frm.clear_table(\"items\");\n\t\t    frappe.call({\n                method: \"eticket_management.e_ticket_management.doctype.ticket_booking.ticket_booking.get_ticket_booking_item\",\n                type: \"GET\",\n                args:{\n                    booking_number:frm.doc.booking_number,\n                    company:frm.doc.company\n                },\n                 callback: function(r) {\n                    $.each(r.message,function(i,d){\n            \t\t    let entry = frm.add_child(\"items\");\n                        entry.item_code = d.ticket_type;\n                        entry.item_name = d.ticket_name,\n                        entry.is_ticket = d.is_ticket;\n                        entry.is_adult_ticket = d.is_adult_ticket;\n                        entry.description = \"<p>\" + d.ticket_name + \"</p>\";\n                        entry.uom = d.unit;\n                        entry.qty = d.quantity;\n                        entry.rate = d.price;\n                        entry.income_account = d.income_account;\n                        entry.expense_account = d.expense_account;\n                        entry.warehouse = d.warehouse;\n                    });\n                    frm.refresh_field(\"items\");\n                }\n            });\n\t\t\t\n\t\t\t\n\t\t}\n\t}\n})",
+  "view": "Form"
+ }
+]

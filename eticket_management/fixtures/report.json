@@ -5111,7 +5111,7 @@
   ]
  },
  {
-  "add_total_row": 0,
+  "add_total_row": 1,
   "columns": [],
   "disable_prepared_report": 0,
   "disabled": 0,
@@ -5122,7 +5122,7 @@
   "javascript": null,
   "json": null,
   "letter_head": "Default Letter Head",
-  "modified": "2022-10-11 10:32:46.018921",
+  "modified": "2022-11-10 12:53:41.634456",
   "module": "E Ticket Management",
   "name": "Ticket Sold Report",
   "prepared_report": 0,
@@ -5359,6 +5359,217 @@
     "parentfield": "roles",
     "parenttype": "Report",
     "role": "Sales User"
+   }
+  ]
+ },
+ {
+  "add_total_row": 1,
+  "columns": [],
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Default Letter Head",
+  "modified": "2022-11-07 11:10:50.789182",
+  "module": "Selling",
+  "name": "POS Sale Summary Report",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "POS Sale Summary Report",
+  "report_script": null,
+  "report_type": "Script Report",
+  "roles": [
+   {
+    "parent": "POS Sale Summary Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "POS Sale Summary Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "POS Sale Summary Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "POS Sale Summary Report",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales Manager"
+   }
+  ]
+ },
+ {
+  "add_total_row": 1,
+  "columns": [
+   {
+    "fieldname": "department",
+    "fieldtype": "Data",
+    "label": "Department",
+    "options": null,
+    "parent": "Today Sale Revenue by Department",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "grand_total",
+    "fieldtype": "Currency",
+    "label": "Grand Total",
+    "options": null,
+    "parent": "Today Sale Revenue by Department",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   }
+  ],
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Default Letter Head",
+  "modified": "2022-11-07 17:11:34.235232",
+  "module": "Selling",
+  "name": "Today Sale Revenue by Department",
+  "prepared_report": 0,
+  "query": "select \r\n\tcoalesce(department,'Not Set') as department,\r\n\tsum(grand_total) as grand_total from `tabPOS Invoice`  \r\nwhere\r\n\tposting_date = cast(NOW() as date) and \r\n\tdocstatus = 1\r\ngroup by \r\ncoalesce(department,'Not Set') \r\n\r\nunion all\r\nselect \r\n\tcoalesce(department,'Not Set') as department,\r\n\tsum(grand_total ) as grand_total \r\nfrom `tabSales Invoice`\r\nwhere \r\n\tis_pos = 0 and \r\n\tdocstatus = 1 \r\ngroup by \r\n\tcoalesce(department,'Not Set') \r\n",
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "Today Sale Revenue by Department",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "parent": "Today Sale Revenue by Department",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Today Sale Revenue by Department",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Today Sale Revenue by Department",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "Today Sale Revenue by Department",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales Manager"
+   },
+   {
+    "parent": "Today Sale Revenue by Department",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "PO Team Report"
+   }
+  ]
+ },
+ {
+  "add_total_row": 1,
+  "columns": [
+   {
+    "fieldname": "item_name",
+    "fieldtype": "Data",
+    "label": "Ticket Type",
+    "options": null,
+    "parent": "Today Sale Revenue By Ticket Type",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "quantity",
+    "fieldtype": "Int",
+    "label": "Quantity",
+    "options": null,
+    "parent": "Today Sale Revenue By Ticket Type",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   },
+   {
+    "fieldname": "amount",
+    "fieldtype": "Currency",
+    "label": "Total Amount",
+    "options": null,
+    "parent": "Today Sale Revenue By Ticket Type",
+    "parentfield": "columns",
+    "parenttype": "Report",
+    "width": 0
+   }
+  ],
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "No",
+  "javascript": null,
+  "json": null,
+  "letter_head": "Default Letter Head",
+  "modified": "2022-11-07 17:39:53.895121",
+  "module": "E Ticket Management",
+  "name": "Today Sale Revenue By Ticket Type",
+  "prepared_report": 0,
+  "query": "select \r\n\tb.item_name,\r\n\tsum(b.qty) as quantity,\r\n\tsum(b.amount) as amount \r\nfrom `tabPOS Invoice`  a\r\ninner join `tabPOS Invoice Item`\t b on b.parent = a.name\r\nwhere\r\n\ta.posting_date = cast(NOW() as date) and \r\n\ta.docstatus = 1 and \r\n\tb.is_ticket = 1\r\ngroup by \r\n\tb.item_name\r\n\r\nunion all\r\nselect \r\n\t\tb.item_name,\r\n\t\tsum(b.qty) as quantity,\r\n\tsum(b.amount) as amount \r\nfrom `tabSales Invoice` a\r\ninner join `tabSales Invoice Item`\t b on b.parent = a.name\r\nwhere \r\n\ta.is_pos = 0 and \r\n\ta.docstatus = 1 and \r\n\tb.is_ticket and \r\n\ta.posting_date = cast(NOW() as date)   \r\ngroup by \r\n\t\tb.item_name\r\n",
+  "ref_doctype": "Sales Invoice",
+  "reference_report": null,
+  "report_name": "Today Sale Revenue By Ticket Type",
+  "report_script": null,
+  "report_type": "Query Report",
+  "roles": [
+   {
+    "parent": "Today Sale Revenue By Ticket Type",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts Manager"
+   },
+   {
+    "parent": "Today Sale Revenue By Ticket Type",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Accounts User"
+   },
+   {
+    "parent": "Today Sale Revenue By Ticket Type",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales User"
+   },
+   {
+    "parent": "Today Sale Revenue By Ticket Type",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Sales Manager"
+   },
+   {
+    "parent": "Today Sale Revenue By Ticket Type",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "PO Team Report"
    }
   ]
  },
@@ -6213,49 +6424,6 @@
   "filters": [],
   "is_standard": "Yes",
   "javascript": null,
-  "json": "{\"add_total_row\": 0, \"sort_by\": \"Serial No.modified\", \"sort_order\": \"desc\", \"sort_by_next\": null, \"filters\": [[\"Serial No\", \"delivery_document_type\", \"in\", [\"Delivery Note\", \"Sales Invoice\"]], [\"Serial No\", \"warehouse\", \"=\", \"\"]], \"sort_order_next\": \"desc\", \"columns\": [[\"name\", \"Serial No\"], [\"item_code\", \"Serial No\"], [\"warranty_expiry_date\", \"Serial No\"], [\"warranty_period\", \"Serial No\"], [\"maintenance_status\", \"Serial No\"], [\"purchase_document_no\", \"Serial No\"], [\"purchase_date\", \"Serial No\"], [\"supplier\", \"Serial No\"], [\"supplier_name\", \"Serial No\"], [\"delivery_document_no\", \"Serial No\"], [\"delivery_date\", \"Serial No\"], [\"customer\", \"Serial No\"], [\"customer_name\", \"Serial No\"], [\"item_name\", \"Serial No\"], [\"description\", \"Serial No\"], [\"item_group\", \"Serial No\"], [\"brand\", \"Serial No\"]]}",
-  "letter_head": null,
-  "modified": "2017-02-24 20:01:53.097456",
-  "module": "Stock",
-  "name": "Serial No Warranty Expiry",
-  "prepared_report": 0,
-  "query": null,
-  "ref_doctype": "Serial No",
-  "reference_report": null,
-  "report_name": "Serial No Warranty Expiry",
-  "report_script": null,
-  "report_type": "Report Builder",
-  "roles": [
-   {
-    "parent": "Serial No Warranty Expiry",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Item Manager"
-   },
-   {
-    "parent": "Serial No Warranty Expiry",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Stock Manager"
-   },
-   {
-    "parent": "Serial No Warranty Expiry",
-    "parentfield": "roles",
-    "parenttype": "Report",
-    "role": "Stock User"
-   }
-  ]
- },
- {
-  "add_total_row": 0,
-  "columns": [],
-  "disable_prepared_report": 0,
-  "disabled": 0,
-  "docstatus": 0,
-  "doctype": "Report",
-  "filters": [],
-  "is_standard": "Yes",
-  "javascript": null,
   "json": "{\"add_total_row\": 0, \"sort_by\": \"Serial No.modified\", \"sort_order\": \"desc\", \"sort_by_next\": null, \"filters\": [[\"Serial No\", \"delivery_document_type\", \"in\", [\"Delivery Note\", \"Sales Invoice\"]], [\"Serial No\", \"warehouse\", \"=\", \"\"]], \"sort_order_next\": \"desc\", \"columns\": [[\"name\", \"Serial No\"], [\"item_code\", \"Serial No\"], [\"amc_expiry_date\", \"Serial No\"], [\"maintenance_status\", \"Serial No\"], [\"delivery_document_no\", \"Serial No\"], [\"customer\", \"Serial No\"], [\"customer_name\", \"Serial No\"], [\"item_name\", \"Serial No\"], [\"description\", \"Serial No\"], [\"item_group\", \"Serial No\"], [\"brand\", \"Serial No\"]]}",
   "letter_head": null,
   "modified": "2017-02-24 20:02:00.706889",
@@ -6283,6 +6451,49 @@
    },
    {
     "parent": "Serial No Service Contract Expiry",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock User"
+   }
+  ]
+ },
+ {
+  "add_total_row": 0,
+  "columns": [],
+  "disable_prepared_report": 0,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Report",
+  "filters": [],
+  "is_standard": "Yes",
+  "javascript": null,
+  "json": "{\"add_total_row\": 0, \"sort_by\": \"Serial No.modified\", \"sort_order\": \"desc\", \"sort_by_next\": null, \"filters\": [[\"Serial No\", \"delivery_document_type\", \"in\", [\"Delivery Note\", \"Sales Invoice\"]], [\"Serial No\", \"warehouse\", \"=\", \"\"]], \"sort_order_next\": \"desc\", \"columns\": [[\"name\", \"Serial No\"], [\"item_code\", \"Serial No\"], [\"warranty_expiry_date\", \"Serial No\"], [\"warranty_period\", \"Serial No\"], [\"maintenance_status\", \"Serial No\"], [\"purchase_document_no\", \"Serial No\"], [\"purchase_date\", \"Serial No\"], [\"supplier\", \"Serial No\"], [\"supplier_name\", \"Serial No\"], [\"delivery_document_no\", \"Serial No\"], [\"delivery_date\", \"Serial No\"], [\"customer\", \"Serial No\"], [\"customer_name\", \"Serial No\"], [\"item_name\", \"Serial No\"], [\"description\", \"Serial No\"], [\"item_group\", \"Serial No\"], [\"brand\", \"Serial No\"]]}",
+  "letter_head": null,
+  "modified": "2017-02-24 20:01:53.097456",
+  "module": "Stock",
+  "name": "Serial No Warranty Expiry",
+  "prepared_report": 0,
+  "query": null,
+  "ref_doctype": "Serial No",
+  "reference_report": null,
+  "report_name": "Serial No Warranty Expiry",
+  "report_script": null,
+  "report_type": "Report Builder",
+  "roles": [
+   {
+    "parent": "Serial No Warranty Expiry",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Item Manager"
+   },
+   {
+    "parent": "Serial No Warranty Expiry",
+    "parentfield": "roles",
+    "parenttype": "Report",
+    "role": "Stock Manager"
+   },
+   {
+    "parent": "Serial No Warranty Expiry",
     "parentfield": "roles",
     "parenttype": "Report",
     "role": "Stock User"

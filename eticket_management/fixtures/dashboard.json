@@ -268,5 +268,46 @@
   "modified": "2022-10-22 14:29:04.680967",
   "module": null,
   "name": "Sale and Marketing Dashboard"
+ },
+ {
+  "cards": [
+   {
+    "card": "Today Ticket Sold Qty (POS)",
+    "parent": "Today Revenue Dashboard",
+    "parentfield": "cards",
+    "parenttype": "Dashboard"
+   },
+   {
+    "card": "Today Ticket Sold Revenue",
+    "parent": "Today Revenue Dashboard",
+    "parentfield": "cards",
+    "parenttype": "Dashboard"
+   }
+  ],
+  "chart_options": null,
+  "charts": [
+   {
+    "chart": "Daily Revenue by POS Profile",
+    "parent": "Today Revenue Dashboard",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Full"
+   },
+   {
+    "chart": "Today Sale Revenue by Department",
+    "parent": "Today Revenue Dashboard",
+    "parentfield": "charts",
+    "parenttype": "Dashboard",
+    "width": "Half"
+   }
+  ],
+  "dashboard_name": "Today Revenue Dashboard",
+  "docstatus": 0,
+  "doctype": "Dashboard",
+  "is_default": 0,
+  "is_standard": 0,
+  "modified": "2022-11-10 15:47:09.285888",
+  "module": null,
+  "name": "Today Revenue Dashboard"
  }
 ]
