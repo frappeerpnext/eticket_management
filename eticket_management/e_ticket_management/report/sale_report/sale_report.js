@@ -71,6 +71,15 @@ frappe.query_reports["Sale Report"] = {
 			}
 		},
 		{
+			"fieldname": "pos_profile",
+			"label": __("POS Profile"),
+			"fieldtype": "MultiSelectList",
+			get_data: function(txt) {
+				
+				return frappe.db.get_link_options('POS Profile', txt);
+			}
+		},
+		{
 			"fieldname": "item_group",
 			"label": __("Item Group"),
 			"fieldtype": "MultiSelectList",

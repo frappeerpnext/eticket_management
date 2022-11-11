@@ -9,6 +9,10 @@ from frappe.utils import date_diff
 from frappe.utils.data import strip
 
 def execute(filters=None):
+	if not filters.department:
+		filters.department = frappe.db.get_list("Department",pluck='name')
+
+
 
 	if filters.filter_based_on =="Fiscal Year":
 		filters.start_date = '{}-01-01'.format(filters.from_fiscal_year)
@@ -16,10 +20,7 @@ def execute(filters=None):
 	
 
 	validate(filters)
-	#run this to update parent_item_group in table sales invoice item
-	update_parent_item_group()
-	update_sale()
-	
+
 	
 	report_data = []
 	skip_total_row=False
@@ -56,58 +57,12 @@ def validate(filters):
 	if filters.row_group and filters.parent_row_group:
 		if(filters.row_group == filters.parent_row_group):
 			frappe.throw("Parent row group and row group can not be the same")
-
-
-def update_parent_item_group():
-	frappe.db.sql(
-		"""
-			UPDATE `tabSales Invoice Item` a 
-			SET parent_item_group = (
-					SELECT parent_item_group FROM `tabItem Group` WHERE NAME=a.item_group) 
-			WHERE ifnull(parent_item_group,'') = ''
-		"""
-	)
-
-def update_sale():
-	frappe.db.sql(
-		"""
-			UPDATE `tabSales Invoice Item` a 
-			SET parent_item_group = (
-					SELECT parent_item_group FROM `tabItem Group` WHERE NAME=a.item_group) 
-			WHERE ifnull(parent_item_group,'') = ''
-		"""
-	)
-
-	#update transaction to tbl sale invoice item
-	sale_invoices = frappe.db.sql("select distinct parent from `tabSales Invoice Item` where total_transaction=0", as_dict=1)
-	
-	if sale_invoices:
-		for s in sale_invoices:
-			 
-			item_count = frappe.db.sql("select count(name) as total from `tabSales Invoice Item` where parent='{}'".format(s["parent"]), as_dict=1)
 			
-			if item_count:
-				total_item = item_count[0]["total"]
-				#get total transaction from pos invoice
-				pos_invoice_count = frappe.db.sql("select count(name) as total from `tabPOS Invoice` where consolidated_invoice='{}'".format(s["parent"]), as_dict=1)
-				total_pos_invoice = 1
-				if pos_invoice_count and pos_invoice_count[0]["total"]>1:
-						total_pos_invoice = pos_invoice_count[0]["total"]
-
-				sql = "update `tabSales Invoice Item` set total_transaction = {} where parent='{}'".format(total_pos_invoice/total_item, s["parent"])
-				 
-				frappe.db.sql(sql)
-	
-	frappe.db.commit()
-	#end update total transaction to sale invoice item
-	# 				
 
 def get_columns(filters):
 	
 	columns = []
 	columns.append({'fieldname':'row_group','label':filters.row_group,'fieldtype':'Data','align':'left','width':250})
-	if filters.row_group == "Product":
-			columns.append({"label":"Item Code","fieldname":"item_code","fieldtype":"Data","align":"left",'width':130})
 	hide_columns = filters.get("hide_columns")
 	 
 	if filters.column_group !="Column Group By" and filters.row_group not in ["Date","Month","Year"]:
@@ -128,8 +83,7 @@ def get_columns(filters):
 					'align':f['align']
 					}
 				)
-	if (filters.row_group == "Sale Invoice" or filters.parent_row_group == "Sale Invoice") and filters.get("include_cancelled") == True:
-		columns.append({"label":"Status","fieldname":"docstatus","fieldtype":"Data","align":"center",'width':100})
+
 	return columns
 
 
@@ -243,38 +197,40 @@ def get_fields(filters):
 	
 
 def get_conditions(filters,group_filter=None):
-	conditions = ""
+	conditions = " 1=1 "
 
 	start_date = filters.start_date
 	end_date = filters.end_date
 
-	conditions += " b.company =if('{0}'='None',b.company,'{0}')".format(filters.company)
+	 
 	if(group_filter!=None):
 		conditions += " and {} ='{}'".format(group_filter["field"],group_filter["value"].replace("'","''").replace("%","%%"))
 
-	conditions += " AND b.posting_date between '{}' AND '{}'".format(start_date,end_date)
+	conditions += " AND b.transaction_date between '{}' AND '{}'".format(start_date,end_date)
 
 
 
 	if filters.get("customer_group"):
 		conditions += " AND b.customer_group in %(customer_group)s"
 
-	if filters.get("price_list"):
-		conditions += " AND b.selling_price_list in %(price_list)s"
-
  
 
 	if filters.get("market_segment"):
 		conditions += " AND b.market_segment in %(market_segment)s"
 
-	if filters.get("business_source"):
-		conditions += " AND b.business_source in %(business_source)s"
-	
+	if filters.get("market_source"):
+		conditions += " AND b.market_source in %(market_source)s"
 
-	conditions += " AND a.is_ticket = 1"
+		
+	conditions += " AND b.department in %(department)s"
+	
+	if filters.get("pos_profile"):
+		conditions += " AND b.pos_profile in %(pos_profile)s"
+
 	return conditions
 
 def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
+ 
 	hide_columns = filters.get("hide_columns")
 	row_group = [d["fieldname"] for d in get_row_groups() if d["label"]==filters.row_group][0]
 	if(parent_row_group!=None):
@@ -292,14 +248,12 @@ def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 			
 			for rf in report_fields:
 				if not hide_columns or  rf["label"] not in hide_columns:
-					sql = sql +	"SUM(if(b.posting_date between '{}' AND '{}',{},0)) as '{}_{}',".format(f["start_date"],f["end_date"],rf["sql_expression"],f["fieldname"],rf["fieldname"])
+					sql = sql +	"SUM(if(b.transaction_date between '{}' AND '{}',{},0)) as '{}_{}',".format(f["start_date"],f["end_date"],rf["sql_expression"],f["fieldname"],rf["fieldname"])
 			#end for
 	# total last column
-	item_code = ""
 	groupdocstatus = ""
-	normal_filter = "b.docstatus in (1) AND"
-	if indent > 0 and  (filters.row_group == "Product" or filters.parent_row_group == "Product"):
-		item_code = ",a.item_code"
+	normal_filter = "b.docstatus = 0 AND"
+
 	for rf in report_fields:
 		#check sql variable if last character is , then remove it
 		sql = strip(sql)
@@ -308,16 +262,16 @@ def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 		if not hide_columns or  rf["label"] not in hide_columns:
 			sql = sql + " ,SUM({}) AS 'total_{}' ".format(rf["sql_expression"],rf["fieldname"])
 	sql = sql + """ {2}
-		FROM `tabSales Invoice Item` AS a
-			INNER JOIN `tabSales Invoice` b on b.name = a.parent
+		FROM `tabTickets Sold` AS b
 		WHERE
-			{4}
+			{3}
 			{0}
 		GROUP BY 
-		{1} {2} {3}
-	""".format(get_conditions(filters,group_filter), row_group,item_code,groupdocstatus,normal_filter)	
+		{1}  {2}
+	""".format(get_conditions(filters,group_filter), row_group,groupdocstatus,normal_filter)	
+	
 	data = frappe.db.sql(sql,filters, as_dict=1)
-	 
+	
 	return data
  
 def get_report_group_data(filters):
@@ -417,59 +371,46 @@ def get_report_chart(filters,data):
  
 
 def get_report_field(filters):
-	 
 	return [
-		{"label":"Quantity","short_label":"Qty", "fieldname":"qty","fieldtype":"Float","indicator":"Grey","precision":2, "align":"center","chart_color":"#FF8A65","sql_expression":"a.qty"},
-		{"label":"Sub Total", "short_label":"Sub To.", "fieldname":"sub_total","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"a.base_rate*a.qty"},
-		{"label":"Discount", "short_label":"Disc.", "fieldname":"discount_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"a.base_rate*a.qty-a.net_amount"},
-		
-		{"label":"Amount", "short_label":"Amt", "fieldname":"amount","fieldtype":"Currency","indicator":"Red","precision":None, "align":"right","chart_color":"#2E7D32","sql_expression":"a.net_amount"},
-		
-	]
-	
+			{"label":"Quantity","short_label":"Qty", "fieldname":"qty","fieldtype":"Float","indicator":"Grey","precision":2, "align":"center","chart_color":"#FF8A65","sql_expression":"b.quantity"},
+			{"label":"Sub Total", "short_label":"Sub To.", "fieldname":"sub_total","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"b.price*b.quantity"},
+			{"label":"Discount", "short_label":"Disc.", "fieldname":"discount_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"b.discount"},
+			{"label":"Amount", "short_label":"Amt", "fieldname":"amount","fieldtype":"Currency","indicator":"Red","precision":None, "align":"right","chart_color":"#2E7D32","sql_expression":"b.amount"}
+		]
+
 	 
  
 
 def get_row_groups():
 	return [
 		{
-			"fieldname":"a.parent",
-			"label":"Sale Invoice",
-			"parent_row_group_filter_field":"row_group"
-		},
-		{
 			"fieldname":"coalesce(b.market_segment,'Not Set')",
 			"label":"Market Segment",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"coalesce(b.business_source,'Not Set')",
-			"label":"Business Source",
+			"fieldname":"coalesce(b.market_source,'Not Set')",
+			"label":"Market Source",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"coalesce(b.marketing_segment_type,'Not Set')",
+			"fieldname":"coalesce(b.market_segment_type,'Not Set')",
 			"label":"Marketing Segment Type",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"coalesce(b.business_source_type,'Not Set')",
-			"label":"Business Source Type",
+			"fieldname":"coalesce(b.market_source_type,'Not Set')",
+			"label":"Market Source Type",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"a.item_group",
+			"fieldname":"b.item_group",
 			"label":"Category",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"a.parent_item_group",
+			"fieldname":"b.parent_item_group",
 			"label":"Product Group",
-			"parent_row_group_filter_field":"row_group"
-		},
-		{
-			"fieldname":"b.company",
-			"label":"Company",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
@@ -504,17 +445,17 @@ def get_row_groups():
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"date_format(b.posting_date,'%%d/%%m/%%Y')",
+			"fieldname":"date_format(b.transaction_date,'%%d/%%m/%%Y')",
 			"label":"Date",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"date_format(b.posting_date,'%%m/%%Y')",
+			"fieldname":"date_format(b.transaction_date,'%%m/%%Y')",
 			"label":"Month",
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"date_format(b.posting_date,'%%Y')",
+			"fieldname":"date_format(b.transaction_date,'%%Y')",
 			"label":"Year",
 			"parent_row_group_filter_field":"row_group"
 		},
@@ -524,27 +465,7 @@ def get_row_groups():
 			"parent_row_group_filter_field":"row_group"
 		},
 		{
-			"fieldname":"ifnull(b.membership,'Not Set')",
-			"label":"Membership",
-			"parent_row_group_filter_field":"row_group"
-		},
-		{
-			"fieldname":"a.item_name",
+			"fieldname":"concat(b.item_code, '-', b.item_name)",
 			"label":"Product"
-		},
-		{
-			"fieldname":"ifnull(a.supplier_name,'Not Set')",
-			"label":"Supplier",
-			"parent_row_group_filter_field":"row_group"
-		},
-		{
-			"fieldname":"ifnull(a.supplier_group,'Not Set')",
-			"label":"Supplier Group",
-			"parent_row_group_filter_field":"row_group"
-		},
-		{
-			"fieldname":"b.selling_price_list",
-			"label":"Sale Type",
-			"parent_row_group_filter_field":"row_group"
-		},
+		}
 	]

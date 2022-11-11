@@ -4,10 +4,13 @@
 frappe.query_reports["Ticket Sold Report"] = {
 	"filters": [
 		{
-			fieldname: "company",
-			label: "Company",
-			fieldtype: "Link",
-			options:"Company",
+			fieldname: "department",
+			label: "Department",
+			"fieldtype": "MultiSelectList",
+			get_data: function(txt) {
+				return frappe.db.get_link_options('Department', txt, {"name": ['!=', 'All Departments']});
+				
+			},
 		},
 		{
 			"fieldname":"filter_based_on",
@@ -57,13 +60,13 @@ frappe.query_reports["Ticket Sold Report"] = {
 				});
 			}
 		},
-
 		{
-			"fieldname": "price_list",
-			"label": __("Sale Type"),
+			"fieldname": "pos_profile",
+			"label": __("POS Profile"),
 			"fieldtype": "MultiSelectList",
 			get_data: function(txt) {
-				return frappe.db.get_link_options('Price List', txt,{"selling":1});
+				
+				return frappe.db.get_link_options('POS Profile', txt);
 			}
 		},
 		{
@@ -84,8 +87,8 @@ frappe.query_reports["Ticket Sold Report"] = {
 			}
 		},
 		{
-			fieldname: "business_source",
-			label: "Business Source",
+			fieldname: "market_source",
+			label: "Market Source",
 			"fieldtype": "MultiSelectList",
 			get_data: function(txt) {
 				return frappe.db.get_link_options('Lead Source', txt);
@@ -95,14 +98,14 @@ frappe.query_reports["Ticket Sold Report"] = {
 			"fieldname": "parent_row_group",
 			"label": __("Parent Group By"),
 			"fieldtype": "Select",
-			"options": "\nCategory\nProduct Group\nCustomer\nCustomer Group\nMembership\nTerritory\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarketing Segment Type\nMarket Source\nMarket Type",
+			"options": "\nCategory\nProduct Group\nCustomer\nCustomer Group\nTerritory\nDate\n\Month\nYear\nMarket Segment\nMarketing Segment Type\nMarket Source\nMarket Source Type",
 			
 		},
 		{
 			"fieldname": "row_group",
 			"label": __("Row Group By"),
 			"fieldtype": "Select",
-			"options": "Product\nCategory\nProduct Group\nCustomer\nCustomer Group\nMembership\nTerritory\nDate\n\Month\nYear\nSale Invoice\nMarket Segment\nMarketing Segment Type\nMarket Source\nMarket Type",
+			"options": "Product\nCategory\nProduct Group\nCustomer\nCustomer Group\nTerritory\nDate\n\Month\nYear\nMarket Segment\nMarketing Segment Type\nMarket Source\nMarket Source Type",
 			"default":"Category"
 		},
 		{

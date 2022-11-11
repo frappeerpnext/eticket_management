@@ -5,7 +5,7 @@
    "label": "Daily Ticket Sold"
   }
  ],
- "content": "[{\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Ticket Sold\",\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Your Shortcuts</span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Today Ticket Sold\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active Ticket\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"MTD Ticket Booking\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Today Arrival\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Booking Calendar\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Door Access\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Configuration\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Recent Activities</b></span>\",\"col\":12}},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Ticket Booking\",\"col\":6}},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Ticket Sold\",\"col\":6}}]",
+ "content": "[{\"type\":\"chart\",\"data\":{\"chart_name\":\"Daily Ticket Sold\",\"col\":12}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Your Shortcuts</span>\",\"col\":12}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Tickets Sold\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Active Ticket\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"MTD Ticket Booking\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Today Arrival\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Booking Calendar\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Door Access\",\"col\":3}},{\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Dashboard\",\"col\":3}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Reports</b></span>\",\"col\":12}},{\"type\":\"card\",\"data\":{\"card_name\":\"Configuration\",\"col\":4}},{\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}},{\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Recent Activities</b></span>\",\"col\":12}},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Ticket Booking\",\"col\":6}},{\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Recent Ticket Sold\",\"col\":6}}]",
  "creation": "2022-09-22 17:03:51.790559",
  "docstatus": 0,
  "doctype": "Workspace",
@@ -102,7 +102,7 @@
    "type": "Link"
   }
  ],
- "modified": "2022-10-26 17:07:38.038141",
+ "modified": "2022-11-10 11:55:25.867823",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "eTicket",
@@ -140,23 +140,6 @@
   {
    "color": "Green",
    "doc_view": "List",
-   "format": "{} Ticket(s)",
-   "label": "Today Arrival",
-   "link_to": "POS Ticket",
-   "stats_filter": "{\"transaction_date\":[\"Timespan\",\"today\"],\"booking_number\":[\"is\",\"set\"],\"status\":[\"=\",\"Active\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Grey",
-   "doc_view": "List",
-   "label": "Today Ticket Sold",
-   "link_to": "POS Ticket",
-   "stats_filter": "{\"transaction_date\":[\"Timespan\",\"today\"]}",
-   "type": "DocType"
-  },
-  {
-   "color": "Green",
-   "doc_view": "List",
    "label": "Active Ticket",
    "link_to": "Ticket Code",
    "stats_filter": "{\"total_checked_in\":[\"=\",0]}",
@@ -171,11 +154,27 @@
    "type": "DocType"
   },
   {
+   "color": "Grey",
+   "doc_view": "Report Builder",
+   "label": "Tickets Sold",
+   "link_to": "Tickets Sold",
+   "type": "DocType"
+  },
+  {
    "color": "Green",
    "doc_view": "List",
    "label": "MTD Ticket Booking",
    "link_to": "Ticket Booking",
    "stats_filter": "{\"booking_date\":[\"Timespan\",\"this month\"]}",
+   "type": "DocType"
+  },
+  {
+   "color": "Green",
+   "doc_view": "List",
+   "format": "{} Booking",
+   "label": "Today Arrival",
+   "link_to": "Ticket Booking",
+   "stats_filter": "{\"arrival_date\":[\"Timespan\",\"today\"]}",
    "type": "DocType"
   }
  ],

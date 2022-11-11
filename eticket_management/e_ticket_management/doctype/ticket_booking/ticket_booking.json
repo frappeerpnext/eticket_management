@@ -125,13 +125,6 @@
    "label": "Booking Ticket "
   },
   {
-   "fieldname": "ticket_items",
-   "fieldtype": "Table",
-   "label": "Ticket",
-   "options": "Booking Ticket Items",
-   "reqd": 1
-  },
-  {
    "fieldname": "section_break_11",
    "fieldtype": "Section Break"
   },
@@ -430,11 +423,18 @@
    "fieldname": "check_in_time",
    "fieldtype": "Time",
    "label": "Check In Time"
+  },
+  {
+   "fieldname": "ticket_items",
+   "fieldtype": "Table",
+   "label": "Ticket",
+   "options": "Booking Ticket Items",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-02 15:53:22.063951",
+ "modified": "2022-11-06 14:46:20.527768",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",

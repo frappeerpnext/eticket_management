@@ -9,6 +9,7 @@
  "field_order": [
   "ticket_number",
   "ticket_type",
+  "color",
   "total_checked_in",
   "last_checked_in_date"
  ],
@@ -24,10 +25,9 @@
   {
    "default": "QR Code",
    "fieldname": "ticket_type",
-   "fieldtype": "Select",
+   "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Ticket Type",
-   "options": "QR Code\nRFID"
+   "label": "Ticket Type"
   },
   {
    "default": "0",
@@ -41,11 +41,16 @@
    "fieldtype": "Datetime",
    "in_list_view": 1,
    "label": "Last Checked In Date"
+  },
+  {
+   "fieldname": "color",
+   "fieldtype": "Data",
+   "label": "Color"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-09-23 16:27:23.027200",
+ "modified": "2022-11-11 10:34:43.801658",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Code",

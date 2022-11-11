@@ -12,13 +12,18 @@ class TicketBooking(Document):
 	def validate(self):
 		total_quantity = 0
 		total_amount = 0
+		total_ticket = 0
 		for d in self.ticket_items:
 			d.amount = d.price * d.quantity
 			total_quantity = total_quantity + d.quantity
 			total_amount = total_amount + d.amount
+			if d.is_ticket:
+				total_ticket = total_ticket + d.quantity
+
 
 		self.total_quantity =total_quantity
 		self.total_amount=total_amount
+		self.total_ticket = total_ticket
 		self.keyword = str(self.customer) + " " + str(self.phone_number) + " " + str(self.email_address or "")
 		
 		self.calendar_title = """%s by: %s 
@@ -107,4 +112,26 @@ def get_item_price(price_list, item_code):
 	else:
 		return 0
 
+@frappe.whitelist()
+def get_ticket_booking_item(booking_number, company):
+	data = frappe.db.get_list('Booking Ticket Items',
+		filters={
+			'parent': booking_number
+		},
+		fields=["*"]
+	)
+	#get item default acounting code
+	com = frappe.db.get_value("Company", company,["*"],as_dict=1)
+	for d in data:
+		item_default = frappe.db.get_list('Item Default',
+			filters={
+				'parent': d.ticket_type
+			},
+			fields=['income_account', 'expense_account']
+		)
+		if item_default:
+			d["income_account"] = item_default[0].income_account or com.default_income_account
+			d["expense_account"] = item_default[0].expense_account or com.default_expense_account
+			d["warehouse"] = item_default[0].default_warehouse or ""
 
+	return data

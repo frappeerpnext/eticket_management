@@ -267,6 +267,9 @@ def get_conditions(filters,group_filter=None):
 		
 	if filters.get("branch"):
 		conditions += " AND b.branch in %(branch)s"
+
+	if filters.get("pos_profile"):
+		conditions += " AND b.pos_profile in %(pos_profile)s"
 	
 	return conditions
 

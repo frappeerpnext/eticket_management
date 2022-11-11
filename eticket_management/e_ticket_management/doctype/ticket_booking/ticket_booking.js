@@ -205,6 +205,7 @@ frappe.ui.form.on('Booking Ticket Items', {
 				doc.price = r.message;
 				doc.amount=doc.quantity*doc.price;
 				frm.refresh_field('ticket_items');
+				updateSumTotal(frm);
 				
 			},
 			error: (r) => {

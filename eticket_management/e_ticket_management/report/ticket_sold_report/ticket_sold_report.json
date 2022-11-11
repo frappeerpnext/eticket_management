@@ -1,5 +1,5 @@
 {
- "add_total_row": 0,
+ "add_total_row": 1,
  "columns": [],
  "creation": "2022-10-11 10:32:46.018921",
  "disable_prepared_report": 0,
@@ -10,7 +10,7 @@
  "idx": 0,
  "is_standard": "Yes",
  "letter_head": "Default Letter Head",
- "modified": "2022-10-11 10:32:46.018921",
+ "modified": "2022-11-10 12:53:41.634456",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Sold Report",
