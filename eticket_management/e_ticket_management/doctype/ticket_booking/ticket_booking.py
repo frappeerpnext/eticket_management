@@ -114,24 +114,17 @@ def get_item_price(price_list, item_code):
 
 @frappe.whitelist()
 def get_ticket_booking_item(booking_number, company):
-	data = frappe.db.get_list('Booking Ticket Items',
-		filters={
-			'parent': booking_number
-		},
-		fields=["*"]
-	)
+	doc = frappe.get_doc('Ticket Booking',booking_number)
+	data = doc.ticket_items
+	
+	 
 	#get item default acounting code
 	com = frappe.db.get_value("Company", company,["*"],as_dict=1)
 	for d in data:
-		item_default = frappe.db.get_list('Item Default',
-			filters={
-				'parent': d.ticket_type
-			},
-			fields=['income_account', 'expense_account']
-		)
-		if item_default:
-			d["income_account"] = item_default[0].income_account or com.default_income_account
-			d["expense_account"] = item_default[0].expense_account or com.default_expense_account
-			d["warehouse"] = item_default[0].default_warehouse or ""
+		item = frappe.get_doc('Item', d.ticket_type)
+		if item.item_defaults:
+			d.income_account = item.item_defaults[0].income_account or com.default_income_account
+			d.expense_account = item.item_defaults[0].expense_account or com.default_expense_account
+			d.warehouse = item.item_defaults[0].default_warehouse or ""
 
 	return data

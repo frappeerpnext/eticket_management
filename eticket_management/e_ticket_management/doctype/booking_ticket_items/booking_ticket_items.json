@@ -16,7 +16,10 @@
   "is_adult_ticket",
   "is_voucher",
   "item_group",
-  "unit"
+  "unit",
+  "income_account",
+  "expense_account",
+  "warehouse"
  ],
  "fields": [
   {
@@ -96,12 +99,30 @@
    "fieldname": "unit",
    "fieldtype": "Data",
    "label": "Unit"
+  },
+  {
+   "fieldname": "income_account",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "income_account"
+  },
+  {
+   "fieldname": "expense_account",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "expense_account"
+  },
+  {
+   "fieldname": "warehouse",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "warehouse"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2022-11-08 12:49:10.754039",
+ "modified": "2022-11-19 16:00:24.912349",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Booking Ticket Items",
