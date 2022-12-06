@@ -2,9 +2,18 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
 
 class DoorAccessLogs(Document):
+	def validate(self):
+		if self.is_new():
+			if self.id:
+				if frappe.db.exists("Door Access Logs", {"id": self.id}):
+					frappe.throw(
+						_("Door Access Log id {} already exist".format(self.id))
+					)
+
 	def after_insert(self):
 		if frappe.db.exists("POS Ticket",{"ticket_number":self.card_number,"is_checked_in":0}):
 			
