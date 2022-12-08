@@ -7,7 +7,6 @@ from frappe.model.document import Document
 from frappe import _, msgprint
 from frappe.utils import fmt_money,format_date
 from frappe.utils.data import flt
-from py_linq import Enumerable
 class TicketBooking(Document):
 	def validate(self):
 		total_quantity = 0

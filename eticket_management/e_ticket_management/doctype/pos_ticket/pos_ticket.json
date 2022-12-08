@@ -11,6 +11,7 @@
   "id",
   "pos_invoice_id",
   "pos_invoice",
+  "pos_document_number",
   "booking_number",
   "pos_profile",
   "pos_username",
@@ -62,13 +63,15 @@
   },
   {
    "fieldname": "pos_invoice",
-   "fieldtype": "Data",
-   "label": "POS Invoice"
+   "fieldtype": "Link",
+   "label": "POS Invoice",
+   "options": "POS Invoice"
   },
   {
    "fieldname": "booking_number",
    "fieldtype": "Link",
-   "label": "Booking Number",
+   "hidden": 1,
+   "label": "Booking Number ",
    "options": "Ticket Booking"
   },
   {
@@ -245,11 +248,16 @@
    "fieldname": "customer_name",
    "fieldtype": "Data",
    "label": "Customer Name"
+  },
+  {
+   "fieldname": "pos_document_number",
+   "fieldtype": "Data",
+   "label": "POS Document Number"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-22 10:07:34.949486",
+ "modified": "2022-12-07 18:10:50.843336",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "POS Ticket",
