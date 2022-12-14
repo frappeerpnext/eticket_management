@@ -8,6 +8,10 @@
 frappe.ui.form.on('Ticket Booking', {
 	
 	 refresh: function(frm) {
+		frm.add_custom_button(__('Activate To Door Access Log'),function(){
+			
+			generateDoorAccessLog(frm)
+		});
 		frm.set_query("price_list", function() {
 			return {
 				"filters": {
@@ -15,7 +19,9 @@ frappe.ui.form.on('Ticket Booking', {
 				}
 			};
 		});
-	 },
+		
+	 
+	},
 	 price_list(frm) {
 		update_item_price(frm)
 	},
@@ -149,42 +155,77 @@ frappe.ui.form.on('Ticket Booking', {
 	},
 	
 	scan_remove_ticket_number(frm){
+		let all_rows = frm.fields_dict["tickets_number"].grid.grid_rows.filter(function(d)
+  		{ return  d.doc.is_checked==1 && d.doc.ticket_number == frm.doc.scan_remove_ticket_number});
+		if(all_rows.length>0){
+			frm.doc.scan_remove_ticket_number="";
+			frm.refresh_field('scan_remove_ticket_number');	  
+			if(frappe.user.has_role("eTicket Manager") == undefined){
+				frappe.throw(__("Cannot remove ticket already checked in"));
+			}
+		}else{
+			frappe.show_alert({message:"Ticket #:"  + frm.doc.scan_remove_ticket_number + "  does not exist.", indicator:"red"});
+			frm.doc.scan_remove_ticket_number="";
+			frm.refresh_field('scan_remove_ticket_number');	  
+			return;
+		}
+
+
+
 		if (frm.doc.scan_remove_ticket_number==frm.doc.master_ticket_number){
 			frappe.show_alert({message:"You cannot remove master ticket number.", indicator:"red"});
 			frm.doc.scan_ticket_number = "";
 			frm.refresh_field('scan_ticket_number');
 			return;	
 		}
-		var tbl = frm.doc.tickets_number || [];
-		var i = tbl.length;
-		var is_exists = 0;
-		while (i--)
-		{
-			if(tbl[i].ticket_number == frm.doc.scan_remove_ticket_number)
-			{
-				frm.get_field("tickets_number").grid.grid_rows[i].remove();
-				is_exists = 1;
-				frappe.show_alert("Ticket #:"  + frm.doc.scan_remove_ticket_number + " Removed");
-				break;
-			}
-		}
-		
-
+		frm.get_field("tickets_number").grid.grid_rows[all_rows[0].doc.idx - 1].remove();
+		frappe.show_alert("Ticket #:"  + frm.doc.scan_remove_ticket_number + " Removed");
 		frm.refresh_field("tickets_number");
 
 	
-		if (is_exists==0){
-			frappe.show_alert({message:"Ticket #:"  + frm.doc.scan_remove_ticket_number + "  does not exist.", indicator:"red"});
-			
-		}
+		
 		frm.doc.scan_remove_ticket_number="";
 		frm.refresh_field('scan_remove_ticket_number');	  	
 	}
 
+
 });
 
  
-
+function generateDoorAccessLog(frm){
+	
+	if(frm.doc.total_ticket != frm.doc.tickets_number.length){
+		frappe.throw(__("Please activate all ticket before activate to door access logs."))
+	}
+	if (frm.is_dirty()) {
+		frappe.throw({message:__("Please save booking before activate to door access log"),title:__("Validate")})
+		
+	}else{
+		frappe.confirm(
+			__("Are you sure activate to door access?"),
+			function(){
+				
+				frm.call({
+					method: 'generate_door_access_log',
+					doc:frm.doc,
+					callback:function(r){
+						if(r.message =='Success'){
+							frappe.show_alert({message:__('Activated to door access log successfully.'),indicator:'green'})
+						}else{
+							frappe.show_alert({message:__('Activated to door access log failed.')},5)
+						}
+						
+					},
+					freeze: true,
+					freeze_message: __('Activating To Door Access Log, Please wait.'),
+					async: true,
+				});
+			},
+		)
+	}
+	
+	
+}
 
 frappe.ui.form.on('Booking Ticket Items', {
 	ticket_type(frm,cdt, cdn) {
@@ -228,6 +269,21 @@ frappe.ui.form.on('Booking Ticket Items', {
 	},
 	ticket_items_add: updateSumTotal,
     ticket_items_remove: updateSumTotal,
+
+
+})
+frappe.ui.form.on('Booking Active Ticket', {
+
+    before_tickets_number_remove: function(frm, cdt, cdn){
+		
+		const row = locals[cdt][cdn];
+		if(row.is_checked == 1){
+			if(frappe.user.has_role('eTicket Manager') == undefined){
+				frappe.throw(__("Cannot remove ticket already checked in." +"Row number:"+ row.idx + " ,Ticket Number:"+ row.ticket_number));
+			}
+		}
+		
+	},
 
 
 })
@@ -289,3 +345,4 @@ function update_item_price(frm){
 	});
 	
 }
+

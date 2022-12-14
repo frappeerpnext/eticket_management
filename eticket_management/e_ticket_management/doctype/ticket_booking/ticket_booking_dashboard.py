@@ -7,5 +7,6 @@ def get_data():
 	
 		"transactions": [
 			{"label": _("Issue Invoice"), "items": ["Sales Invoice"]},
+			{"label": _("Door Access Logs"), "items": ["Door Access Logs"]},
 		],
 	}

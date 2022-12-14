@@ -5,8 +5,12 @@ import frappe
 from urllib.request import ftpwrapper
 from frappe.model.document import Document
 from frappe import _, msgprint
-from frappe.utils import fmt_money,format_date
+from frappe.utils import fmt_money,format_date,today
 from frappe.utils.data import flt
+import uuid
+from datetime import datetime
+from dateutil import parser
+from py_linq import Enumerable
 class TicketBooking(Document):
 	def validate(self):
 		total_quantity = 0
@@ -67,6 +71,60 @@ class TicketBooking(Document):
 		 
 		frappe.db.sql("update `tabPOS Ticket` set status = 'Cancel' where booking_number='{}'".format(self.name))
 		frappe.db.commit()
+
+	def on_update(self):
+		if self.is_activate_to_door_access_logs:
+			frappe.msgprint(_("Please update ticket to door access logs."))
+  
+	@frappe.whitelist()
+	def generate_door_access_log(self):
+		if self.arrival_date < today():
+			frappe.throw(_("Arrival date cannot smaller than today."))
+		tickets_number = Enumerable(self.tickets_number).select(lambda x:x.ticket_number)
+		frappe.db.sql("""delete from `tabDoor Access Logs` where booking_number = '{}' and card_number not in ('{}')""".format(self.name,("','".join(tickets_number))))
+		#frappe.throw("""delete from `tabDoor Access Logs` where booking_number = '{}' and card_number not in ('{}')""".format(data.name,("','".join(tickets_number))))
+		self.is_activate_to_door_access_logs = 1
+		for d in self.tickets_number:
+			d.is_checked = 1
+			
+   
+			
+
+			str_date = "2022-11-27  15:54:03.47"
+			date_time = parser.parse(str_date)
+
+			exists=frappe.db.exists({"doctype":"Door Access Logs","booking_number": self.name,"card_number":d.ticket_number})
+			
+			if exists:
+				door_access = frappe.get_doc('Door Access Logs',exists)
+				door_access.card_number = d.ticket_number
+				door_access.booking_number = self.name
+				if self.check_in_time:
+					door_access.transaction_date = parser.parse(self.arrival_date + " " + self.check_in_time)
+				else:
+					door_access.transaction_date = self.arrival_date
+				door_access.posting_date = self.arrival_date
+				door_access.save()
+				
+			else:
+				door_access = frappe.new_doc('Door Access Logs')
+				door_access.card_number = d.ticket_number
+				door_access.id = uuid.uuid4()
+				door_access.booking_number = self.name
+				door_access.direction = "Entry"
+				door_access.door_name = "Generate"
+				door_access.ip_address = "None"
+				door_access.status = "Success"
+				
+				if self.check_in_time:
+					door_access.transaction_date = parser.parse(self.arrival_date + " " + self.check_in_time)
+				else:
+					door_access.transaction_date = self.arrival_date
+				
+				door_access.insert()
+		frappe.db.commit()
+	
+		return 'Success'
 		
 	# def on_update_after_submit(self):
 

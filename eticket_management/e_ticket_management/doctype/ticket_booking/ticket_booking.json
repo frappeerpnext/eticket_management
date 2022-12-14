@@ -17,12 +17,15 @@
   "length_of_visit",
   "section_customer_information",
   "customer",
-  "phone_number",
+  "contact",
+  "contact_phone_number",
   "customer_address",
   "column_break_13",
   "customer_name",
+  "phone_number",
   "company_name",
   "email_address",
+  "is_activate_to_door_access_logs",
   "column_break_15",
   "territory",
   "business_source",
@@ -430,11 +433,29 @@
    "label": "Ticket",
    "options": "Booking Ticket Items",
    "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_activate_to_door_access_logs",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "label": "Is Activate to Door Access Logs",
+   "read_only": 1
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Data",
+   "label": "Contact"
+  },
+  {
+   "fieldname": "contact_phone_number",
+   "fieldtype": "Data",
+   "label": "Contact Phone Number"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-11-06 14:46:20.527768",
+ "modified": "2022-12-12 17:09:37.329911",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",
