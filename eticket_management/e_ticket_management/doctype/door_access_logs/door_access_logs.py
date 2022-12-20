@@ -25,7 +25,7 @@ class DoorAccessLogs(Document):
 		if frappe.db.exists("POS Ticket",{"ticket_number":self.card_number,"is_checked_in":0}):
 			
 			frappe.db.sql("update `tabPOS Ticket` set checked_in_time=%s, is_checked_in=1 where is_checked_in = 0 and ticket_number =%s",	(self.transaction_date,self.card_number))
-			frappe.db.commit();
+			frappe.db.commit()
 		#update ticket total check in history
 	 
 		if self.status == "Success":

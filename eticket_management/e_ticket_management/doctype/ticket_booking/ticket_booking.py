@@ -86,6 +86,9 @@ class TicketBooking(Document):
 		self.is_activate_to_door_access_logs = 1
 		for d in self.tickets_number:
 			d.is_checked = 1
+			d.count_door_open = "1"
+			d.checked_date =datetime.today()
+   
 			
    
 			
