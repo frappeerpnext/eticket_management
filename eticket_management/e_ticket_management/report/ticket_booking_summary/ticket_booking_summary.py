@@ -194,7 +194,7 @@ def get_fields(filters):
 	
 
 def get_conditions(filters,group_filter=None):
-	conditions = " 1=1 "
+	conditions = " 1 = 1 "
 
 	start_date = filters.start_date
 	end_date = filters.end_date
@@ -251,7 +251,7 @@ def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 	# total last column
 	item_code = ""
 	groupdocstatus = ""
-	normal_filter = "b.docstatus in (1) AND"
+	normal_filter = ""
 	if (indent > 0) and ( filters.row_group == "Product" or filters.parent_row_group == "Product"):
 		item_code = ",a.ticket_type"
 	for rf in report_fields:
@@ -270,8 +270,9 @@ def get_report_data(filters,parent_row_group=None,indent=0,group_filter=None):
 		GROUP BY 
 		{1} {2} {3}
 	""".format(get_conditions(filters,group_filter), row_group,item_code,groupdocstatus,normal_filter)
-	 
+	
 	data = frappe.db.sql(sql,filters, as_dict=1)
+	
 	return data
  
 def get_report_group_data(filters):
