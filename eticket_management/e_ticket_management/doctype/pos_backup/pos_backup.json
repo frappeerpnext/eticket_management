@@ -1,0 +1,79 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-01-21 08:53:53.893294",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "backup_date",
+  "backup_url",
+  "column_break_3",
+  "backup_path",
+  "exception_section",
+  "exception"
+ ],
+ "fields": [
+  {
+   "fieldname": "backup_date",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "Backup Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "backup_url",
+   "fieldtype": "Data",
+   "label": "Backup URL API",
+   "read_only": 1
+  },
+  {
+   "fieldname": "exception",
+   "fieldtype": "Long Text",
+   "in_list_view": 1,
+   "label": "Exception",
+   "read_only": 1
+  },
+  {
+   "fieldname": "exception_section",
+   "fieldtype": "Section Break",
+   "label": "Exception",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break",
+   "read_only": 1
+  },
+  {
+   "fieldname": "backup_path",
+   "fieldtype": "Data",
+   "label": "Backup Path",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-01-21 17:41:59.353032",
+ "modified_by": "Administrator",
+ "module": "E Ticket Management",
+ "name": "POS Backup",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

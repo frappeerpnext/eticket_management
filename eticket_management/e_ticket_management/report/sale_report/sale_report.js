@@ -13,8 +13,6 @@ frappe.query_reports["Sale Report"] = {
 		{
 			fieldname: "department",
 			label: "Department",
-		 
-			
 			"fieldtype": "MultiSelectList",
 			get_data: function(txt) {
 				return frappe.db.get_link_options('Department', txt, {"name": ['!=', 'All Departments']});
@@ -34,7 +32,6 @@ frappe.query_reports["Sale Report"] = {
 				frappe.query_report.toggle_filter_display('from_fiscal_year', filter_based_on === 'Date Range');
 				frappe.query_report.toggle_filter_display('start_date', filter_based_on === 'Fiscal Year');
 				frappe.query_report.toggle_filter_display('end_date', filter_based_on === 'Fiscal Year');
-
 				frappe.query_report.refresh();
 			}
 		},
@@ -194,5 +191,3 @@ frappe.query_reports["Sale Report"] = {
 	},
 	
 };
-
- 

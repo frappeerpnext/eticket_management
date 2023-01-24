@@ -4,10 +4,9 @@
 // For license information, please see license.txt
 
  
-
 frappe.ui.form.on('Ticket Booking', {
 	
-	 refresh: function(frm) {
+	refresh: function(frm) {
 		frm.add_custom_button(__('Activate To Door Access Log'),function(){
 			
 			generateDoorAccessLog(frm)
@@ -155,8 +154,10 @@ frappe.ui.form.on('Ticket Booking', {
 	},
 	
 	scan_remove_ticket_number(frm){
+		alert(54)
 		let all_rows = frm.fields_dict["tickets_number"].grid.grid_rows.filter(function(d)
   		{ return  d.doc.is_checked==1 && d.doc.ticket_number == frm.doc.scan_remove_ticket_number});
+		
 		if(all_rows.length>0){
 			frm.doc.scan_remove_ticket_number="";
 			frm.refresh_field('scan_remove_ticket_number');	  
