@@ -85,7 +85,7 @@ def generate_door_access_log_from_master(self):
 								`tabDoor Access Logs` b 
 							where 
 								b.booking_number='{0}'
-						)""".format(self.booking_number);
+						)""".format(self.booking_number)
 		
 		pos_tickets = frappe.db.sql(sql, as_dict=1)
 		for t in pos_tickets:

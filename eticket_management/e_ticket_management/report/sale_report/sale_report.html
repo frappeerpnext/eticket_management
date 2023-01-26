@@ -219,7 +219,7 @@
                                             {% if(report.columns[c]["fieldtype"] ==  "Currency") { %}
                                                 {%= __(format_currency(data[i][report.columns[c]["fieldname"]]) ) %}
                                             {% } else { %}
-                                                {%= __(data[i][report.columns[c]["fieldname"]]) %}
+                                                {%= __(format_number(data[i][report.columns[c]["fieldname"]])) %}
                                             {% } %}
                                         {% } %}
                                     </td>
