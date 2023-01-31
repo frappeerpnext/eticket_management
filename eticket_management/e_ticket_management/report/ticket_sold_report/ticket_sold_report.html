@@ -1,14 +1,6 @@
 
 <h2 class="text-center report-title">{%= __("Sale Report Summary") %}</h2>
 <h5 class="text-left">
-	{% 
-        if (filters.company) { %}
-        <span class="text-right text-muted">
-            Company:
-        </span>
-             {%= filters.company %}
-        {% }
-    %}
     {%
         if (filters.department.length>0) { %}
             <span class="text-right text-muted">
@@ -66,50 +58,6 @@
         
     %}
     {%  
-        if (filters.item_group.length>0) { %}
-            <span class="text-right text-muted">
-                ,Item Group:
-            </span>
-            
-            {% for ( var i = 0; i < filters.item_group.length; i++ ) { %}
-                <b>
-                    {%= filters.item_group[i]%}       
-                </b>    
-            
-                {%
-                    
-                    if (filters.item_group.length != i+1) { %}
-                        ,
-                    {% }
-                %}
-                
-            {% } %}
-	    {% }
-        
-    %}
-    {%  
-        if (filters.item_category.length>0) { %}
-            <span class="text-right text-muted">
-                ,Item Category:
-            </span>
-            
-            {% for ( var i = 0; i < filters.item_category.length; i++ ) { %}
-                <b>
-                    {%= filters.item_category[i]%}       
-                </b>    
-            
-                {%
-                    
-                    if (filters.item_category.length != i+1) { %}
-                        ,
-                    {% }
-                %}
-                
-            {% } %}
-	    {% }
-        
-    %}
-    {%  
         if (filters.customer_group.length>0) { %}
             <span class="text-right text-muted">
                 ,Customer Group:
@@ -121,6 +69,7 @@
                 </b>    
             
                 {%
+                    
                     if (filters.customer_group.length != i+1) { %}
                         ,
                     {% }
@@ -130,7 +79,6 @@
 	    {% }
         
     %}
-
     {%  
         if (filters.market_segment.length>0) { %}
             <span class="text-right text-muted">
@@ -151,18 +99,20 @@
                 
             {% } %}
 	    {% }
+        
     %}
+
     {%  
-        if (filters.business_source.length>0) { %}
+        if (filters.market_source.length>0) { %}
             <span class="text-right text-muted">
                 ,Market Source: 
             </span>
-            {% for ( var i = 0; i < filters.business_source.length; i++ ) { %}
+            {% for ( var i = 0; i < filters.market_source.length; i++ ) { %}
                 <b>
-                    {%= filters.business_source[i]%}       
+                    {%= filters.market_source[i]%}       
                 </b>
                 {%
-                    if (filters.business_source.length != i+1) { %}
+                    if (filters.market_source.length != i+1) { %}
                         ,
                     {% }
                 %}
@@ -228,12 +178,15 @@
                 {% } %}
         </tbody>
     </table>
-    {% console.log(frappe) %}
+    {% console.log(frappe.datetime) %}
     <div>
         {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")].footer %}
     </div>
     <p class="text-right text-muted">
         Printed by {%= frappe.user.name%} On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}
+    </p>
+    <p class="text-right text-muted">
+        {%= frappe.datetime.get_datetime_as_string %}
     </p>
 
     <style media="print">

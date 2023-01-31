@@ -11,5 +11,3 @@ frappe.listview_settings['POS Ticket'] = {
 
  
 };
-
-

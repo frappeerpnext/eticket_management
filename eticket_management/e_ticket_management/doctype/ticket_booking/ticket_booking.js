@@ -120,7 +120,7 @@ frappe.ui.form.on('Ticket Booking', {
 			if(_is_success=="1"){ 
 				for(var a in frm.doc.tickets_number){
 					var data = frm.doc.tickets_number[a];  
-					if(data.ticket_number==frm.doc.master_ticket_number){ 
+					if(data.ticket_number==frm.doc.master_ticket_number){
 						_ticket_number =data.ticket_number; 
 						data.is_master_ticket = 1;	
 						data.master_ticket_number = ""; 
