@@ -190,7 +190,7 @@
             
                 {% for(var i=0, l=data.length; i<l; i++) { %}
                     {% var style = ``%}
-                    {% if(i==l-1) { %}
+                    {% if(i==l-1 && !filters["parent_row_group"]) { %}
                         {% style = `style="font-weight:800"`%}
                     {% } %}
                     <tr {%= style %}>
@@ -199,7 +199,7 @@
                                 {% colspan = 2%}
                             {% }%}
                             <td class="text-center">
-                                {% if(i+1 != l) { %}
+                                {% if(!filters["parent_row_group"]) { %}
                                     {%= i + 1 %}
                                 {% }%}
                                 
@@ -208,7 +208,7 @@
                                 
                                     <td class="text-{%= report.columns[c]['align'] %}">
                                         {% if(report.columns[c]["fieldname"] ==  "row_group") { %}
-                                        
+                                            
                                             <!-- Put Total Label -->
                                             {% if(!data[i]["is_total_row"]) { %}
                                                 {%= __(data[i][report.columns[c]["fieldname"]])%}
@@ -228,7 +228,7 @@
                 {% } %}
         </tbody>
     </table>
-    {% console.log(frappe) %}
+    {% console.log(data) %}
     <div>
         {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")].footer %}
     </div>

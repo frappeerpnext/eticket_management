@@ -1,6 +1,7 @@
 // Copyright (c) 2022, Frappe Technologies and contributors
 // For license information, please see license.txt
 /* eslint-disable */
+
 frappe.query_reports["Sale Report"] = {
 	"filters": [
 		{
@@ -191,3 +192,5 @@ frappe.query_reports["Sale Report"] = {
 	},
 	
 };
+
+console.log(frappe.query_reports["Sale Report"])
