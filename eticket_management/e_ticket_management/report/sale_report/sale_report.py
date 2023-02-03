@@ -260,7 +260,7 @@ def get_conditions(filters,group_filter=None):
 	if filters.get("business_source"):
 		conditions += " AND b.business_source in %(business_source)s"
 
-	conditions += " AND b.department in %(department)s"
+	#conditions += " AND b.department in %(department)s"
 	
 	if filters.get("supplier_group"):
 		conditions += " AND (SELECT supplier_group FROM `tabSupplier` b WHERE b.name = a.supplier) in %(supplier_group)s"
