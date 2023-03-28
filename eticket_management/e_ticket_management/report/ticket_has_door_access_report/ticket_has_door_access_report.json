@@ -1,0 +1,30 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2023-03-28 10:39:55.142427",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "Default Letter Head",
+ "modified": "2023-03-28 10:40:38.078625",
+ "modified_by": "Administrator",
+ "module": "E Ticket Management",
+ "name": "Ticket Has Door Access Report",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "POS Ticket",
+ "report_name": "Ticket Has Door Access Report",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "Sales User"
+  }
+ ]
+}
