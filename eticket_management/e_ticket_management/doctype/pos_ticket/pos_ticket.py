@@ -20,5 +20,3 @@ class POSTicket(Document):
 			if pos_invoice and document_number:
 				self.pos_invoice = pos_invoice
 				self.pos_document_number = document_number
-		
-

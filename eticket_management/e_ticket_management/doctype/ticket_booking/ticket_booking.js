@@ -154,8 +154,7 @@ frappe.ui.form.on('Ticket Booking', {
 	
 	scan_remove_ticket_number(frm){
 		let all_rows = frm.fields_dict["tickets_number"].grid.grid_rows.filter(function(d)
-  		{ return  d.doc.is_checked==1 && d.doc.ticket_number == frm.doc.scan_remove_ticket_number});
-		
+  		{ return  d.doc.is_checked==0 && d.doc.ticket_number == frm.doc.scan_remove_ticket_number});
 		if(all_rows.length>0){
 			frm.doc.scan_remove_ticket_number="";
 			frm.refresh_field('scan_remove_ticket_number');	  
@@ -165,7 +164,7 @@ frappe.ui.form.on('Ticket Booking', {
 		}else{
 			frappe.show_alert({message:"Ticket #:"  + frm.doc.scan_remove_ticket_number + "  does not exist.", indicator:"red"});
 			frm.doc.scan_remove_ticket_number="";
-			frm.refresh_field('scan_remove_ticket_number');	  
+			frm.refresh_field('scan_remove_ticket_number');
 			return;
 		}
 

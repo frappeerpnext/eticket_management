@@ -181,9 +181,6 @@
                 {% for(var i=0, l=report.columns.length; i<l; i++) { %}
                     <th class="text-{%= report.columns[i].align %}">{%= __(report.columns[i].label) %}</th>
                 {% } %}
-                
-
-                
             </tr>
         </thead>
         <tbody>
@@ -195,9 +192,6 @@
                     {% } %}
                     <tr {%= style %}>
                             
-                            {% if(i+1==l) { %}
-                                {% colspan = 2%}
-                            {% }%}
                             <td class="text-center">
                                 {% if(!filters["parent_row_group"]) { %}
                                     {%= i + 1 %}
@@ -217,9 +211,9 @@
                                             {% } %}
                                         {% } else { %}
                                             {% if(report.columns[c]["fieldtype"] ==  "Currency") { %}
-                                                {%= __(format_currency(data[i][report.columns[c]["fieldname"]]) ) %}
+                                                {%= __(format_currency(data[i][report.columns[c]["fieldname"]],frappe.defaults.get_default("pos_currency_symbol"),frappe.defaults.get_default("currency_precision_in_report"))) %}
                                             {% } else { %}
-                                                {%= __(format_number(data[i][report.columns[c]["fieldname"]])) %}
+                                                {%= __(format_number(data[i][report.columns[c]["fieldname"]],"",frappe.defaults.get_default("float_precision_in_report"))) %}
                                             {% } %}
                                         {% } %}
                                     </td>
@@ -228,12 +222,11 @@
                 {% } %}
         </tbody>
     </table>
-    {% console.log(data) %}
     <div>
         {%= frappe.boot.letter_heads[frappe.defaults.get_default("letter_head")].footer %}
     </div>
     <p class="text-right text-muted">
-        Printed by {%= frappe.user.name%} On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}
+        Printed by {%= frappe.user.name%} On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %} 
     </p>
 
     <style media="print">

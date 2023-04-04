@@ -192,5 +192,3 @@ frappe.query_reports["Sale Report"] = {
 	},
 	
 };
-
-console.log(frappe.query_reports["Sale Report"])

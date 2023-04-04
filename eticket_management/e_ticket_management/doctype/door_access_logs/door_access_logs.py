@@ -38,7 +38,6 @@ class DoorAccessLogs(Document):
 					frappe.db.commit()
 			#generate Door Access Logs From Master Ticket
 			if self.is_master:
-				frappe.msgprint("eticket_management.e_ticket_management.doctype.door_access_logs.door_access_logs.generate_door_access_log_from_master")
 				frappe.enqueue('eticket_management.e_ticket_management.doctype.door_access_logs.door_access_logs.generate_door_access_log_from_master', queue='long',self=self)
 			
 	# def before_save(self):
