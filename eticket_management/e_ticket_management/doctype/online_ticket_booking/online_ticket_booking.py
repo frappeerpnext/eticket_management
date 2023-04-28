@@ -19,32 +19,29 @@ class OnlineTicketBooking(Document):
 		self.total_ticket_amount = total_ticket_items.sum(lambda x:x.amount)
 
 	def after_insert(self):
+		try:
+			with frappe.db.transaction():
+				customer_doc = frappe.get_doc({ 
+					"doctype": "Customer",
+					"customer_name": self.customer_name,
+					"phone_number": self.phone_number,
+					"customer_group": "Individual",
+					"territory": "Cambodian",
+					"email_address": self.email_address
+				})
+				customer_doc.insert()
 
-		customer_doc = frappe.get_doc({ 
-			"doctype":"Customer",
-			"customer_name":self.customer_name,
-			"phone_number":self.phone_number,
-			"customer_group":"Individual",
-			"territory":self.territory,
-			"email_address":self.email_address
-		})
-		
-		customer_doc.insert()
-		frappe.db.commit()
-		booking_doc = frappe.get_doc({
-			"doctype":"Ticket Booking",
-			"booking_date": self.booking_date,
-			"total_ticket": self.total_ticket,
-			"total_ticket_amount": self.total_ticket_amount,
-			"arrival_date": self.arrival_date,
-			"payment_amount":self.payment_amount,
-			"customer":customer_doc.name,
-			"ticket_items":  self.booking_items,
-		
-		},as_dict=1)
-		booking_doc.insert()
-		frappe.db.commit()
-		frappe.db.set_value('Online Ticket Booking', self.name, 'booking_number',booking_doc.name)
-
-
-		
+				booking_doc = frappe.get_doc({
+					"doctype": "Ticket Booking",
+					"booking_date": self.booking_date,
+					"total_ticket": self.total_ticket,
+					"total_ticket_amount": self.total_ticket_amount,
+					"arrival_date": self.arrival_date,
+					"payment_amount": self.payment_amount,
+					"customer": customer_doc.name,
+					"ticket_items": self.booking_items,
+				})
+				booking_doc.insert()
+				frappe.db.set_value('Online Ticket Booking', self.name, 'booking_number', booking_doc.name)
+		except Exception as e:
+			frappe.log_error(frappe.get_traceback(), "Transaction Failed")

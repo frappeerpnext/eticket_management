@@ -265,9 +265,8 @@
   {
    "fetch_from": "customer.territory",
    "fieldname": "territory",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "Territory",
-   "options": "Territory",
    "read_only": 1
   },
   {
@@ -455,7 +454,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-12 17:09:37.329911",
+ "modified": "2023-04-28 16:46:24.219129",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",
