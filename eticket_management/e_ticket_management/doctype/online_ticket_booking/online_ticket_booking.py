@@ -10,6 +10,11 @@ from py_linq import Enumerable
 
 class OnlineTicketBooking(Document):
 	def validate(self):
+		if not frappe.db.exists("Territory", self.territory):
+			territory = frappe.new_doc('Territory')
+			territory.territory_name=self.territory
+			territory.parent_territory = 'All Territories'
+			territory.insert()
 		for d in self.booking_items:
 			d.amount = d.price * d.quantity
 		self.total_quantity = sum(flt(d.quantity) for d in self.booking_items)
@@ -19,29 +24,25 @@ class OnlineTicketBooking(Document):
 		self.total_ticket_amount = total_ticket_items.sum(lambda x:x.amount)
 
 	def after_insert(self):
-		try:
-			with frappe.db.transaction():
-				customer_doc = frappe.get_doc({ 
-					"doctype": "Customer",
-					"customer_name": self.customer_name,
-					"phone_number": self.phone_number,
-					"customer_group": "Individual",
-					"territory": "Cambodian",
-					"email_address": self.email_address
-				})
-				customer_doc.insert()
-
-				booking_doc = frappe.get_doc({
-					"doctype": "Ticket Booking",
-					"booking_date": self.booking_date,
-					"total_ticket": self.total_ticket,
-					"total_ticket_amount": self.total_ticket_amount,
-					"arrival_date": self.arrival_date,
-					"payment_amount": self.payment_amount,
-					"customer": customer_doc.name,
-					"ticket_items": self.booking_items,
-				})
-				booking_doc.insert()
-				frappe.db.set_value('Online Ticket Booking', self.name, 'booking_number', booking_doc.name)
-		except Exception as e:
-			frappe.log_error(frappe.get_traceback(), "Transaction Failed")
+		customer_doc = frappe.get_doc({ 
+			"doctype": "Customer",
+			"customer_name": self.customer_name,
+			"phone_number": self.phone_number,
+			"customer_group": "Individual",
+			"territory": self.territory,
+			"email_address": self.email_address
+		})
+		customer_doc.insert()
+		booking_doc = frappe.get_doc({
+			"doctype": "Ticket Booking",
+			"booking_date": self.booking_date,
+			"total_ticket": self.total_ticket,
+			"total_ticket_amount": self.total_ticket_amount,
+			"arrival_date": self.arrival_date,
+			"payment_amount": self.payment_amount,
+			"customer": customer_doc.name,
+			"ticket_items": self.booking_items,
+		})
+		booking_doc.insert()
+		frappe.db.set_value('Online Ticket Booking', self.name, 'booking_number', booking_doc.name)
+		frappe.db.commit()
