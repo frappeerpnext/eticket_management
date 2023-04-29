@@ -24,7 +24,6 @@
   "business_source",
   "market_segment",
   "price_list",
-  "booking_status",
   "booking_ticket_section",
   "booking_items",
   "section_break_11",
@@ -262,18 +261,11 @@
    "label": "Ticket",
    "options": "Booking Ticket Items",
    "reqd": 1
-  },
-  {
-   "default": "Booked",
-   "fieldname": "booking_status",
-   "fieldtype": "Select",
-   "label": "Booking Status",
-   "options": "Booked\nCancelled"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-10-17 10:51:48.271711",
+ "modified": "2023-04-29 09:13:04.346824",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Online Ticket Booking",
