@@ -42,7 +42,19 @@ class OnlineTicketBooking(Document):
 			"payment_amount": self.payment_amount,
 			"customer": customer_doc.name,
 			"ticket_items": self.booking_items,
+			"online_ticket_booking":self.name
 		})
 		booking_doc.insert()
 		frappe.db.set_value('Online Ticket Booking', self.name, 'booking_number', booking_doc.name)
 		frappe.db.commit()
+
+
+	def on_update(self):
+		if self.booking_status=='Cancelled':
+			frappe.db.sql('''
+				update `tabTicket Booking`
+				set workflow_state = %s
+				where name = %s
+			''',
+			('Cancelled', self.booking_number))
+			frappe.db.commit()

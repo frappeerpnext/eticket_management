@@ -18,8 +18,10 @@ frappe.ui.form.on('Ticket Booking', {
 				}
 			};
 		});
+		if(frm.doc.online_ticket_booking){
+			frm.set_intro(__("This booking come from Online Booking"), true);
+		}
 		
-	 
 	},
 	 price_list(frm) {
 		update_item_price(frm)

@@ -40,7 +40,7 @@
   "cancellation_policies",
   "column_break_47",
   "note",
-  "amended_from"
+  "booking_status"
  ],
  "fields": [
   {
@@ -61,7 +61,7 @@
    "reqd": 1
   },
   {
-   "default": "GIT",
+   "default": "FIT",
    "fieldname": "ticket_type",
    "fieldtype": "Select",
    "label": "Ticket Type",
@@ -152,15 +152,6 @@
    "options": "Price List"
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Online Ticket Booking",
-   "print_hide": 1,
-   "read_only": 1
-  },
-  {
    "fieldname": "booking_ticket_section",
    "fieldtype": "Section Break",
    "label": "Booking Ticket "
@@ -247,25 +238,23 @@
    "label": "Note"
   },
   {
-   "fieldname": "amended_from",
-   "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Online Ticket Booking",
-   "print_hide": 1,
-   "read_only": 1
-  },
-  {
    "fieldname": "booking_items",
    "fieldtype": "Table",
    "label": "Ticket",
    "options": "Booking Ticket Items",
    "reqd": 1
+  },
+  {
+   "default": "Confirmed",
+   "fieldname": "booking_status",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Booking Status"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-04-29 09:13:04.346824",
+ "modified": "2023-05-15 10:34:56.674880",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Online Ticket Booking",

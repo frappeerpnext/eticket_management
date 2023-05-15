@@ -129,7 +129,8 @@ class TicketBooking(Document):
 	
 		return 'Success'
 		
-	# def on_update_after_submit(self):
+  
+ 	# def on_update_after_submit(self):
 
 	# 	frappe.db.sql("delete from `tabPOS Ticket` where booking_number='{}'".format(self.name))
 	# 	frappe.db.commit()
@@ -188,3 +189,5 @@ def get_ticket_booking_item(booking_number, company):
 			d.warehouse = item.item_defaults[0].default_warehouse or ""
 
 	return data
+
+	

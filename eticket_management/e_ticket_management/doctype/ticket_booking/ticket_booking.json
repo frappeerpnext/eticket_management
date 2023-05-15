@@ -69,7 +69,8 @@
   "column_break_54",
   "scan_remove_ticket_number",
   "section_break_56",
-  "tickets_number"
+  "tickets_number",
+  "online_ticket_booking"
  ],
  "fields": [
   {
@@ -451,11 +452,16 @@
    "fieldname": "contact_phone_number",
    "fieldtype": "Data",
    "label": "Contact Phone Number"
+  },
+  {
+   "fieldname": "online_ticket_booking",
+   "fieldtype": "Data",
+   "label": "Online Ticket Booking"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-04-28 17:14:05.931962",
+ "modified": "2023-05-13 10:05:32.323993",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",
