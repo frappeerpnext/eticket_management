@@ -41,7 +41,8 @@
   "column_break_31",
   "market_source_type",
   "market_segment_type",
-  "customer_name"
+  "customer_name",
+  "nationality"
  ],
  "fields": [
   {
@@ -253,11 +254,17 @@
    "fieldname": "pos_document_number",
    "fieldtype": "Data",
    "label": "POS Document Number"
+  },
+  {
+   "fieldname": "nationality",
+   "fieldtype": "Link",
+   "label": "Nationality",
+   "options": "Territory"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2022-12-07 18:10:50.843336",
+ "modified": "2023-09-22 14:57:23.500175",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "POS Ticket",
