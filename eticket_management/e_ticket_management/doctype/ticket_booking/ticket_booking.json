@@ -38,6 +38,9 @@
   "total_quantity",
   "total_ticket",
   "total_ticket_amount",
+  "include_vat",
+  "taxes_and_charges",
+  "total_vat_amount",
   "column_break_12",
   "total_amount",
   "payment_method",
@@ -70,7 +73,8 @@
   "scan_remove_ticket_number",
   "section_break_56",
   "tickets_number",
-  "online_ticket_booking"
+  "online_ticket_booking",
+  "email_recipients"
  ],
  "fields": [
   {
@@ -358,7 +362,7 @@
   },
   {
    "allow_on_submit": 1,
-   "default": "Up to 3 days prior to arrival \u2013 free of charge\n2-0 days prior to arrival \u2013 100% charge \nNo-show \u2013 100% charge\n",
+   "fetch_from": "term_policies.terms",
    "fieldname": "cancellation_policies",
    "fieldtype": "Text Editor",
    "label": "Cancellation Policies"
@@ -457,11 +461,38 @@
    "fieldname": "online_ticket_booking",
    "fieldtype": "Data",
    "label": "Online Ticket Booking"
+  },
+  {
+   "default": "sengho715@gmail.com,hymenghour1701@gmail.com",
+   "fieldname": "email_recipients",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Email Recipients"
+  },
+  {
+   "default": "0",
+   "fieldname": "include_vat",
+   "fieldtype": "Check",
+   "label": "Include VAT"
+  },
+  {
+   "depends_on": "eval:doc.include_vat==1",
+   "fieldname": "taxes_and_charges",
+   "fieldtype": "Link",
+   "label": "Sales Taxes and Charges Template",
+   "mandatory_depends_on": "eval:doc.include_vat==1",
+   "options": "Sales Taxes and Charges Template"
+  },
+  {
+   "depends_on": "eval:doc.include_vat==1",
+   "fieldname": "total_vat_amount",
+   "fieldtype": "Currency",
+   "label": "Total Vat Amount"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-05-13 10:05:32.323993",
+ "modified": "2023-10-30 16:52:31.682926",
  "modified_by": "Administrator",
  "module": "E Ticket Management",
  "name": "Ticket Booking",
