@@ -427,11 +427,11 @@ def get_report_field(filters):
      
 		return [
 			{"label":"Quantity","short_label":"Qty", "fieldname":"qty","fieldtype":"Float","indicator":"Grey","precision":2, "align":"center","chart_color":"#FF8A65","sql_expression":"a.qty"},
-			{"label":"Sub Total", "short_label":"Sub To.", "fieldname":"sub_total","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"(if(b.posting_date<'2022-12-20',a.base_rate,a.base_price_list_rate)) * a.qty"},
-			{"label":"Discount", "short_label":"Disc.", "fieldname":"discount_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"if(a.is_foc,0,(if(b.posting_date<'2022-12-20',a.base_rate,a.base_price_list_rate))*a.qty-a.net_amount)"},
+			{"label":"Sub Total", "short_label":"Sub To.", "fieldname":"sub_total","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"(if(b.posting_date<'2022-12-20',a.base_rate,a.base_price_list_rate)) * a.qty +(a.item_tax-a.item_tax_after_discount)"},
+			{"label":"Discount", "short_label":"Disc.", "fieldname":"discount_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"if(a.is_foc,0,((if(b.posting_date<'2022-12-20',a.base_rate,a.base_price_list_rate))*a.qty)+(a.item_tax-a.item_tax_after_discount)-a.net_amount)"},
    			{"label":"FOC", "short_label":"FOC", "fieldname":"foc_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"if(a.is_foc,(if(b.posting_date<'2022-12-20',a.base_rate,a.base_price_list_rate))*a.qty-a.net_amount,0)"},
-			{"label":"VAT", "short_label":"VAT.", "fieldname":"tax_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"a.item_tax"},		
-   			{"label":"Amount", "short_label":"Amt", "fieldname":"amount","fieldtype":"Currency","indicator":"Red","precision":None, "align":"right","chart_color":"#2E7D32","sql_expression":"a.net_amount + a.item_tax"},
+			{"label":"VAT", "short_label":"VAT.", "fieldname":"tax_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"a.item_tax_after_discount"},		
+   			{"label":"Amount", "short_label":"Amt", "fieldname":"amount","fieldtype":"Currency","indicator":"Red","precision":None, "align":"right","chart_color":"#2E7D32","sql_expression":"(a.net_amount + a.item_tax_after_discount) + 0.01"},
 		]
 	else:
 		return [
@@ -440,8 +440,8 @@ def get_report_field(filters):
 			{"label":"Sub Total", "short_label":"Sub To.", "fieldname":"sub_total","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"(if(b.posting_date<'2022-12-20',a.base_rate,a.base_price_list_rate))*a.qty"},
 			{"label":"Discount", "short_label":"Disc.", "fieldname":"discount_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"if(a.is_foc,0,(if(b.posting_date<'2022-12-20',a.base_rate,a.base_price_list_rate))*a.qty-a.net_amount)"},
 			{"label":"FOC", "short_label":"FOC", "fieldname":"foc_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"if(a.is_foc=1, (if(b.posting_date<'2022-12-20',a.base_rate,a.base_price_list_rate))*a.qty-a.net_amount,0)"},
-			{"label":"VAT", "short_label":"VAT", "fieldname":"tax_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"a.item_tax"},	
-   			{"label":"Amount", "short_label":"Amt", "fieldname":"amount","fieldtype":"Currency","indicator":"Red","precision":None, "align":"right","chart_color":"#2E7D32","sql_expression":"a.net_amount + a.item_tax"},
+			{"label":"VAT", "short_label":"VAT", "fieldname":"tax_amount","fieldtype":"Currency","indicator":"Grey","precision":None, "align":"right","chart_color":"#dd5574","sql_expression":"a.item_tax_after_discount"},	
+   			{"label":"Amount", "short_label":"Amt", "fieldname":"amount","fieldtype":"Currency","indicator":"Red","precision":None, "align":"right","chart_color":"#2E7D32","sql_expression":"(a.net_amount + a.item_tax_after_discount) + 0.01"},
 		]
   
 def get_row_groups():
